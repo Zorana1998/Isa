@@ -1,0 +1,168 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@using IsaProject.Models.Users
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@model IEnumerable<IsaProject.Models.Entities.Users.Ship>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Ships</h1>
+
+<form asp-controller="Ships" asp-action="Index" class="form-inline">
+
+    <div class="form-group mb-2">
+        <label for="searchString" class="sr-only">Search:</label>
+        <input type="text" id="searchString" name="searchString" class="form-control" />
+    </div>
+    <div class="form-group mb-2">
+        <label for="filter">Filter</label>
+        <select name="filter" id="filter" style="background-color: transparent;">
+            <option value="Name" class="option">Name</option>
+            <option value="AverageScore" class="option">Rating</option>
+            <option value="Address" class="option">Address</option>
+        </select>
+    </div>
+    <div class="form-group mb-2">
+        <label for="sort" >Sort:</label>
+        <select name="sort" id="sort" style="background-color: transparent;">
+            <option value="Name" class="option">Name</option>
+            <option value="AverageScore" class="option">Rating</option>
+            <option value="Address" class="option">Address</option>
+        </select>
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </div>
+</form>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    @if ((await AuthorizationService.AuthorizeAsync(User, null, "AdminPolicy")).Succeeded)
+    {
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+    }
+
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Length)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EngineNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PromotionalDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AverageScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Capacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rules)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FishingEquipment)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Length)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EngineNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PromotionalDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AverageScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capacity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rules)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FishingEquipment)
+            </td>
+           <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
+            </td>
+            @if (SignInManager.IsSignedIn(User))
+{
+    @if ((await AuthorizationService.AuthorizeAsync(User, null, "AdminPolicy")).Succeeded)
+    {
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+    }
+}
+        </tr>
+}
+    </tbody>
+</table>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    @if ((await AuthorizationService.AuthorizeAsync(User, null, "UserPolicy")).Succeeded)
+    {
+        <form asp-controller="Ships" asp-action="GetAvailableShips" class="form-inline">
+            <div class="form-group">
+                <label for="dateTime">Search:</label>
+                <input type="datetime-local" id="dateTime" name="dateTime" class="form-control"/><br/>
+                <label for="numberOfGuest">Number of guest:</label>
+                <input type="number" id="numberOfGuest" name="numberOfGuest" class="form-control"/><br/>
+
+                <label for="numberOfDays">Number of days:</label>
+                <input type="number" id="numberOfDays" name="numberOfDays" class="form-control"/><br/>
+
+                <label for="averageScore">Average Score:</label>
+                <input type="number" id="averageScore" name="averageScore" class="form-control"/><br/>
+            </div>
+            <div class="form-group mx-sm-3">
+                <button type="submit" class="btn btn-primary">Get Available Ships</button>
+            </div>
+
+        </form>
+    }
+
+}
+
+

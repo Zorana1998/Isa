@@ -30,6 +30,11 @@ namespace IsaProject.Controllers
             _appUsersService = appUsersService;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.tbAppUsers.ToListAsync());
+        }
+
         // GET: AppUsers/Details/5
         public async Task<IActionResult> Details(string? id)
         {
@@ -55,6 +60,7 @@ namespace IsaProject.Controllers
         }
 
         // GET: AppUsers/UserList
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> UserList()
         {
             List<string> entryPoint = await (from userrole in _context.UserRoles
@@ -157,6 +163,7 @@ namespace IsaProject.Controllers
             return RedirectToAction("UserList");
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         protected bool AppUserExists(string id)
         {
             return _context.tbAppUsers.Any(e => e.Id == id);
