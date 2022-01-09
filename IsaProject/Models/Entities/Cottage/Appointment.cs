@@ -31,6 +31,6 @@ namespace IsaProject.Models.Entities
 
         public bool isScheduled { get; set; }
 
-        public List<AppointmentTag> appointmentTags;
+        public List<AppointmentTag> appointmentTags { get; set; }
     }
 }

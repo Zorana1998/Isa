@@ -19,7 +19,7 @@ namespace IsaProject.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("IsaProject.Models.DTO.CottageAppointmentDTO", b =>
+            modelBuilder.Entity("IsaProject.Models.DTO.AppointmentDTO", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -68,6 +68,10 @@ namespace IsaProject.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("DurationDays")
                         .HasColumnType("int");
 
@@ -97,6 +101,8 @@ namespace IsaProject.Migrations
                     b.HasIndex("EntityID");
 
                     b.ToTable("Appointments");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Appointment");
                 });
 
             modelBuilder.Entity("IsaProject.Models.Entities.AppointmentTag", b =>
@@ -113,6 +119,8 @@ namespace IsaProject.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppointmentID");
 
                     b.ToTable("AppointmentTag");
                 });
@@ -209,10 +217,10 @@ namespace IsaProject.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("AppointmentId")
+                    b.Property<long?>("AppointmentDTOId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("CottageAppointmentDTOId")
+                    b.Property<long?>("AppointmentId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Name")
@@ -221,9 +229,9 @@ namespace IsaProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppointmentId");
+                    b.HasIndex("AppointmentDTOId");
 
-                    b.HasIndex("CottageAppointmentDTOId");
+                    b.HasIndex("AppointmentId");
 
                     b.ToTable("Tags");
                 });
@@ -469,6 +477,16 @@ namespace IsaProject.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("IsaProject.Models.Entities.FastReservation", b =>
+                {
+                    b.HasBaseType("IsaProject.Models.Entities.Appointment");
+
+                    b.Property<double>("NewPrice")
+                        .HasColumnType("float");
+
+                    b.HasDiscriminator().HasValue("FastReservation");
+                });
+
             modelBuilder.Entity("IsaProject.Models.Entities.Adventure.Adventure", b =>
                 {
                     b.HasBaseType("IsaProject.Models.Entities.Entity");
@@ -528,6 +546,15 @@ namespace IsaProject.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("IsaProject.Models.Entities.AppointmentTag", b =>
+                {
+                    b.HasOne("IsaProject.Models.Entities.Appointment", null)
+                        .WithMany("appointmentTags")
+                        .HasForeignKey("AppointmentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("IsaProject.Models.Entities.Room", b =>
                 {
                     b.HasOne("IsaProject.Models.Entities.Cottage", null)
@@ -546,13 +573,13 @@ namespace IsaProject.Migrations
 
             modelBuilder.Entity("IsaProject.Models.Entities.Tag", b =>
                 {
+                    b.HasOne("IsaProject.Models.DTO.AppointmentDTO", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("AppointmentDTOId");
+
                     b.HasOne("IsaProject.Models.Entities.Appointment", null)
                         .WithMany("Tags")
                         .HasForeignKey("AppointmentId");
-
-                    b.HasOne("IsaProject.Models.DTO.CottageAppointmentDTO", null)
-                        .WithMany("Tags")
-                        .HasForeignKey("CottageAppointmentDTOId");
                 });
 
             modelBuilder.Entity("IsaProject.Models.Image", b =>
@@ -615,13 +642,15 @@ namespace IsaProject.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("IsaProject.Models.DTO.CottageAppointmentDTO", b =>
+            modelBuilder.Entity("IsaProject.Models.DTO.AppointmentDTO", b =>
                 {
                     b.Navigation("Tags");
                 });
 
             modelBuilder.Entity("IsaProject.Models.Entities.Appointment", b =>
                 {
+                    b.Navigation("appointmentTags");
+
                     b.Navigation("Tags");
                 });
 

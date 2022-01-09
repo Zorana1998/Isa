@@ -163,5 +163,7 @@ namespace IsaProject.Controllers
             return View(await _cottageService.GetAvailableCottages(dateTime, numberOfGuest, numberOfDays, averageScore));
         }
 
+        
+
     }
 }

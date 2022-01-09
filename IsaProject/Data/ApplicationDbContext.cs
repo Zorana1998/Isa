@@ -28,10 +28,12 @@ namespace IsaProject.Data
         public DbSet<Image> Images { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Tag> Tags { get; set; }
-        public DbSet<CottageAppointmentDTO> cottageAppointmentDTOs { get; set; }
+        public DbSet<AppointmentDTO> cottageAppointmentDTOs { get; set; }
         public DbSet<Ship> Ships { get; set; }
         public DbSet<Adventure> Adventure { get; set; }
         public DbSet<IsaProject.Models.Entities.AppointmentTag> AppointmentTag { get; set; }
+
+        public DbSet<IsaProject.Models.Entities.FastReservation> FastReservations { get; set; }
 
     }
 }

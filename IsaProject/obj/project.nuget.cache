@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "maY52i6ZBatIU+PMSGmqBjbbjnvDPCe4Torh9iS2ouJUBO7R5EUxxcPKYXGiJFoBj41N96LfOvVYKmqDzxEa+Q==",
+  "dgSpecHash": "8clRyit1p7kHERtcJ7QNmZxACuLFNy1MKlronOU3QVXTEJCvvLNyk1DYaShpY1GjuwBpSXDKFn0r9paER1Zvjg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Zorana Stamenković\\source\\repos\\IsaProject\\IsaProject\\IsaProject.csproj",
+  "projectFilePath": "C:\\Users\\Zorana Stamenković\\Desktop\\New folder (5)\\Isa\\IsaProject\\IsaProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Zorana Stamenković\\.nuget\\packages\\bootstrap\\5.1.3\\bootstrap.5.1.3.nupkg.sha512",
     "C:\\Users\\Zorana Stamenković\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

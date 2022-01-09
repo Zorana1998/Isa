@@ -153,5 +153,15 @@ namespace IsaProject.Controllers
         {
             return _context.Adventure.Any(e => e.Id == id);
         }
+
+        public IActionResult GetAvailableAdventure()
+        {
+            return View(new List<Adventure>());
+        }
+        [HttpPost]
+        public async Task<IActionResult> GetAvailableAdventure(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore)
+        {
+            return View(await _adventureService.GetAvailableAdventure(dateTime, numberOfGuest, numberOfDays, averageScore));
+        }
     }
 }

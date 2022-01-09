@@ -98,6 +98,7 @@ namespace IsaProject
             services.AddScoped<IShipService, ShipService>();
             services.AddScoped<IAdventureService, AdventureService>();
             services.AddScoped<IAppointmentService, AppointmentService>();
+            services.AddScoped<IFastReservationService, FastReservationService>();
 
 
 

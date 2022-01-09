@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace IsaProject.Models.DTO
 {
-    public class CottageAppointmentDTO
+    public class AppointmentDTO
     {
-        public CottageAppointmentDTO(long id, string name, string address, string country, string city, double averageScore, string rules, double price, DateTime startDate, int duration)
+        public AppointmentDTO(long id, string name, string address, string country, string city, double averageScore, string rules, double price, DateTime startDate, int duration)
         {
             Id = id;
             Name = name;
@@ -20,7 +20,7 @@ namespace IsaProject.Models.DTO
             StartDate = startDate;
         }
 
-        public CottageAppointmentDTO()
+        public AppointmentDTO()
         {
         }
 

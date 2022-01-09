@@ -76,16 +76,16 @@ namespace IsaProject.Services
             return filteredShips;
         }
 
-        public async Task<List<ShipAppointmentDTO>> GetAvailableShips(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore)
+        public async Task<List<AppointmentDTO>> GetAvailableShips(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore)
         {
-            List<ShipAppointmentDTO> ships;
+            List<AppointmentDTO> ships;
             ships = await (from ship in _context.Ships
                            join shipAppointment in _context.Appointments on ship.Id equals shipAppointment.EntityID
                            where ship.AverageScore > averageScore
                            && shipAppointment.MaxNumberOfPeople > numberOfGuest
                            && shipAppointment.Start <= dateTime
                            && shipAppointment.Start.AddDays(shipAppointment.DurationDays) > dateTime.AddDays(numberOfDays)
-                           select new ShipAppointmentDTO(shipAppointment.Id, ship.Name, ship.Address, ship.Country, ship.City, ship.AverageScore, ship.Rules, shipAppointment.Price, shipAppointment.Start, shipAppointment.DurationDays)).ToListAsync();
+                           select new AppointmentDTO(shipAppointment.Id, ship.Name, ship.Address, ship.Country, ship.City, ship.AverageScore, ship.Rules, shipAppointment.Price, shipAppointment.Start, shipAppointment.DurationDays)).ToListAsync();
 
             return ships;
         }

@@ -24,9 +24,9 @@ namespace IsaProject.Services
             _userManager = userManager;
         }
 
-        public async Task<List<CottageAppointmentDTO>> GetAvailableCottages(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore)
+        public async Task<List<AppointmentDTO>> GetAvailableCottages(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore)
         {
-            List<CottageAppointmentDTO> cottages;
+            List<AppointmentDTO> cottages;
             cottages = await (from cottage in _context.Cottages
                                             join cottageAppointment in _context.Appointments on cottage.Id equals cottageAppointment.EntityID
                                             where cottage.AverageScore > averageScore
@@ -34,7 +34,7 @@ namespace IsaProject.Services
                                             && cottageAppointment.Start <= dateTime
                                             && cottageAppointment.Start.AddDays(cottageAppointment.DurationDays) > dateTime.AddDays(numberOfDays)
                                             && cottageAppointment.UserID == null
-                                            select new CottageAppointmentDTO(cottageAppointment.Id,cottage.Name,cottage.Address,cottage.Country,cottage.City,cottage.AverageScore, cottage.Rules, cottageAppointment.Price, dateTime, numberOfDays)).ToListAsync();
+                                            select new AppointmentDTO(cottageAppointment.Id,cottage.Name,cottage.Address,cottage.Country,cottage.City,cottage.AverageScore, cottage.Rules, cottageAppointment.Price, dateTime, numberOfDays)).ToListAsync();
 
             return cottages;
         }
@@ -89,6 +89,8 @@ namespace IsaProject.Services
 
             return filteredCottages;
         }
+
+        
     }
 
 

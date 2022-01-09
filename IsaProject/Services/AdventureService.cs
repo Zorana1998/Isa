@@ -1,9 +1,11 @@
 ﻿using IsaProject.Data;
+using IsaProject.Models.DTO;
 using IsaProject.Models.Entities.Adventure;
 using IsaProject.Models.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -70,6 +72,21 @@ namespace IsaProject.Services
             }
 
             return filteredAdventures;
+        }
+
+        public async Task<List<AppointmentDTO>> GetAvailableAdventure(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore)
+        {
+            List<AppointmentDTO> appointmentDTOs;
+            appointmentDTOs = await (from adventure in _context.Adventure
+                              join adventureAppointment in _context.Appointments on adventure.Id equals adventureAppointment.EntityID
+                              where adventure.AverageScore > averageScore
+                              && adventureAppointment.MaxNumberOfPeople > numberOfGuest
+                              && adventureAppointment.Start <= dateTime
+                              && adventureAppointment.Start.AddDays(adventureAppointment.DurationDays) > dateTime.AddDays(numberOfDays)
+                              && adventureAppointment.UserID == null
+                              select new AppointmentDTO(adventureAppointment.Id, adventure.Name, adventure.Address, adventure.Country, adventure.City, adventure.AverageScore, adventure.Rules, adventureAppointment.Price, dateTime, numberOfDays)).ToListAsync();
+
+            return appointmentDTOs;
         }
 
     }

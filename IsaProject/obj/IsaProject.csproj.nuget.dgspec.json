@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Zorana Stamenković\\source\\repos\\IsaProject\\IsaProject\\IsaProject.csproj": {}
+    "C:\\Users\\Zorana Stamenković\\Desktop\\New folder (5)\\Isa\\IsaProject\\IsaProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Zorana Stamenković\\source\\repos\\IsaProject\\IsaProject\\IsaProject.csproj": {
+    "C:\\Users\\Zorana Stamenković\\Desktop\\New folder (5)\\Isa\\IsaProject\\IsaProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Zorana Stamenković\\source\\repos\\IsaProject\\IsaProject\\IsaProject.csproj",
+        "projectUniqueName": "C:\\Users\\Zorana Stamenković\\Desktop\\New folder (5)\\Isa\\IsaProject\\IsaProject.csproj",
         "projectName": "IsaProject",
-        "projectPath": "C:\\Users\\Zorana Stamenković\\source\\repos\\IsaProject\\IsaProject\\IsaProject.csproj",
+        "projectPath": "C:\\Users\\Zorana Stamenković\\Desktop\\New folder (5)\\Isa\\IsaProject\\IsaProject.csproj",
         "packagesPath": "C:\\Users\\Zorana Stamenković\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Zorana Stamenković\\source\\repos\\IsaProject\\IsaProject\\obj\\",
+        "outputPath": "C:\\Users\\Zorana Stamenković\\Desktop\\New folder (5)\\Isa\\IsaProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
