@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IsaProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220110090421_help")]
-    partial class help
+    [Migration("20220110101751_ExplanationField2")]
+    partial class ExplanationField2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -288,6 +288,9 @@ namespace IsaProject.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Explanation")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");

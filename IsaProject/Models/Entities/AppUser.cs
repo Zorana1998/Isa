@@ -18,6 +18,11 @@ namespace IsaProject.Models.Users
         public string City { get; set; }
         [PersonalData]
         public int Penalty { get; set; }
+
+        
+        public string Explanation { get; set; }
+
+        public string ReasonForReject { get; set; }
         /*public float AverageScore { get; set; }
         /*[ForeignKey("Pharmacy")]
         public long PharmacyId { get; set; }

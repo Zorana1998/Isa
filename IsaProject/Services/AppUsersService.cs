@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace IsaProject.Services
 {
@@ -61,6 +62,18 @@ namespace IsaProject.Services
         {
             _context.Add(user);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<AppUser>> GetUnapprovedUsers()
+        {
+            List<AppUser> users = await (from u in _context.tbAppUsers
+                                         join userRole in _context.UserRoles on u.Id equals userRole.UserId
+                                         join role in _context.Roles on userRole.RoleId equals role.Id
+                                         where (role.Name != "Admin" || role.Name !="User") &&
+                                         u.EmailConfirmed == false && u.ReasonForReject == null
+                                         select u).ToListAsync();
+
+            return users;
         }
     }
 }

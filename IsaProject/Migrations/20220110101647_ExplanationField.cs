@@ -2,7 +2,7 @@
 
 namespace IsaProject.Migrations
 {
-    public partial class help : Migration
+    public partial class ExplanationField : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

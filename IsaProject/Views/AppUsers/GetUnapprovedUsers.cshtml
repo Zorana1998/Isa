@@ -1,0 +1,71 @@
+﻿@model IEnumerable<IsaProject.Models.Users.AppUser>
+
+@using IsaProject.Models.Users
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@using Microsoft.AspNetCore.Identity
+@using IsaProject.Models.Entities.Users
+@inject SignInManager<IsaProject.Models.Users.AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@{ ViewData["Title"] = "GetUnapprovedUsers";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<h1>Details</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Explanation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Explanation)
+            </td>
+            <td>
+                <a asp-action="ApproveRegistration" asp-route-id="@item.Id">Approve registration</a>
+            </td>
+            <td>
+                <a asp-action="Reject" asp-route-id="@item.Id">RejectRegistration</a>
+            </td>
+
+        </tr>}
+    </tbody>
+</table>

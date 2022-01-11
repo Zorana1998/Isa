@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Isa.Areas.Identity;
+using System.IO;
 
 namespace IsaProject.Controllers
 {
@@ -21,6 +23,7 @@ namespace IsaProject.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly IAppUsersService _appUsersService;
+        private readonly EmailSender _emailSender;
 
 
         public AppUsersController(ApplicationDbContext context, UserManager<AppUser> userManager, IAppUsersService appUsersService)
@@ -28,11 +31,17 @@ namespace IsaProject.Controllers
             _context = context;
             _userManager = userManager;
             _appUsersService = appUsersService;
+            using (StreamReader r = new StreamReader("./Areas/Identity/emailCredentials.json"))
+            {
+                string json = r.ReadToEnd();
+                _emailSender = JsonConvert.DeserializeObject<EmailSender>(json);
+            }
         }
 
         public async Task<IActionResult> Index()
         {
             return View(await _context.tbAppUsers.ToListAsync());
+
         }
 
         // GET: AppUsers/Details/5
@@ -169,5 +178,97 @@ namespace IsaProject.Controllers
             return _context.tbAppUsers.Any(e => e.Id == id);
         }
 
+
+        public async Task<IActionResult> GetUnapprovedUsers()
+        {
+            return View(await _appUsersService.GetUnapprovedUsers());
+        }
+
+        public async Task<IActionResult> ApproveRegistration(string? id)
+        {
+            var user = await _context.tbAppUsers
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            user.EmailConfirmed = true;
+            try
+            {
+                await _appUsersService.Update(user);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_appUsersService.Exists(user.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return View("ConcurrencyError", "Home");
+                }
+            }
+            await _emailSender.SendEmailAsync(user.Email, "Profile approved",
+                $"Profile approved for {user.Email}");
+
+            return View();
+        }
+
+        [HttpGet("AppUsers/Reject")]
+        // GET: AppUsers/Edit/5
+        public async Task<IActionResult> Reject(string id)
+        {
+            
+            var repositoryUser = await _appUsersService.GetById(id);
+
+            if (repositoryUser == null)
+            {
+                return NotFound();
+            }
+
+            return View(repositoryUser);
+        }
+
+        // POST: AppUsers/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost("AppUsers/Reject")]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public async Task<IActionResult> Reject([Bind("Id, ReasonForReject")] AppUser appUser)
+        {
+            Console.WriteLine(appUser);
+
+            var user = await _appUsersService.GetById(appUser.Id);
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var repositoryUser = await _appUsersService.GetById(user.Id);
+
+                    repositoryUser.ReasonForReject = appUser.ReasonForReject;
+
+                    await _appUsersService.Update(repositoryUser);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!_appUsersService.Exists(user.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        return View("ConcurrencyError", "Home");
+                    }
+                }
+                await _emailSender.SendEmailAsync(user.Email, "Profile reject",
+                $"Profile reject for {user.Email} because {user.ReasonForReject}");
+                return View("Home");
+            }
+            
+
+            return View("Home");
+        }
+
+       
+
     }
+
 }

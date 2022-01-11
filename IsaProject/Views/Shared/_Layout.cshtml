@@ -26,42 +26,43 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        
+
                         @if (SignInManager.IsSignedIn(User))
                         {
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="Edit">Profile</a>
-                            </li>
-                        }
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="Edit">Profile</a>
+                    </li>}
                         <li class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Entities
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Cottages" asp-action="Index">Cottages</a>
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Adventures" asp-action="Index">Adventures</a>
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Ships" asp-action="Index">Ships</a>
-                                       <a class="nav-link text-dark" asp-area="" asp-controller="FastReservations" asp-action="Index">Fast Reservation</a>
-                                    </div>
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Entities
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Cottages" asp-action="Index">Cottages</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Adventures" asp-action="Index">Adventures</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Ships" asp-action="Index">Ships</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="FastReservations" asp-action="Index">Fast Reservation</a>
+                            </div>
                         </li>
                         @if ((await AuthorizationService.AuthorizeAsync(User, null, "AdminPolicy")).Succeeded)
-                         {
+                        {
                         <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="Index">Users</a>
-                        </li>
-                        }
-                        <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="Index">Appointment</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="Index">Users</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="FastReservations" asp-action="Index">Fast</a>
-                        </li>
-                         <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Tags" asp-action="Index">Tags</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="GetUnapprovedUsers">Accounts for approve</a>
+                        </li>}
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="Index">Appointment</a>
                         </li>
                         <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="AppointmentTags" asp-action="Index">AppTags</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="FastReservations" asp-action="Index">Fast</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Tags" asp-action="Index">Tags</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="AppointmentTags" asp-action="Index">AppTags</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />

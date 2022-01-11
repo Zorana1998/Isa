@@ -12,5 +12,6 @@ namespace IsaProject.Services
         public Task<int> Update(AppUser user);
         bool Exists(string id);
         public void Create(AppUser user);
+        public Task<List<AppUser>> GetUnapprovedUsers();
     }
 }

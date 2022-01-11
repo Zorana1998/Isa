@@ -1,5 +1,4 @@
 using Isa.Areas.Identity;
-using IsaProject.Areas.Identity;
 using IsaProject.Data;
 using IsaProject.Models.Users;
 using IsaProject.Services;
@@ -101,18 +100,6 @@ namespace IsaProject
             services.AddScoped<IAdventureService, AdventureService>();
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IFastReservationService, FastReservationService>();
-            services.AddScoped<IEmailSender, EmailSender>();
-
-
-
-            // requires
-            // using Microsoft.AspNetCore.Identity.UI.Services;
-            // using WebPWrecover.Services;
-            /*services.AddTransient<IEmailSender, EmailSender>();
-            services.Configure<AuthMessageSenderOptions>(Configuration);*/
-            // requires
-            // using Microsoft.AspNetCore.Identity.UI.Services;
-            // using WebPWrecover.Services;
 
 
 

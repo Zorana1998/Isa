@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ZoranaStamenković\\Desktop\\Isa\\Isa-main\\IsaProject\\IsaProject.csproj": {}
+    "C:\\Users\\ZoranaStamenković\\Desktop\\New folder\\Isa-main\\IsaProject\\IsaProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ZoranaStamenković\\Desktop\\Isa\\Isa-main\\IsaProject\\IsaProject.csproj": {
+    "C:\\Users\\ZoranaStamenković\\Desktop\\New folder\\Isa-main\\IsaProject\\IsaProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ZoranaStamenković\\Desktop\\Isa\\Isa-main\\IsaProject\\IsaProject.csproj",
+        "projectUniqueName": "C:\\Users\\ZoranaStamenković\\Desktop\\New folder\\Isa-main\\IsaProject\\IsaProject.csproj",
         "projectName": "IsaProject",
-        "projectPath": "C:\\Users\\ZoranaStamenković\\Desktop\\Isa\\Isa-main\\IsaProject\\IsaProject.csproj",
+        "projectPath": "C:\\Users\\ZoranaStamenković\\Desktop\\New folder\\Isa-main\\IsaProject\\IsaProject.csproj",
         "packagesPath": "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ZoranaStamenković\\Desktop\\Isa\\Isa-main\\IsaProject\\obj\\",
+        "outputPath": "C:\\Users\\ZoranaStamenković\\Desktop\\New folder\\Isa-main\\IsaProject\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
           "C:\\Users\\ZoranaStamenković\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Isa.Areas.Identity;
+using IsaProject.Data;
 using IsaProject.Models.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -15,7 +18,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace IsaProject.Areas.Identity.Pages.Account
 {
@@ -23,23 +28,31 @@ namespace IsaProject.Areas.Identity.Pages.Account
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        private readonly EmailSender _emailSender;
+        private readonly ApplicationDbContext _context;
 
         public RegisterModel(
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
             RoleManager<IdentityRole> roleManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _logger = logger;
-            _emailSender = emailSender;
             _roleManager = roleManager;
+            _logger = logger;
+            _context = context;
+
+            using (StreamReader r = new StreamReader("./Areas/Identity/emailCredentials.json"))
+            {
+                string json = r.ReadToEnd();
+                _emailSender = JsonConvert.DeserializeObject<EmailSender>(json);
+            }
         }
 
         [BindProperty]
@@ -101,6 +114,10 @@ namespace IsaProject.Areas.Identity.Pages.Account
             [Display(Name = "PhoneNumber")]
             public string PhoneNumber { get; set; }
 
+            [DataType(DataType.Text)]
+            [Display(Name = "Explanation")]
+            public string Explanation { get; set; }
+
         }
 
 
@@ -142,9 +159,9 @@ namespace IsaProject.Areas.Identity.Pages.Account
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
-                //await _userManager.AddToRoleAsync(user, Input.Role);
+                await _userManager.AddToRoleAsync(user, Input.Role);
                 
-                if (result.Succeeded)
+                if (result.Succeeded && (Input.Role == "User" || Input.Role == "Admin"))
                 {
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -156,6 +173,46 @@ namespace IsaProject.Areas.Identity.Pages.Account
 
                     await _emailSender.SendEmailAsync(Input.Email, "Booking: Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    {
+                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                    }
+                    else
+                    {
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        return LocalRedirect(returnUrl);
+                    }
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+
+                if (result.Succeeded && Input.Role != "User")
+                {
+                    /*var adminIds = (from u in _context.tbAppUsers
+                                    join userRole in _context.UserRoles on u.Id equals userRole.UserId
+                                    join role in _context.Roles on userRole.RoleId equals role.Id
+                                    where role.Name == "Admin"
+                                    select u.Id);
+                    var admin = await _context.Users
+                    .FirstOrDefaultAsync(m => m.Id == adminIds.First());
+
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    var callbackUrl = Url.Page(
+                        "/Account/ConfirmEmail",
+                        pageHandler: null,
+                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                        protocol: Request.Scheme);
+
+                    await _emailSender.SendEmailAsync(admin.Email, "Booking: Confirm your email",
+                        $"Please confirm {Input.Email} account with explanation {Input.Explanation} by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");*/
+
+                    
+
+                    
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
