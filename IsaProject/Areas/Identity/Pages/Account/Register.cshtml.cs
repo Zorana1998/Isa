@@ -142,7 +142,7 @@ namespace IsaProject.Areas.Identity.Pages.Account
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
-                await _userManager.AddToRoleAsync(user, Input.Role);
+                //await _userManager.AddToRoleAsync(user, Input.Role);
                 
                 if (result.Succeeded)
                 {
