@@ -79,7 +79,7 @@
                 @Html.DisplayFor(model => item.Tags)
             </td>
             <td>
-                    <a asp-controller="Appointments" asp-action="TakeAppointment" asp-route-id="@item.Id">Schedule</a>
+                    <a asp-controller="Appointments" asp-action="AddTagsUser" asp-route-id="@item.Id">Add Tags</a>
             </td>
         </tr>
 }

@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using IsaProject.Models.Entities;
 using IsaProject.Models.DTO;
 using Newtonsoft.Json;
+using Isa.Areas.Identity;
 
 namespace IsaProject.Services
 {
@@ -24,8 +25,9 @@ namespace IsaProject.Services
             _userManager = userManager;
         }
 
-        public async Task<List<AppointmentDTO>> GetAvailableCottages(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore)
+        public async Task<List<AppointmentDTO>> GetAvailableCottages(string id,DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore)
         {
+            
             List<AppointmentDTO> cottages;
             cottages = await (from cottage in _context.Cottages
                                             join cottageAppointment in _context.Appointments on cottage.Id equals cottageAppointment.EntityID
@@ -35,6 +37,10 @@ namespace IsaProject.Services
                                             && cottageAppointment.Start.AddDays(cottageAppointment.DurationDays) > dateTime.AddDays(numberOfDays)
                                             && cottageAppointment.UserID == null
                                             select new AppointmentDTO(cottageAppointment.Id,cottage.Name,cottage.Address,cottage.Country,cottage.City,cottage.AverageScore, cottage.Rules, cottageAppointment.Price, dateTime, numberOfDays)).ToListAsync();
+
+            _context.cottageAppointmentDTOs.Add(new AppointmentDTO(id, dateTime, numberOfGuest, numberOfDays));
+            await _context.SaveChangesAsync();
+
 
             return cottages;
         }

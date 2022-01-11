@@ -15,6 +15,8 @@ namespace IsaProject.Models.Entities
         [ForeignKey("Tag")]
         public long TagId { get; set; }
 
+        public bool ChoosenByUser { get; set; }
+
 
     }
 }

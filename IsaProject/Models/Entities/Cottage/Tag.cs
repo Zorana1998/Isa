@@ -12,6 +12,8 @@ namespace IsaProject.Models.Entities
         [Required]
         public string Name { get; set; }
 
+        public double Price { get; set; }
+
         public List<AppointmentTag> appointmentTags;
 
         

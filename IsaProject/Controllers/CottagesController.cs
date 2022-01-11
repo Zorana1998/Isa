@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using IsaProject.Data;
 using IsaProject.Models.Entities;
 using IsaProject.Services;
+using Microsoft.AspNetCore.Identity;
+using IsaProject.Models.Users;
 
 namespace IsaProject.Controllers
 {
@@ -15,11 +17,13 @@ namespace IsaProject.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ICottageService _cottageService;
+        private readonly UserManager<AppUser> _userManager;
 
-        public CottagesController(ApplicationDbContext context, ICottageService cottageService)
+        public CottagesController(ApplicationDbContext context, ICottageService cottageService, UserManager<AppUser> userManager)
         {
             _context = context;
             _cottageService = cottageService;
+            _userManager = userManager;
         }
 
         // GET: Cottages1
@@ -160,7 +164,8 @@ namespace IsaProject.Controllers
         [HttpPost]
         public async Task<IActionResult> GetAvailableCottages(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore)
         {
-            return View(await _cottageService.GetAvailableCottages(dateTime, numberOfGuest, numberOfDays, averageScore));
+            var user = await _userManager.GetUserAsync(User);
+            return View(await _cottageService.GetAvailableCottages(user.Id, dateTime, numberOfGuest, numberOfDays, averageScore));
         }
 
         

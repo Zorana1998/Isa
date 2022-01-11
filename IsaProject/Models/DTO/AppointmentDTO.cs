@@ -24,8 +24,16 @@ namespace IsaProject.Models.DTO
         {
         }
 
+        public AppointmentDTO(string customerId, DateTime dateTime, int numberOfGuest, int numberOfDays)
+        {
+            StartDate = dateTime;
+            NumberOfGuest = numberOfGuest;
+            Duration = numberOfDays;
+            CustomerId = customerId;
+        }
+
         public long Id { get; set; }
-        public long CustomerId { get; set; }
+        public string CustomerId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Country { get; set; }
@@ -35,6 +43,7 @@ namespace IsaProject.Models.DTO
         public double Price { get; set; }
         public DateTime StartDate { get; set; }
         public int Duration { get; set; }
+        public int NumberOfGuest { get; set; }
         public List<Tag> Tags { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace IsaProject.Services
 {
     public interface ICottageService
     {
-        public Task<List<AppointmentDTO>> GetAvailableCottages(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore);
+        public Task<List<AppointmentDTO>> GetAvailableCottages(String id,DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore);
         public Task<List<Cottage>> GetAllFiltered(string searchString, string filter, string sort);
 
     }

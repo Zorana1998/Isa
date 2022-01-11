@@ -38,14 +38,17 @@ namespace IsaProject.Migrations
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("CustomerId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Duration")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumberOfGuest")
+                        .HasColumnType("int");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -114,6 +117,9 @@ namespace IsaProject.Migrations
 
                     b.Property<long>("AppointmentID")
                         .HasColumnType("bigint");
+
+                    b.Property<bool>("ChoosenByUser")
+                        .HasColumnType("bit");
 
                     b.Property<long>("TagId")
                         .HasColumnType("bigint");
@@ -226,6 +232,9 @@ namespace IsaProject.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

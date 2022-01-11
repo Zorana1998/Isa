@@ -52,9 +52,7 @@
                         <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="GetUnapprovedUsers">Accounts for approve</a>
                         </li>}
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="Index">Appointment</a>
-                        </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="FastReservations" asp-action="Index">Fast</a>
                         </li>
@@ -64,6 +62,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="AppointmentTags" asp-action="Index">AppTags</a>
                         </li>
+                        @if ((await AuthorizationService.AuthorizeAsync(User, null, "CottageOwnerPolicy")).Succeeded || (await AuthorizationService.AuthorizeAsync(User, null, "ShipOwnerPolicy")).Succeeded || (await AuthorizationService.AuthorizeAsync(User, null, "FishingInstructorPolicy")).Succeeded)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="Index">Appointment</a>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

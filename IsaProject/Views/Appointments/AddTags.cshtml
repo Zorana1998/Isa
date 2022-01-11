@@ -1,0 +1,61 @@
+﻿@model IEnumerable<IsaProject.Models.Entities.Tag>
+
+@{
+    ViewData["Title"] = "AddTags";
+}
+
+<h1>Add tags</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <input type="checkbox"  id="@item.Id">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <button type="submit" onclick="something(@item.Id)">Submit</button>
+                
+            </td>
+        </tr>
+}
+    </tbody>
+    
+
+
+
+</table>
+<script>
+    function something(id) {
+        var id = id;
+        var url = window.location.pathname;
+        var appointmentId = url.substring(url.lastIndexOf('/') + 1);
+        $.ajax({
+        // do the rest of work here
+        type: "POST",
+        data: {id: id, appointmentId: appointmentId},
+        url: '@Url.Action("AddTags", "Appointments")',
+        async: true,
+        success: function(){
+                    location.reload();
+                }
+    });
+
+    
+}
+    
+
+    
+</script>
