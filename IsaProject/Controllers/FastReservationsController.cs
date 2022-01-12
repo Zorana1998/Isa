@@ -14,6 +14,7 @@ using IsaProject.Services;
 using System.IO;
 using Newtonsoft.Json;
 using Isa.Areas.Identity;
+using IsaProject.Models;
 
 namespace IsaProject.Controllers
 {
@@ -176,23 +177,20 @@ namespace IsaProject.Controllers
 
             var user = await _userManager.GetUserAsync(User);
             var fastReservation = await _context.FastReservations.FindAsync(id);
-            fastReservation.UserID = user.Id;
-            fastReservation.isScheduled = true;
-            try
-            {
-                await _fastReservationService.Update(fastReservation);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_fastReservationService.Exists(fastReservation.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    return View("ConcurrencyError", "Home");
-                }
-            }
+
+            ScheduledAppointment scheduledAppointment = new ScheduledAppointment();
+            scheduledAppointment.UserID = user.Id;
+            scheduledAppointment.EntityID = fastReservation.EntityID;
+            scheduledAppointment.Start = fastReservation.Start;
+            scheduledAppointment.Duration = fastReservation.DurationDays;
+            scheduledAppointment.NumberOfPeople = fastReservation.MaxNumberOfPeople;
+            scheduledAppointment.Price = fastReservation.Price;
+            scheduledAppointment.IsActive = true;
+
+            _context.FastReservations.Remove(fastReservation);
+            _context.scheduledAppointments.Add(scheduledAppointment);
+            _context.SaveChanges();
+
             await _emailSender.SendEmailAsync(user.Email, "Scheduled Appointment",
                 $"Scheduled Appointment for {user.FirstName} at {fastReservation.Start}");
 
@@ -204,19 +202,11 @@ namespace IsaProject.Controllers
         public async Task<IActionResult> GetFree()
         {
             var fastRes = await (from fast in _context.FastReservations
-                                         where fast.isScheduled == false && fast.UserID == null
                                          select fast).ToListAsync();
             return View(fastRes);
         }
 
-        public async Task<IActionResult> GetMyFastReservation()
-        {
-
-            var user = await _userManager.GetUserAsync(User);
-
-
-            return View(await _fastReservationService.GetMyFastReservation(user.Id));
-        }
+        
 
 
 

@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using IsaProject.Models.Entities.Users;
 using IsaProject.Models.Entities.Adventure;
 
 namespace IsaProject.Data
@@ -34,6 +33,8 @@ namespace IsaProject.Data
         public DbSet<IsaProject.Models.Entities.AppointmentTag> AppointmentTag { get; set; }
 
         public DbSet<IsaProject.Models.Entities.FastReservation> FastReservations { get; set; }
+
+        public DbSet<IsaProject.Models.ScheduledAppointment> scheduledAppointments { get; set; }
 
     }
 }

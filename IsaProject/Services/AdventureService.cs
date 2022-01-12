@@ -83,7 +83,6 @@ namespace IsaProject.Services
                               && adventureAppointment.MaxNumberOfPeople > numberOfGuest
                               && adventureAppointment.Start <= dateTime
                               && adventureAppointment.Start.AddDays(adventureAppointment.DurationDays) > dateTime.AddDays(numberOfDays)
-                              && adventureAppointment.UserID == null
                               select new AppointmentDTO(adventureAppointment.Id, adventure.Name, adventure.Address, adventure.Country, adventure.City, adventure.AverageScore, adventure.Rules, adventureAppointment.Price, dateTime, numberOfDays)).ToListAsync();
 
             return appointmentDTOs;

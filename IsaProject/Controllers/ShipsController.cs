@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IsaProject.Data;
-using IsaProject.Models.Entities.Users;
 using IsaProject.Services;
+using IsaProject.Models;
 
 namespace IsaProject.Controllers
 {

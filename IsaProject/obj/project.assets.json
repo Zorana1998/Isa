@@ -8295,25 +8295,28 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Zorana Stamenković\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ZoranaStamenković\\Desktop\\Isa-main(4)\\Isa-main\\IsaProject\\IsaProject.csproj",
+      "projectUniqueName": "C:\\Users\\Zorana Stamenković\\Desktop\\IsaSolution\\Isa\\IsaProject\\IsaProject.csproj",
       "projectName": "IsaProject",
-      "projectPath": "C:\\Users\\ZoranaStamenković\\Desktop\\Isa-main(4)\\Isa-main\\IsaProject\\IsaProject.csproj",
-      "packagesPath": "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ZoranaStamenković\\Desktop\\Isa-main(4)\\Isa-main\\IsaProject\\obj\\",
+      "projectPath": "C:\\Users\\Zorana Stamenković\\Desktop\\IsaSolution\\Isa\\IsaProject\\IsaProject.csproj",
+      "packagesPath": "C:\\Users\\Zorana Stamenković\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Zorana Stamenković\\Desktop\\IsaSolution\\Isa\\IsaProject\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\ZoranaStamenković\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Zorana Stamenković\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -8395,6 +8398,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[5.0.13, 5.0.13]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"

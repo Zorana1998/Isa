@@ -35,13 +35,13 @@ namespace IsaProject.Services
             return _context.FastReservations.Any(m => m.Id == id);
         }
 
-        public async Task<List<FastReservation>> GetMyFastReservation(string id)
+        /*public async Task<List<FastReservation>> GetMyFastReservation(string id)
         {
             List<FastReservation> fastReservations = await (from u in _context.FastReservations
                                                     where u.UserID == id && u.Start >= System.DateTime.Now && u.isScheduled == true
                                                     select u).ToListAsync();
 
             return fastReservations;
-        }
+        }*/
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<IsaProject.Models.Entities.Appointment>
+﻿@model IEnumerable<IsaProject.Models.ScheduledAppointment>
 
 @{
     ViewData["Title"] = "GetMyReservation";
@@ -13,13 +13,16 @@
                 @Html.DisplayNameFor(model => model.Start)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DurationDays)
+                @Html.DisplayNameFor(model => model.NumberOfPeople)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MaxNumberOfPeople)
+                @Html.DisplayNameFor(model => model.EntityID)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
             </th>
             <th></th>
         </tr>
@@ -31,16 +34,22 @@
                 @Html.DisplayFor(modelItem => item.Start)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DurationDays)
+                @Html.DisplayFor(modelItem => item.NumberOfPeople)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MaxNumberOfPeople)
+                @Html.DisplayFor(modelItem => item.EntityID)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <button [disabled]="isDisabled(@item.Start)" id = "forExit"> Cancel reservation </button>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @if ((item.Start - DateTime.Now).Days > 3)
+                {
+                    <button type="submit" onclick="cancel(@item.Id)"> Cancel reservation </button>
+                }
             </td>
 
         </tr>
@@ -50,22 +59,13 @@
 
 
 <script >
-    function isDisabled(startDate) {
-        //Reference the Button.
-        var btnSubmit = document.getElementById("forExit");
-
-        const date1 = Date.now();
-        const date2 = startDate;
-        const diffTime = Math.abs(date2 - date1);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
- 
-        //Verify the TextBox value.
-        if (diffDays <= 3) {
-            //Enable the TextBox when TextBox has value.
-            btnSubmit.disabled = true;
-        } else {
-            //Disable the TextBox when TextBox is empty.
-            btnSubmit.disabled = false;
-        }
-    };
+    function cancel(id) {
+        $.ajax({
+        // do the rest of work here
+        type: "POST",
+        data: {id: id},
+        url: '@Url.Action("CancelReservation", "Appointments")',
+        async: true
+    });
+    }
 </script>

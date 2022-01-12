@@ -9,6 +9,6 @@ namespace IsaProject.Services
         public Task<int> Update(FastReservation fastReservation);
         public bool Exists(long id);
 
-        public Task<List<FastReservation>> GetMyFastReservation(string id);
+        //public Task<List<FastReservation>> GetMyFastReservation(string id);
     }
 }

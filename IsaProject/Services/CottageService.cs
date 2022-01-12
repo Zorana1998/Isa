@@ -11,6 +11,7 @@ using IsaProject.Models.Entities;
 using IsaProject.Models.DTO;
 using Newtonsoft.Json;
 using Isa.Areas.Identity;
+using IsaProject.Models;
 
 namespace IsaProject.Services
 {
@@ -27,24 +28,104 @@ namespace IsaProject.Services
 
         public async Task<List<AppointmentDTO>> GetAvailableCottages(string id,DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore)
         {
+
+            //AllScheduledCottages
+            List<ScheduledAppointment> scheduledAppointments = await (from schApp in _context.scheduledAppointments
+                                                                      join cottage in _context.Cottages on schApp.EntityID equals cottage.Id
+                                                                      where schApp.IsActive == true
+                                                                      select schApp).ToListAsync();
+
             
 
-            List<AppointmentDTO> cottages;
-            cottages = await (from cottage in _context.Cottages
-                                            join cottageAppointment in _context.Appointments on cottage.Id equals cottageAppointment.EntityID
-                                            where cottage.AverageScore > averageScore
-                                            && cottageAppointment.MaxNumberOfPeople > numberOfGuest
-                                            && cottageAppointment.Start <= dateTime
-                                            && cottageAppointment.Start.AddDays(cottageAppointment.DurationDays) >= dateTime.AddDays(numberOfDays)
-                                            && cottageAppointment.isSeparated != true
-                                            && cottageAppointment.UserID == null
-                                            select new AppointmentDTO(cottageAppointment.Id,cottage.Name,cottage.Address,cottage.Country,cottage.City,cottage.AverageScore, cottage.Rules, cottageAppointment.Price, dateTime, numberOfDays, id, numberOfGuest)).ToListAsync();
+            List<Appointment> cottagesAppointment;
+            cottagesAppointment = await (from cottage in _context.Cottages
+                                         join cottageAppointment in _context.Appointments on cottage.Id equals cottageAppointment.EntityID
+                                         where cottage.AverageScore > averageScore
+                                         && cottageAppointment.MaxNumberOfPeople > numberOfGuest
+                                         && cottageAppointment.Start <= dateTime
+                                         && cottageAppointment.Start.AddDays(cottageAppointment.DurationDays) >= dateTime.AddDays(numberOfDays)
+                                         select cottageAppointment).ToListAsync();
 
-            List<long> dtosIds = new List<long>();
+            List<Appointment> availableAppointments = new List<Appointment>();
+
+            var counter = 0;
+
+            foreach (Appointment appointment in cottagesAppointment)
+            {
+                counter = 0;
+
+                foreach (ScheduledAppointment scheduledAppointment in scheduledAppointments)
+                {
+                    if (appointment.EntityID == scheduledAppointment.EntityID)
+                    {
+                        //upao u sredinu
+                        if (scheduledAppointment.Start >= dateTime && scheduledAppointment.Start.AddDays(scheduledAppointment.Duration) <= dateTime.AddDays(numberOfDays))
+                        {
+                            counter++;
+                        }
+
+                        //kraj unutar
+                        if (scheduledAppointment.Start <= dateTime && scheduledAppointment.Start.AddDays(scheduledAppointment.Duration) <= dateTime.AddDays(numberOfDays))
+                        {
+                            counter++;
+                        }
+
+                        //upao pocetak
+                        if (scheduledAppointment.Start < dateTime.AddDays(numberOfDays) && scheduledAppointment.Start.AddDays(scheduledAppointment.Duration) >= dateTime.AddDays(numberOfDays))
+                        {
+                            counter++;
+                        }
+
+
+                        //novi u sredinu
+                        if (scheduledAppointment.Start < dateTime && scheduledAppointment.Start.AddDays(scheduledAppointment.Duration) > dateTime.AddDays(numberOfDays))
+                        {
+                            counter++;
+                        }
+                    }
+
+                }
+
+                if (counter == 0)
+                {
+                    availableAppointments.Add(appointment);
+                }
+            }
+
+            //AllCottagesAppDTO
+            List<AppointmentDTO> cottagesAppointmentDTO = new List<AppointmentDTO>();
+
+            foreach(Appointment app in availableAppointments)
+            {
+                //MyLastAppointment, to skip in same time
+                List<ScheduledAppointment> myAppointments = await (from schApp in _context.scheduledAppointments
+                                                                   join cottage in _context.Cottages on schApp.EntityID equals cottage.Id
+                                                                   where schApp.IsActive == false && schApp.UserID == id && schApp.Start == dateTime && schApp.EntityID == app.EntityID
+                                                                   select schApp).ToListAsync();
+
+                
+
+                if (myAppointments.Count != 0)
+                {
+                    continue;
+                }
+
+                List<Cottage> cottages = await (from cottage in _context.Cottages
+                                               join cottageAppointment in _context.Appointments on cottage.Id equals cottageAppointment.EntityID
+                                               where cottageAppointment.Id == app.Id
+                                               select cottage).ToListAsync();
+                Cottage cottage1 = cottages.First();
+
+                AppointmentDTO appDTO = new AppointmentDTO(app.Id, cottage1.Name, cottage1.Address, cottage1.Country, cottage1.City, cottage1.AverageScore, cottage1.Rules, app.Price, dateTime, numberOfDays, id, numberOfGuest);
+                cottagesAppointmentDTO.Add(appDTO);
+            }
+            
+            
+
             List<AppointmentDTO> present = new List<AppointmentDTO>();
 
 
-            foreach( AppointmentDTO appointmentDTO in cottages)
+            foreach( AppointmentDTO appointmentDTO in cottagesAppointmentDTO)
             {
                 var app = new AppointmentDTO(appointmentDTO.AppointmentId, appointmentDTO.Name, appointmentDTO.Address, appointmentDTO.Country, appointmentDTO.City, appointmentDTO.AverageScore, appointmentDTO.Rules, appointmentDTO.Price, appointmentDTO.StartDate, appointmentDTO.Duration, id, numberOfGuest);
                 _context.cottageAppointmentDTOs.Add(app);

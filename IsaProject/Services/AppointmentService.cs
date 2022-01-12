@@ -1,4 +1,5 @@
 ﻿using IsaProject.Data;
+using IsaProject.Models;
 using IsaProject.Models.Entities;
 using IsaProject.Models.Users;
 using Microsoft.AspNetCore.Identity;
@@ -34,10 +35,10 @@ namespace IsaProject.Services
             return _context.Appointments.Any(m => m.Id == id);
         }
 
-        public async Task<List<Appointment>> GetMyReservation(string id)
+        public async Task<List<ScheduledAppointment>> GetMyReservation(string id)
         {
-            List<Appointment> appointments = await (from u in _context.Appointments
-                                         where u.UserID == id && u.IsActive == true && u.Start >= System.DateTime.Now
+            List<ScheduledAppointment> appointments = await (from u in _context.scheduledAppointments
+                                         where u.UserID == id && u.Start >= System.DateTime.Now && u.IsActive == true
                                          select u).ToListAsync();
 
             return appointments;

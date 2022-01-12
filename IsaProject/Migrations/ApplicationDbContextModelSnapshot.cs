@@ -84,9 +84,6 @@ namespace IsaProject.Migrations
                     b.Property<long>("EntityID")
                         .HasColumnType("bigint");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<int>("MaxNumberOfPeople")
                         .HasColumnType("int");
 
@@ -98,15 +95,6 @@ namespace IsaProject.Migrations
 
                     b.Property<DateTime>("Start")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("isScheduled")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isSeparated")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -130,8 +118,11 @@ namespace IsaProject.Migrations
                     b.Property<long>("AppointmentID")
                         .HasColumnType("bigint");
 
-                    b.Property<bool>("ChoosenByUser")
-                        .HasColumnType("bit");
+                    b.Property<long?>("ScheduleAppointmentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("ScheduledAppointmentId")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("TagId")
                         .HasColumnType("bigint");
@@ -141,6 +132,8 @@ namespace IsaProject.Migrations
                     b.HasIndex("AppointmentDTOID");
 
                     b.HasIndex("AppointmentID");
+
+                    b.HasIndex("ScheduledAppointmentId");
 
                     b.ToTable("AppointmentTag");
                 });
@@ -275,6 +268,39 @@ namespace IsaProject.Migrations
                     b.HasIndex("EntityID");
 
                     b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("IsaProject.Models.ScheduledAppointment", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Duration")
+                        .HasColumnType("int");
+
+                    b.Property<long>("EntityID")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("NumberOfPeople")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("scheduledAppointments");
                 });
 
             modelBuilder.Entity("IsaProject.Models.Users.AppUser", b =>
@@ -531,7 +557,7 @@ namespace IsaProject.Migrations
                     b.HasDiscriminator().HasValue("Cottage");
                 });
 
-            modelBuilder.Entity("IsaProject.Models.Entities.Users.Ship", b =>
+            modelBuilder.Entity("IsaProject.Models.Ship", b =>
                 {
                     b.HasBaseType("IsaProject.Models.Entities.Entity");
 
@@ -581,6 +607,10 @@ namespace IsaProject.Migrations
                         .HasForeignKey("AppointmentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("IsaProject.Models.ScheduledAppointment", null)
+                        .WithMany("appointmentTags")
+                        .HasForeignKey("ScheduledAppointmentId");
                 });
 
             modelBuilder.Entity("IsaProject.Models.Entities.Room", b =>
@@ -594,7 +624,7 @@ namespace IsaProject.Migrations
 
             modelBuilder.Entity("IsaProject.Models.Entities.Ship.NavigationEquipment", b =>
                 {
-                    b.HasOne("IsaProject.Models.Entities.Users.Ship", null)
+                    b.HasOne("IsaProject.Models.Ship", null)
                         .WithMany("NavigationEquipments")
                         .HasForeignKey("ShipId");
                 });
@@ -685,12 +715,17 @@ namespace IsaProject.Migrations
                     b.Navigation("Images");
                 });
 
+            modelBuilder.Entity("IsaProject.Models.ScheduledAppointment", b =>
+                {
+                    b.Navigation("appointmentTags");
+                });
+
             modelBuilder.Entity("IsaProject.Models.Entities.Cottage", b =>
                 {
                     b.Navigation("Rooms");
                 });
 
-            modelBuilder.Entity("IsaProject.Models.Entities.Users.Ship", b =>
+            modelBuilder.Entity("IsaProject.Models.Ship", b =>
                 {
                     b.Navigation("NavigationEquipments");
                 });

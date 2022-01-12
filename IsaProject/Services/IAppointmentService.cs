@@ -1,4 +1,5 @@
-﻿using IsaProject.Models.Entities;
+﻿using IsaProject.Models;
+using IsaProject.Models.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,6 +10,6 @@ namespace IsaProject.Services
         public Task<int> Update(Appointment appointment);
         public bool Exists(long id);
 
-        public Task<List<Appointment>> GetMyReservation(string id);
+        public Task<List<ScheduledAppointment>> GetMyReservation(string id);
     }
 }

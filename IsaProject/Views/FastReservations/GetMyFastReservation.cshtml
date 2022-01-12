@@ -52,25 +52,3 @@
     </tbody>
 </table>
 
-<script >
-    function isDisabled(startDate, id) {
-        //Reference the Button.
-        var btnSubmit = document.getElementById(id);
-
-        const date1 = Date.now();
-        const date2 = startDate;
-        const diffTime = Math.abs(date2 - date1);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-        console.log(diffDays);
- 
-        //Verify the TextBox value.
-        if (diffDays <= 3) {
-            //Enable the TextBox when TextBox has value.
-            btnSubmit.hidden = true;
-        } else {
-            //Disable the TextBox when TextBox is empty.
-            btnSubmit.hidden = false;
-        }
-    };
-</script>

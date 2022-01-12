@@ -15,27 +15,35 @@ namespace IsaProject.Models.Entities
         [ForeignKey("Tag")]
         public long TagId { get; set; }
 
-        public bool ChoosenByUser { get; set; }
-
         [ForeignKey("AppointmentDTO")]
         public long? AppointmentDTOID { get; set; }
+
+        [ForeignKey("ScheduledAppointment")]
+        public long? ScheduleAppointmentId { get; set; }
 
         public AppointmentTag()
         {
         }
 
-        public AppointmentTag(long appointmentID, long appointmentDTOID, long tagId, bool choosenByUser)
+        public AppointmentTag(long appointmentID, long appointmentDTOID, long tagId)
         {
             AppointmentID = appointmentID;
             AppointmentDTOID = appointmentDTOID;
             TagId = tagId;
-            ChoosenByUser = choosenByUser;
         }
 
         public AppointmentTag(long appointmentID, long tagId)
         {
             AppointmentID = appointmentID;
             TagId = tagId;
+        }
+
+        public AppointmentTag(long appointmentID, long appointmentDTOID, long tagId, long scheduleAppointmentId)
+        {
+            AppointmentID = appointmentID;
+            AppointmentDTOID = appointmentDTOID;
+            TagId = tagId;
+            ScheduleAppointmentId = scheduleAppointmentId;
         }
     }
 }

@@ -185,27 +185,22 @@ namespace IsaProject.Controllers
             var appointment = await _context.Appointments
                 .FirstOrDefaultAsync(m => m.Id == appointmentDTO.AppointmentId);
 
-            
+            ScheduledAppointment scheduledAppointment = new ScheduledAppointment();
+            scheduledAppointment.UserID = user.Id;
+            scheduledAppointment.EntityID = appointment.EntityID;
+            scheduledAppointment.Start = appointmentDTO.StartDate;
+            scheduledAppointment.Duration = appointmentDTO.Duration;
+            scheduledAppointment.NumberOfPeople = appointmentDTO.NumberOfGuest;
+            scheduledAppointment.Price = appointmentDTO.Price;
+            scheduledAppointment.IsActive = true;
 
-
-            
-
-            //Appointment for schedule
-            Appointment appointmentNew = new Appointment();
-            appointmentNew.isScheduled = true;
-            appointmentNew.MaxNumberOfPeople = appointmentDTO.NumberOfGuest;
-            appointmentNew.OwnerID = appointment.OwnerID;
-            appointmentNew.Price = appointmentDTO.Price;
-            appointmentNew.Start = appointmentDTO.StartDate;
-            appointmentNew.DurationDays = appointmentDTO.Duration;
-            appointmentNew.UserID = user.Id;
-            appointmentNew.EntityID = appointment.EntityID;
-            appointmentNew.IsActive = true;
-            _context.Appointments.Add(appointmentNew);
+            _context.scheduledAppointments.Add(scheduledAppointment);
             _context.SaveChanges();
 
 
-            long appNewId = appointmentNew.Id;
+
+            //AddTags
+            long appNewId = scheduledAppointment.Id;
 
             var tagChoosenUser = await (from tag in _context.Tags
                                       join appTag in _context.AppointmentTag on tag.Id equals appTag.TagId
@@ -215,121 +210,15 @@ namespace IsaProject.Controllers
             var tagChoosenOwner = await (from tag in _context.Tags
                                       join appTag in _context.AppointmentTag on tag.Id equals appTag.TagId
                                       join app in _context.Appointments on appTag.AppointmentID equals app.Id
-                                      where appTag.ChoosenByUser == false
                                       select tag).ToListAsync();
 
             foreach (Tag tag in tagChoosenUser)
             {
-                AppointmentTag appointmentTag = new AppointmentTag(appNewId, appointmentDTO.Id, tag.Id, true);
+                AppointmentTag appointmentTag = new AppointmentTag(appNewId, appointmentDTO.Id, tag.Id, scheduledAppointment.Id);
                 _context.AppointmentTag.Add(appointmentTag);
                 _context.SaveChanges();
             }
 
-            //NewAppointments because appointment take
-            if (appointment.Start.AddDays(appointment.DurationDays) == appointmentNew.Start.AddDays(appointmentNew.DurationDays)){
-                Appointment appointmentFreeSchedule = new Appointment();
-                appointmentFreeSchedule.isScheduled = false;
-                appointmentFreeSchedule.MaxNumberOfPeople = appointment.MaxNumberOfPeople;
-                appointmentFreeSchedule.OwnerID = appointment.OwnerID;
-                appointmentFreeSchedule.Price = appointment.Price;
-                appointmentFreeSchedule.Start = appointment.Start;
-                appointmentFreeSchedule.DurationDays = (int)((appointmentNew.Start)-(appointment.Start)).TotalDays;
-                appointmentFreeSchedule.UserID = null;
-                appointmentFreeSchedule.EntityID = appointment.EntityID;
-                appointmentFreeSchedule.IsActive = false;
-                _context.Appointments.Add(appointmentFreeSchedule);
-                _context.SaveChanges();
-
-                long appointmentFreeScheduleId = appointmentFreeSchedule.Id;
-
-                foreach (Tag tag in tagChoosenOwner)
-                {
-                    AppointmentTag appointmentTag = new AppointmentTag(appointmentFreeScheduleId, tag.Id);
-                    _context.AppointmentTag.Add(appointmentTag);
-                    _context.SaveChanges();
-                }
-            }
-
-            //case between
-            if (appointment.Start.AddDays(appointment.DurationDays) != appointmentNew.Start.AddDays(appointmentNew.DurationDays) && appointmentNew.Start!=appointment.Start)
-            {
-                Appointment appointmentFreeScheduleBefore = new Appointment();
-                appointmentFreeScheduleBefore.isScheduled = false;
-                appointmentFreeScheduleBefore.MaxNumberOfPeople = appointment.MaxNumberOfPeople;
-                appointmentFreeScheduleBefore.OwnerID = appointment.OwnerID;
-                appointmentFreeScheduleBefore.Price = appointment.Price;
-                appointmentFreeScheduleBefore.Start = appointment.Start;
-                appointmentFreeScheduleBefore.DurationDays = (int)((appointmentNew.Start) - (appointment.Start)).TotalDays;
-                appointmentFreeScheduleBefore.UserID = null;
-                appointmentFreeScheduleBefore.EntityID = appointment.EntityID;
-                appointmentFreeScheduleBefore.IsActive = false;
-                _context.Appointments.Add(appointmentFreeScheduleBefore);
-                _context.SaveChanges();
-
-                long appointmentFreeScheduleBeforeId = appointmentFreeScheduleBefore.Id;
-
-                foreach (Tag tag in tagChoosenOwner)
-                {
-                    AppointmentTag appointmentTag = new AppointmentTag(appointmentFreeScheduleBeforeId, tag.Id);
-                    _context.AppointmentTag.Add(appointmentTag);
-                    _context.SaveChanges();
-                }
-
-
-                Appointment appointmentFreeScheduleEnd = new Appointment();
-                appointmentFreeScheduleEnd.isScheduled = false;
-                appointmentFreeScheduleEnd.MaxNumberOfPeople = appointment.MaxNumberOfPeople;
-                appointmentFreeScheduleEnd.OwnerID = appointment.OwnerID;
-                appointmentFreeScheduleEnd.Price = appointment.Price;
-                appointmentFreeScheduleEnd.Start = appointmentDTO.StartDate.AddDays(appointmentNew.DurationDays);
-                appointmentFreeScheduleEnd.DurationDays = appointment.DurationDays - appointmentNew.DurationDays - appointmentFreeScheduleBefore.DurationDays;
-                appointmentFreeScheduleEnd.UserID = null;
-                appointmentFreeScheduleEnd.EntityID = appointment.EntityID;
-                appointmentFreeScheduleEnd.IsActive = false;
-                _context.Appointments.Add(appointmentFreeScheduleEnd);
-                _context.SaveChanges();
-
-                long appointmentFreeScheduleEndId = appointmentFreeScheduleEnd.Id;
-
-                foreach (Tag tag in tagChoosenOwner)
-                {
-                    AppointmentTag appointmentTag = new AppointmentTag(appointmentFreeScheduleEndId, tag.Id);
-                    _context.AppointmentTag.Add(appointmentTag);
-                    _context.SaveChanges();
-                }
-            }
-
-
-            //case end more 
-            if (appointmentNew.Start == appointment.Start)
-            {
-                
-                Appointment appointmentFreeScheduleEnd = new Appointment();
-                appointmentFreeScheduleEnd.isScheduled = false;
-                appointmentFreeScheduleEnd.MaxNumberOfPeople = appointment.MaxNumberOfPeople;
-                appointmentFreeScheduleEnd.OwnerID = appointment.OwnerID;
-                appointmentFreeScheduleEnd.Price = appointment.Price;
-                appointmentFreeScheduleEnd.Start = appointmentDTO.StartDate.AddDays(appointmentNew.DurationDays);
-                appointmentFreeScheduleEnd.DurationDays = appointment.DurationDays - appointmentNew.DurationDays;
-                appointmentFreeScheduleEnd.UserID = null;
-                appointmentFreeScheduleEnd.EntityID = appointment.EntityID;
-                appointmentFreeScheduleEnd.IsActive = false;
-                _context.Appointments.Add(appointmentFreeScheduleEnd);
-                _context.SaveChanges();
-
-                long appointmentFreeScheduleEndId = appointmentFreeScheduleEnd.Id;
-
-                foreach (Tag tag in tagChoosenOwner)
-                {
-                    AppointmentTag appointmentTag = new AppointmentTag(appointmentFreeScheduleEndId, tag.Id);
-                    _context.AppointmentTag.Add(appointmentTag);
-                    _context.SaveChanges();
-                }
-            }
-
-            appointment.isSeparated = true;
-
-            _context.Appointments.Update(appointment);
             _context.SaveChanges();
 
             await _emailSender.SendEmailAsync(user.Email, "Scheduled Appointment",
@@ -411,7 +300,7 @@ namespace IsaProject.Controllers
             List<Tag> tagChoosen = await (from tag in _context.Tags
                                           join appTag in _context.AppointmentTag on tag.Id equals appTag.TagId
                                           join app in _context.Appointments on appTag.AppointmentID equals app.Id
-                                          where app.Id == appointment.Id && app.UserID == null && appTag.AppointmentDTOID ==   null && appTag.ChoosenByUser == false
+                                          where app.Id == appointment.Id && appTag.AppointmentDTOID ==null
                                           select tag).ToListAsync();
 
 
@@ -442,7 +331,7 @@ namespace IsaProject.Controllers
             var appointmentTags = await _context.AppointmentTag
                 .FirstOrDefaultAsync(m => m.AppointmentID == appointmentDTO.AppointmentId && m.TagId == Tag.Id);
 
-            var appTag = new AppointmentTag(appointmentDTO.AppointmentId, appointmentId, id, true);
+            var appTag = new AppointmentTag(appointmentDTO.AppointmentId, appointmentId, id);
             _context.AppointmentTag.Add(appTag);
             _context.SaveChanges();
 
@@ -458,6 +347,20 @@ namespace IsaProject.Controllers
 
 
             return View(await _appointmentService.GetMyReservation(user.Id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CancelReservation(long id)
+        {
+            var scheduleAppointment = await _context.scheduledAppointments.FindAsync(id);
+            Console.WriteLine(scheduleAppointment.Id);
+            scheduleAppointment.IsActive = false;
+
+            _context.scheduledAppointments.Update(scheduleAppointment);
+            _context.SaveChanges();
+
+            return View();
+
         }
 
     }

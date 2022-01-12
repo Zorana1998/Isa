@@ -1,6 +1,6 @@
-﻿using IsaProject.Models.DTO;
+﻿using IsaProject.Models;
+using IsaProject.Models.DTO;
 using IsaProject.Models.Entities;
-using IsaProject.Models.Entities.Users;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
