@@ -31,6 +31,45 @@ namespace IsaProject.Models.Entities
 
         public bool isScheduled { get; set; }
 
+        public bool IsActive { get; set; }
+
+        public bool isSeparated { get; set; }
+
         public List<AppointmentTag> appointmentTags { get; set; }
+
+        public Appointment(string ownerId, string customerId, long entityId, DateTime dateTime, int duration, int numberOfGuest, int numberOfDays, bool isSchedule, double price, bool isActive)
+        {
+            OwnerID = ownerId;
+            UserID = customerId;
+            EntityID = entityId;
+            Start = dateTime;
+            DurationDays = numberOfDays;
+            MaxNumberOfPeople = numberOfGuest;
+            Price = price;
+            isScheduled = isSchedule;
+            DurationDays = duration;
+            IsActive = isActive;
+        }
+
+
+
+        public Appointment()
+        {
+            
+        }
+
+        public Appointment(string ownerId, string customerId, long entityId, DateTime dateTime, int duration, int numberOfGuest, int numberOfDays, bool isSchedule, double price)
+        {
+            OwnerID = ownerId;
+            UserID = customerId;
+            EntityID = entityId;
+            Start = dateTime;
+            DurationDays = numberOfDays;
+            MaxNumberOfPeople = numberOfGuest;
+            Price = price;
+            isScheduled = isSchedule;
+            DurationDays = duration;
+        }
+
     }
 }

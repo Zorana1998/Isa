@@ -1088,3 +1088,6 @@ C:\Users\ZoranaStamenković\Desktop\Isa-main(4)\Isa-main\IsaProject\obj\Debug\ne
 C:\Users\ZoranaStamenković\Desktop\Isa-main(4)\Isa-main\IsaProject\obj\Debug\net5.0\IsaProject.genruntimeconfig.cache
 C:\Users\ZoranaStamenković\Desktop\Isa-main(4)\Isa-main\IsaProject\obj\Debug\net5.0\Razor\Views\Appointments\AddTags.cshtml.g.cs
 C:\Users\ZoranaStamenković\Desktop\Isa-main(4)\Isa-main\IsaProject\obj\Debug\net5.0\Razor\Views\Appointments\AddTagsUser.cshtml.g.cs
+C:\Users\ZoranaStamenković\Desktop\Isa-main(4)\Isa-main\IsaProject\obj\Debug\net5.0\Razor\Views\Appointments\GetMyReservation.cshtml.g.cs
+C:\Users\ZoranaStamenković\Desktop\Isa-main(4)\Isa-main\IsaProject\obj\Debug\net5.0\Razor\Views\FastReservations\GetFree.cshtml.g.cs
+C:\Users\ZoranaStamenković\Desktop\Isa-main(4)\Isa-main\IsaProject\obj\Debug\net5.0\Razor\Views\FastReservations\GetMyFastReservation.cshtml.g.cs

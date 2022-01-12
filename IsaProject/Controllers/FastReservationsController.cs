@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Identity;
 using IsaProject.Models.Users;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using IsaProject.Services;
+using System.IO;
+using Newtonsoft.Json;
+using Isa.Areas.Identity;
 
 namespace IsaProject.Controllers
 {
@@ -25,7 +28,11 @@ namespace IsaProject.Controllers
         {
             _context = context;
             _userManager = userManager;
-            _emailSender = emailSender;
+            using (StreamReader r = new StreamReader("./Areas/Identity/emailCredentials.json"))
+            {
+                string json = r.ReadToEnd();
+                _emailSender = JsonConvert.DeserializeObject<EmailSender>(json);
+            }
             _fastReservationService = fastReservationService;
         }
 
@@ -190,6 +197,25 @@ namespace IsaProject.Controllers
                 $"Scheduled Appointment for {user.FirstName} at {fastReservation.Start}");
 
             return View();
+        }
+
+
+        // GET: FastReservations
+        public async Task<IActionResult> GetFree()
+        {
+            var fastRes = await (from fast in _context.FastReservations
+                                         where fast.isScheduled == false && fast.UserID == null
+                                         select fast).ToListAsync();
+            return View(fastRes);
+        }
+
+        public async Task<IActionResult> GetMyFastReservation()
+        {
+
+            var user = await _userManager.GetUserAsync(User);
+
+
+            return View(await _fastReservationService.GetMyFastReservation(user.Id));
         }
 
 

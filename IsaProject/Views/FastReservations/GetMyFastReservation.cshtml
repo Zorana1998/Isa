@@ -1,0 +1,76 @@
+﻿@model IEnumerable<IsaProject.Models.Entities.FastReservation>
+
+@{
+    ViewData["Title"] = "GetMyFastReservation";
+}
+
+<h1>Reservation</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Start)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DurationDays)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxNumberOfPeople)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Start)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DurationDays)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxNumberOfPeople)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @if ((item.Start - DateTime.Now).Days > 3)
+                {
+                    <button id = "@item.Id"> Cancel reservation </button>
+                }
+                
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>
+
+<script >
+    function isDisabled(startDate, id) {
+        //Reference the Button.
+        var btnSubmit = document.getElementById(id);
+
+        const date1 = Date.now();
+        const date2 = startDate;
+        const diffTime = Math.abs(date2 - date1);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        console.log(diffDays);
+ 
+        //Verify the TextBox value.
+        if (diffDays <= 3) {
+            //Enable the TextBox when TextBox has value.
+            btnSubmit.hidden = true;
+        } else {
+            //Disable the TextBox when TextBox is empty.
+            btnSubmit.hidden = false;
+        }
+    };
+</script>

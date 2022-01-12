@@ -28,21 +28,33 @@ namespace IsaProject.Services
         public async Task<List<AppointmentDTO>> GetAvailableCottages(string id,DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore)
         {
             
+
             List<AppointmentDTO> cottages;
             cottages = await (from cottage in _context.Cottages
                                             join cottageAppointment in _context.Appointments on cottage.Id equals cottageAppointment.EntityID
                                             where cottage.AverageScore > averageScore
                                             && cottageAppointment.MaxNumberOfPeople > numberOfGuest
                                             && cottageAppointment.Start <= dateTime
-                                            && cottageAppointment.Start.AddDays(cottageAppointment.DurationDays) > dateTime.AddDays(numberOfDays)
+                                            && cottageAppointment.Start.AddDays(cottageAppointment.DurationDays) >= dateTime.AddDays(numberOfDays)
+                                            && cottageAppointment.isSeparated != true
                                             && cottageAppointment.UserID == null
-                                            select new AppointmentDTO(cottageAppointment.Id,cottage.Name,cottage.Address,cottage.Country,cottage.City,cottage.AverageScore, cottage.Rules, cottageAppointment.Price, dateTime, numberOfDays)).ToListAsync();
+                                            select new AppointmentDTO(cottageAppointment.Id,cottage.Name,cottage.Address,cottage.Country,cottage.City,cottage.AverageScore, cottage.Rules, cottageAppointment.Price, dateTime, numberOfDays, id, numberOfGuest)).ToListAsync();
 
-            _context.cottageAppointmentDTOs.Add(new AppointmentDTO(id, dateTime, numberOfGuest, numberOfDays));
-            await _context.SaveChangesAsync();
+            List<long> dtosIds = new List<long>();
+            List<AppointmentDTO> present = new List<AppointmentDTO>();
 
 
-            return cottages;
+            foreach( AppointmentDTO appointmentDTO in cottages)
+            {
+                var app = new AppointmentDTO(appointmentDTO.AppointmentId, appointmentDTO.Name, appointmentDTO.Address, appointmentDTO.Country, appointmentDTO.City, appointmentDTO.AverageScore, appointmentDTO.Rules, appointmentDTO.Price, appointmentDTO.StartDate, appointmentDTO.Duration, id, numberOfGuest);
+                _context.cottageAppointmentDTOs.Add(app);
+                _context.SaveChanges();
+                var appDTOiD = app.Id;
+                present.Add(_context.cottageAppointmentDTOs.Find(appDTOiD));
+            }
+
+
+            return present;
         }
 
         public async Task<List<Cottage>> GetAllFiltered(string searchString, string filter, string sort)

@@ -11,7 +11,7 @@
 }
 
 <h1>Cottages</h1>
-<table class="table">
+<table class="table" >
     <thead>
         <tr>
             <th>
@@ -80,6 +80,9 @@
             </td>
             <td>
                     <a asp-controller="Appointments" asp-action="AddTagsUser" asp-route-id="@item.Id">Add Tags</a>
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Id)
             </td>
         </tr>
 }

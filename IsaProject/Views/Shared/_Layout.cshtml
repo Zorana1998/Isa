@@ -41,9 +41,23 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Cottages" asp-action="Index">Cottages</a>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Adventures" asp-action="Index">Adventures</a>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Ships" asp-action="Index">Ships</a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="FastReservations" asp-action="Index">Fast Reservation</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="FastReservations" asp-action="GetFree">Fast Reservation</a>
                             </div>
                         </li>
+                        @if ((await AuthorizationService.AuthorizeAsync(User, null, "UserPolicy")).Succeeded)
+                        {
+                            <li class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Appointments
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="GetMyReservation">My Reservation</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="FastReservations" asp-action="GetMyFastReservation">My fast reservation</a>
+                            </div>
+
+                        </li>
+                        }
+
                         @if ((await AuthorizationService.AuthorizeAsync(User, null, "AdminPolicy")).Succeeded)
                         {
                         <li class="nav-item">

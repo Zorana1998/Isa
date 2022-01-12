@@ -161,6 +161,7 @@ namespace IsaProject.Controllers
         {
             return View(new List<Cottage>());
         }
+
         [HttpPost]
         public async Task<IActionResult> GetAvailableCottages(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore)
         {

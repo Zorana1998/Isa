@@ -3,6 +3,7 @@ using IsaProject.Models.Entities;
 using IsaProject.Models.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,5 +33,15 @@ namespace IsaProject.Services
         {
             return _context.Appointments.Any(m => m.Id == id);
         }
+
+        public async Task<List<Appointment>> GetMyReservation(string id)
+        {
+            List<Appointment> appointments = await (from u in _context.Appointments
+                                         where u.UserID == id && u.IsActive == true && u.Start >= System.DateTime.Now
+                                         select u).ToListAsync();
+
+            return appointments;
+        }
+
     }
 }

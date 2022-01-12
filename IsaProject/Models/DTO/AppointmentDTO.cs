@@ -20,6 +20,39 @@ namespace IsaProject.Models.DTO
             StartDate = startDate;
         }
 
+        public AppointmentDTO(long appointmentId, string name, string address, string country, string city, double averageScore, string rules, double price, DateTime startDate, int duration, string customerid)
+        {
+            AppointmentId = appointmentId;
+            Name = name;
+            Address = address;
+            Country = country;
+            City = city;
+            AverageScore = averageScore;
+            Rules = rules;
+            Price = price;
+            Duration = duration;
+            StartDate = startDate;
+            CustomerId = customerid;
+
+        }
+
+        public AppointmentDTO(long appointmentId, string name, string address, string country, string city, double averageScore, string rules, double price, DateTime startDate, int duration, string customerid, int numberOfGuest)
+        {
+            AppointmentId = appointmentId;
+            Name = name;
+            Address = address;
+            Country = country;
+            City = city;
+            AverageScore = averageScore;
+            Rules = rules;
+            Price = price;
+            Duration = duration;
+            StartDate = startDate;
+            CustomerId = customerid;
+            NumberOfGuest = numberOfGuest;
+
+        }
+
         public AppointmentDTO()
         {
         }
@@ -33,6 +66,7 @@ namespace IsaProject.Models.DTO
         }
 
         public long Id { get; set; }
+        public long AppointmentId { get; set; }
         public string CustomerId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
@@ -44,7 +78,7 @@ namespace IsaProject.Models.DTO
         public DateTime StartDate { get; set; }
         public int Duration { get; set; }
         public int NumberOfGuest { get; set; }
-        public List<Tag> Tags { get; set; }
+        public List<AppointmentTag> Tags { get; set; }
     }
 }
 

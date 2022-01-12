@@ -3,6 +3,8 @@ using IsaProject.Data;
 using IsaProject.Models.Entities;
 using IsaProject.Models.Users;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,6 +33,15 @@ namespace IsaProject.Services
         public bool Exists(long id)
         {
             return _context.FastReservations.Any(m => m.Id == id);
+        }
+
+        public async Task<List<FastReservation>> GetMyFastReservation(string id)
+        {
+            List<FastReservation> fastReservations = await (from u in _context.FastReservations
+                                                    where u.UserID == id && u.Start >= System.DateTime.Now && u.isScheduled == true
+                                                    select u).ToListAsync();
+
+            return fastReservations;
         }
     }
 }

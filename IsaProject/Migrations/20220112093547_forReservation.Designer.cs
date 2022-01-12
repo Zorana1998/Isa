@@ -4,14 +4,16 @@ using IsaProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IsaProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220112093547_forReservation")]
+    partial class forReservation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,9 +86,6 @@ namespace IsaProject.Migrations
                     b.Property<long>("EntityID")
                         .HasColumnType("bigint");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<int>("MaxNumberOfPeople")
                         .HasColumnType("int");
 
@@ -105,9 +104,6 @@ namespace IsaProject.Migrations
                     b.Property<bool>("isScheduled")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("isSeparated")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.HasIndex("EntityID");
@@ -124,9 +120,6 @@ namespace IsaProject.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("AppointmentDTOID")
-                        .HasColumnType("bigint");
-
                     b.Property<long>("AppointmentID")
                         .HasColumnType("bigint");
 
@@ -137,8 +130,6 @@ namespace IsaProject.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppointmentDTOID");
 
                     b.HasIndex("AppointmentID");
 
@@ -237,6 +228,9 @@ namespace IsaProject.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<long?>("AppointmentDTOId")
+                        .HasColumnType("bigint");
+
                     b.Property<long?>("AppointmentId")
                         .HasColumnType("bigint");
 
@@ -248,6 +242,8 @@ namespace IsaProject.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppointmentDTOId");
 
                     b.HasIndex("AppointmentId");
 
@@ -572,10 +568,6 @@ namespace IsaProject.Migrations
 
             modelBuilder.Entity("IsaProject.Models.Entities.AppointmentTag", b =>
                 {
-                    b.HasOne("IsaProject.Models.DTO.AppointmentDTO", null)
-                        .WithMany("Tags")
-                        .HasForeignKey("AppointmentDTOID");
-
                     b.HasOne("IsaProject.Models.Entities.Appointment", null)
                         .WithMany("appointmentTags")
                         .HasForeignKey("AppointmentID")
@@ -601,6 +593,10 @@ namespace IsaProject.Migrations
 
             modelBuilder.Entity("IsaProject.Models.Entities.Tag", b =>
                 {
+                    b.HasOne("IsaProject.Models.DTO.AppointmentDTO", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("AppointmentDTOId");
+
                     b.HasOne("IsaProject.Models.Entities.Appointment", null)
                         .WithMany("Tags")
                         .HasForeignKey("AppointmentId");
