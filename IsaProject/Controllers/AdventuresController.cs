@@ -8,6 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using IsaProject.Data;
 using IsaProject.Models.Entities.Adventure;
 using IsaProject.Services;
+using IsaProject.Models.Users;
+using Microsoft.AspNetCore.Identity;
+using IsaProject.Models.DTO;
+using IsaProject.Models;
+using IsaProject.Models.Entities;
 
 namespace IsaProject.Controllers
 {
@@ -17,10 +22,13 @@ namespace IsaProject.Controllers
 
         private readonly IAdventureService _adventureService;
 
-        public AdventuresController(ApplicationDbContext context, IAdventureService adventureService)
+        private readonly UserManager<AppUser> _userManager;
+
+        public AdventuresController(ApplicationDbContext context, IAdventureService adventureService, UserManager<AppUser> userManager)
         {
             _context = context;
             _adventureService = adventureService;
+            _userManager = userManager;
         }
 
         // GET: Adventures
@@ -161,7 +169,10 @@ namespace IsaProject.Controllers
         [HttpPost]
         public async Task<IActionResult> GetAvailableAdventure(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore)
         {
-            return View(await _adventureService.GetAvailableAdventure(dateTime, numberOfGuest, numberOfDays, averageScore));
+            var user = await _userManager.GetUserAsync(User);
+            return View(await _adventureService.GetAvailableAdventure(dateTime, numberOfGuest, numberOfDays, averageScore, user.Id));
         }
     }
+
+        
 }

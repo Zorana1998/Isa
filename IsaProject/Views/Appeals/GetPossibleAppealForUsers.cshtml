@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IsaProject.Models.Users.AppUser> SignInManager
+@model IEnumerable<IsaProject.Models.Users.AppUser>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Appeal entities</h1>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+
+ @if (SignInManager.IsSignedIn(User))
+{
+    @if ((await AuthorizationService.AuthorizeAsync(User, null, "UserPolicy")).Succeeded)
+    {
+            <td>
+                <a asp-controller = "Appeals" asp-action="CreateUser" asp-route-id="@item.Id">Appeal</a>
+            </td>
+    }
+}
+        </tr>
+}
+    </tbody>
+</table>

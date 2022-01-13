@@ -112,6 +112,15 @@
             </td>
     }
 }
+ @if (SignInManager.IsSignedIn(User))
+{
+    @if ((await AuthorizationService.AuthorizeAsync(User, null, "UserPolicy")).Succeeded)
+    {
+            <td>
+                <a asp-controller = "Subscriptions" asp-action="Subscribe" asp-route-id="@item.Id">Subscribe</a>
+            </td>
+    }
+}
         </tr>
 }
     </tbody>

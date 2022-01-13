@@ -40,7 +40,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Cottages" asp-action="Index">Cottages</a>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Adventures" asp-action="Index">Adventures</a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Ships" asp-action="Index">Ships</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="ShipBookings" asp-action="Index">Ships</a>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="FastReservations" asp-action="GetFree">Fast Reservation</a>
                             </div>
                         </li>
@@ -52,9 +52,21 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="GetMyReservation">My Reservation</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="GetMyHistoryReservation">My reservation history</a>
                             </div>
-
-                        </li>
+                            </li>
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Subscriptions" asp-action="GetMySubscriptions">My Subscriptions</a>
+                            </li>
+                            <li class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Appeal
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Appeals" asp-action="GetPossibleAppealForEntities">Entity appeal</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Appeals" asp-action="GetPossibleAppealForUsers">User appeal</a>
+                            </div>
+                            </li>
                         }
 
                         @if ((await AuthorizationService.AuthorizeAsync(User, null, "AdminPolicy")).Succeeded)
@@ -64,6 +76,9 @@
                         </li>
                         <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="GetUnapprovedUsers">Accounts for approve</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Appeals" asp-action="GetUnansweredAppeals">Users</a>
                         </li>}
                         
                         <li class="nav-item">
@@ -74,6 +89,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="AppointmentTags" asp-action="Index">AppTags</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Subscriptions" asp-action="Index">Akcije</a>
                         </li>
                         @if ((await AuthorizationService.AuthorizeAsync(User, null, "CottageOwnerPolicy")).Succeeded || (await AuthorizationService.AuthorizeAsync(User, null, "ShipOwnerPolicy")).Succeeded || (await AuthorizationService.AuthorizeAsync(User, null, "FishingInstructorPolicy")).Succeeded)
                         {

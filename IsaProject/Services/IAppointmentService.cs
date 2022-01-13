@@ -11,5 +11,6 @@ namespace IsaProject.Services
         public bool Exists(long id);
 
         public Task<List<ScheduledAppointment>> GetMyReservation(string id);
+        public Task<List<ScheduledAppointment>> GetMyHistoryReservation(string id);
     }
 }

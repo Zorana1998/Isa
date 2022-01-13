@@ -363,5 +363,14 @@ namespace IsaProject.Controllers
 
         }
 
+        public async Task<IActionResult> GetMyHistoryReservation()
+        {
+
+            var user = await _userManager.GetUserAsync(User);
+
+
+            return View(await _appointmentService.GetMyHistoryReservation(user.Id));
+        }
+
     }
 }

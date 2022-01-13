@@ -78,6 +78,25 @@ namespace IsaProject.Controllers
             {
                 _context.Add(fastReservation);
                 await _context.SaveChangesAsync();
+
+                Entity entity = _context.Entities.Find(fastReservation.EntityID);
+
+                List<string> appUserIds = new();
+
+                appUserIds = (from sub in _context.Subscription
+                                       join user in _context.tbAppUsers on sub.OwnerID equals user.Id
+                                       where sub.EntityID == fastReservation.EntityID
+                                       select user.Id).ToList();
+
+                List<AppUser> appUser = await _context.tbAppUsers.Where(e => appUserIds.Contains(e.Id)).ToListAsync();
+
+                foreach(AppUser app in appUser)
+                {
+                    await _emailSender.SendEmailAsync(app.Email, "Fast reservation",
+                    $"Fast reservation for {entity.Name}");
+                }
+
+
                 return RedirectToAction(nameof(Index));
             }
             return View(fastReservation);

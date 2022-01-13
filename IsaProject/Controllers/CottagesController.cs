@@ -10,6 +10,7 @@ using IsaProject.Models.Entities;
 using IsaProject.Services;
 using Microsoft.AspNetCore.Identity;
 using IsaProject.Models.Users;
+using IsaProject.Models.DTO;
 
 namespace IsaProject.Controllers
 {
@@ -157,9 +158,9 @@ namespace IsaProject.Controllers
             return _context.Cottages.Any(e => e.Id == id);
         }
 
-        public IActionResult GetAvailableCottages()
+        public async Task<IActionResult> GetAvailableCottages(string searchString = "", string filter = "", string sort = "")
         {
-            return View(new List<Cottage>());
+            return View(new List<AppointmentDTO>());
         }
 
         [HttpPost]

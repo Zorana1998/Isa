@@ -35,16 +35,31 @@ namespace IsaProject.Services
                                                                       where schApp.IsActive == true
                                                                       select schApp).ToListAsync();
 
-            
+            //FastReservation
+            List<long> fastReservationsIds = new List<long>();
+            fastReservationsIds = await (from res in _context.FastReservations
+                                      select res.Id).ToListAsync();
 
-            List<Appointment> cottagesAppointment;
-            cottagesAppointment = await (from cottage in _context.Cottages
+            //AllWithFast
+            List<Appointment> cottagesAppointmentTemporary;
+            cottagesAppointmentTemporary = await (from cottage in _context.Cottages
                                          join cottageAppointment in _context.Appointments on cottage.Id equals cottageAppointment.EntityID
                                          where cottage.AverageScore > averageScore
                                          && cottageAppointment.MaxNumberOfPeople > numberOfGuest
                                          && cottageAppointment.Start <= dateTime
+                                         //&& cottageAppointment.Start >= DateTime.Now
                                          && cottageAppointment.Start.AddDays(cottageAppointment.DurationDays) >= dateTime.AddDays(numberOfDays)
                                          select cottageAppointment).ToListAsync();
+            //SkipFast
+            List<Appointment> cottagesAppointment = new List<Appointment>();
+
+            foreach(Appointment app in cottagesAppointmentTemporary)
+            {
+                if (!fastReservationsIds.Contains(app.Id))
+                {
+                    cottagesAppointment.Add(app);
+                }
+            }
 
             List<Appointment> availableAppointments = new List<Appointment>();
 
@@ -189,7 +204,58 @@ namespace IsaProject.Services
             return filteredCottages;
         }
 
-        
+        /*public async Task<List<AppointmentDTO>> GetAvailableCottagesFiltered(string searchString, string filter, string sort)
+        {
+
+            var cottages = new List<AppointmentDTO>();
+            if (sort != null)
+            {
+                if (sort == "Score")
+                {
+                    cottages = await _context.Cottages.OrderBy(x => x.AverageScore).ToListAsync();
+                }
+                else if (sort == "Name")
+                {
+                    cottages = await _context.Cottages.OrderBy(x => x.Name).ToListAsync();
+                }
+                else if (sort == "Adress")
+                {
+                    cottages = await _context.Cottages.OrderBy(x => x.Address).ToListAsync();
+                }
+                else
+                {
+                    cottages = await _context.Cottages.ToListAsync();
+                }
+            }
+            else
+            {
+                cottages = await _context.Cottages.ToListAsync();
+            }
+
+            List<Cottage> filteredCottages = new List<Cottage>();
+
+            if (string.IsNullOrEmpty(searchString))
+            {
+                filteredCottages = cottages;
+            }
+            else
+            {
+                foreach (var cottage in cottages)
+                {
+                    var json = JsonConvert.SerializeObject(cottage);
+                    var dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+
+                    if (dictionary[filter] != null && dictionary[filter].ToUpper().Contains(searchString.ToUpper()))
+                    {
+                        filteredCottages.Add(cottage);
+                    }
+                }
+            }
+
+            return cottages;
+        }*/
+
+
     }
 
 

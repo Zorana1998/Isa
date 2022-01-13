@@ -44,5 +44,14 @@ namespace IsaProject.Services
             return appointments;
         }
 
+        public async Task<List<ScheduledAppointment>> GetMyHistoryReservation(string id)
+        {
+            List<ScheduledAppointment> appointments = await (from u in _context.scheduledAppointments
+                                                             where u.UserID == id && u.Start < System.DateTime.Now && u.IsActive == true
+                                                             select u).ToListAsync();
+
+            return appointments;
+        }
+
     }
 }

@@ -67,6 +67,37 @@ namespace IsaProject.Migrations
                     b.ToTable("cottageAppointmentDTOs");
                 });
 
+            modelBuilder.Entity("IsaProject.Models.Entities.Appeal", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContentAnswer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("EntityID")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsAnswered")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserApprovalReceivedID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserApprovalSendID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Appeal");
+                });
+
             modelBuilder.Entity("IsaProject.Models.Entities.Appointment", b =>
                 {
                     b.Property<long>("Id")
@@ -213,14 +244,37 @@ namespace IsaProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long?>("ShipBookingId")
+                        .HasColumnType("bigint");
+
                     b.Property<long?>("ShipId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ShipBookingId");
+
                     b.HasIndex("ShipId");
 
                     b.ToTable("NavigationEquipment");
+                });
+
+            modelBuilder.Entity("IsaProject.Models.Entities.Subscription", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("EntityID")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("OwnerID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Subscription");
                 });
 
             modelBuilder.Entity("IsaProject.Models.Entities.Tag", b =>
@@ -283,6 +337,9 @@ namespace IsaProject.Migrations
                     b.Property<long>("EntityID")
                         .HasColumnType("bigint");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<int>("NumberOfPeople")
                         .HasColumnType("int");
 
@@ -294,9 +351,6 @@ namespace IsaProject.Migrations
 
                     b.Property<string>("UserID")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("isActive")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -557,7 +611,7 @@ namespace IsaProject.Migrations
                     b.HasDiscriminator().HasValue("Cottage");
                 });
 
-            modelBuilder.Entity("IsaProject.Models.Ship", b =>
+            modelBuilder.Entity("IsaProject.Models.Entities.ShipBooking", b =>
                 {
                     b.HasBaseType("IsaProject.Models.Entities.Entity");
 
@@ -572,7 +626,7 @@ namespace IsaProject.Migrations
 
                     b.Property<string>("FishingEquipment")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Ship_FishingEquipment");
+                        .HasColumnName("ShipBooking_FishingEquipment");
 
                     b.Property<double>("Length")
                         .HasColumnType("float");
@@ -583,6 +637,42 @@ namespace IsaProject.Migrations
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("ShipBooking");
+                });
+
+            modelBuilder.Entity("IsaProject.Models.Ship", b =>
+                {
+                    b.HasBaseType("IsaProject.Models.Entities.Entity");
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int")
+                        .HasColumnName("Ship_Capacity");
+
+                    b.Property<double>("EngineNumber")
+                        .HasColumnType("float")
+                        .HasColumnName("Ship_EngineNumber");
+
+                    b.Property<double>("EnginePower")
+                        .HasColumnType("float")
+                        .HasColumnName("Ship_EnginePower");
+
+                    b.Property<string>("FishingEquipment")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Ship_FishingEquipment");
+
+                    b.Property<double>("Length")
+                        .HasColumnType("float")
+                        .HasColumnName("Ship_Length");
+
+                    b.Property<double>("MaxSpeed")
+                        .HasColumnType("float")
+                        .HasColumnName("Ship_MaxSpeed");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Ship_Type");
 
                     b.HasDiscriminator().HasValue("Ship");
                 });
@@ -624,6 +714,10 @@ namespace IsaProject.Migrations
 
             modelBuilder.Entity("IsaProject.Models.Entities.Ship.NavigationEquipment", b =>
                 {
+                    b.HasOne("IsaProject.Models.Entities.ShipBooking", null)
+                        .WithMany("NavigationEquipments")
+                        .HasForeignKey("ShipBookingId");
+
                     b.HasOne("IsaProject.Models.Ship", null)
                         .WithMany("NavigationEquipments")
                         .HasForeignKey("ShipId");
@@ -723,6 +817,11 @@ namespace IsaProject.Migrations
             modelBuilder.Entity("IsaProject.Models.Entities.Cottage", b =>
                 {
                     b.Navigation("Rooms");
+                });
+
+            modelBuilder.Entity("IsaProject.Models.Entities.ShipBooking", b =>
+                {
+                    b.Navigation("NavigationEquipments");
                 });
 
             modelBuilder.Entity("IsaProject.Models.Ship", b =>
