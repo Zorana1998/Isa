@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "CwbPtpUaClvLQrKscw5E6QCntB1JzNar8+9RzMiYDi+orgIJFF0WOrAoAV5RJP1smFHBitTU1s/c6Ta6zaMXoQ==",
+  "dgSpecHash": "JqLbUmpmlHBA75G7TD1xrv/X33SrzvjBYyC3Xbjpb2NIbW8aCfiQEURF7LV4RMhElFsq4DRKNHEpYTA1sjBZ4w==",
   "success": true,
   "projectFilePath": "C:\\Users\\ZoranaStamenković\\Desktop\\isa\\Isa-main (1)\\Isa-main\\IsaProject\\IsaProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\bootstrap\\5.1.3\\bootstrap.5.1.3.nupkg.sha512",
+    "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\cronos\\0.7.1\\cronos.0.7.1.nupkg.sha512",
     "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\microsoft.aspnet.webapi.client\\4.0.20710\\microsoft.aspnet.webapi.client.4.0.20710.nupkg.sha512",
     "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\microsoft.aspnet.webapi.core\\4.0.20710\\microsoft.aspnet.webapi.core.4.0.20710.nupkg.sha512",

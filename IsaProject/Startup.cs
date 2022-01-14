@@ -100,6 +100,21 @@ namespace IsaProject
             services.AddScoped<IAdventureService, AdventureService>();
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IFastReservationService, FastReservationService>();
+            services.AddScoped<ISchedulerService, SchedulerService>();
+
+
+
+            services.AddCronJob<PenaltyAddService>(c =>
+            {
+                c.TimeZoneInfo = TimeZoneInfo.Local;
+                c.CronExpression = @"0 0 * * *";
+            });
+
+            services.AddCronJob<PenaltyDeleteService>(c =>
+            {
+                c.TimeZoneInfo = TimeZoneInfo.Local;
+                c.CronExpression = @"0 0 1 * *";
+            });
 
 
 

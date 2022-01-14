@@ -32,7 +32,11 @@
 
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="Edit">Profile</a>
-                    </li>}
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="DeleteProfile">Delete Profile</a>
+                    </li>
+                        }
                         <li class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Entities
@@ -67,32 +71,47 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Appeals" asp-action="GetPossibleAppealForUsers">User appeal</a>
                             </div>
                             </li>
+                            <li class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Rating
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Ratings" asp-action="GetPossibleRatingsForEntities">Entity rating</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Ratings" asp-action="GetPossibleRatingsForUsers">User rating</a>
+                            </div>
+                            </li>
                         }
 
                         @if ((await AuthorizationService.AuthorizeAsync(User, null, "AdminPolicy")).Succeeded)
                         {
-                        <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="Index">Users</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="GetUnapprovedUsers">Accounts for approve</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Appeals" asp-action="GetUnansweredAppeals">Users</a>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="Index">Users</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="GetUnapprovedUsers">Accounts for approve</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Appeals" asp-action="GetUnansweredAppeals">Users</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Ratings" asp-action="GetUnapprovedRatings">Users</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="GetProfilesForDelete">Delete profiles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="FastReservations" asp-action="Index">Fast</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Tags" asp-action="Index">Tags</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="AppointmentTags" asp-action="Index">AppTags</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Subscriptions" asp-action="Index">Akcije</a>
                         </li>}
-                        
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="FastReservations" asp-action="Index">Fast</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Tags" asp-action="Index">Tags</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="AppointmentTags" asp-action="Index">AppTags</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Subscriptions" asp-action="Index">Akcije</a>
-                        </li>
                         @if ((await AuthorizationService.AuthorizeAsync(User, null, "CottageOwnerPolicy")).Succeeded || (await AuthorizationService.AuthorizeAsync(User, null, "ShipOwnerPolicy")).Succeeded || (await AuthorizationService.AuthorizeAsync(User, null, "FishingInstructorPolicy")).Succeeded)
                         {
                             <li class="nav-item">

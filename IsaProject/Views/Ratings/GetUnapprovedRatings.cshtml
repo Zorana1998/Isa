@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Isa.Models.Rating>
+
+@{
+    ViewData["Title"] = "GetUnapprovedRatings";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EntityID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Score)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EntityID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Score)
+            </td>
+            <td>
+                <a asp-action="Approved" asp-route-id="@item.Id">Approved</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

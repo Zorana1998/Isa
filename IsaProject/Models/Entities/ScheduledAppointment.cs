@@ -27,9 +27,11 @@ namespace IsaProject.Models
 
         public bool IsActive { get; set; }
 
+        public bool IsCome { get; set; }
+
         public List<AppointmentTag> appointmentTags { get; set; }
 
-        public ScheduledAppointment(string userID, long entityId, DateTime dateTime, int numberOfGuest, int numberOfDays, double price, bool isActive)
+        public ScheduledAppointment(string userID, long entityId, DateTime dateTime, int numberOfGuest, int numberOfDays, double price, bool isActive, bool isCome)
         {
             UserID = userID;
             EntityID = entityId;
@@ -38,6 +40,7 @@ namespace IsaProject.Models
             NumberOfPeople = numberOfGuest;
             Price = price;
             IsActive = isActive;
+            IsCome = isCome;
         }
 
         public ScheduledAppointment()

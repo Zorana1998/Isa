@@ -1,4 +1,12 @@
-﻿@model IEnumerable<IsaProject.Models.Entities.FastReservation>
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@using IsaProject.Models.Users
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@model IEnumerable<IsaProject.Models.Entities.FastReservation>
 
 @{
     ViewData["Title"] = "Index";
@@ -6,9 +14,17 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (SignInManager.IsSignedIn(User))
+{
+    @if (((await AuthorizationService.AuthorizeAsync(User, null, "CottageOwnerPolicy")).Succeeded) || (await AuthorizationService.AuthorizeAsync(User, null, "ShipOwnerPolicy")).Succeeded || (await AuthorizationService.AuthorizeAsync(User, null, "FishingInstructorPolicy")).Succeeded)
+    {
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+    }
+
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -54,12 +70,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
+            
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
             <td>
+    
                 <a asp-action="TakeAppointment" asp-route-id="@item.Id">Schedule</a>
             </td>
         </tr>

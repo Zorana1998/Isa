@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using IsaProject.Models.Entities.Adventure;
+using Isa.Models;
 
 namespace IsaProject.Data
 {
@@ -41,6 +42,10 @@ namespace IsaProject.Data
         public DbSet<IsaProject.Models.Entities.Subscription> Subscription { get; set; }
 
         public DbSet<IsaProject.Models.Entities.Appeal> Appeal { get; set; }
+
+        public DbSet<Isa.Models.Rating> Rating { get; set; }
+
+        public DbSet<IsaProject.Models.Entities.ProfileDelete> ProfileDelete { get; set; }
 
 
 

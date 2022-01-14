@@ -1,14 +1,29 @@
-﻿@model IEnumerable<IsaProject.Models.Entities.FastReservation>
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@using IsaProject.Models.Users
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@model IEnumerable<IsaProject.Models.Entities.FastReservation>
 
 @{
     ViewData["Title"] = "GetFree";
 }
 
-<h1>Index</h1>
+<h1>Free fast reservation</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (SignInManager.IsSignedIn(User))
+{
+    @if (((await AuthorizationService.AuthorizeAsync(User, null, "CottageOwnerPolicy")).Succeeded) || (await AuthorizationService.AuthorizeAsync(User, null, "ShipOwnerPolicy")).Succeeded || (await AuthorizationService.AuthorizeAsync(User, null, "FishingInstructorPolicy")).Succeeded)
+    {
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+    }
+
+}
+
 <table class="table">
     <thead>
         <tr>

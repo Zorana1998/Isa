@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.1.3" />
+    <PackageReference Include="Cronos" Version="0.7.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.12" />
@@ -26,6 +27,6 @@
     <Folder Include="Models\Entities\Users\" />
   </ItemGroup>
 
-  <ProjectExtensions><VisualStudio><UserProperties _1_1_4_1_1_4_1_1_4_1_1_4_1nuget_4packages_4bootstrap_45_11_13_4contentfiles_4any_4any_4wwwroot_4css_4bootstrap-grid_1css_1map__JsonSchema="https://json.schemastore.org/specif-1.1.json" /></VisualStudio></ProjectExtensions>
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

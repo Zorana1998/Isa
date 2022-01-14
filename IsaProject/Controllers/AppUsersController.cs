@@ -15,6 +15,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Isa.Areas.Identity;
 using System.IO;
+using IsaProject.Models.Entities;
 
 namespace IsaProject.Controllers
 {
@@ -267,7 +268,67 @@ namespace IsaProject.Controllers
             return View("Home");
         }
 
-       
+        public IActionResult DeleteProfile()
+        {
+            return View();
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteProfile([Bind("Id,Content,IsApproved")] ProfileDelete profileDelete)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            ProfileDelete profileDeleteNew = new()
+            {
+                IsApproved = false,
+                UserId = user.Id,
+                Content = profileDelete.Content
+            };
+
+            _context.Add(profileDeleteNew);
+            _context.SaveChanges();
+            return View();
+        }
+        public async Task<IActionResult> GetProfilesForDelete()
+        {
+            List<ProfileDelete> profileDeletes = await (from u in _context.ProfileDelete
+                                          where u.IsApproved == false
+                                          select u).ToListAsync();
+
+            return View(profileDeletes);
+        }
+
+
+        public async Task<IActionResult> ApproveDelete(long Id)
+        {
+            ProfileDelete profileDelete = _context.ProfileDelete.Find(Id);
+
+            profileDelete.IsApproved = true;
+
+            _context.ProfileDelete.Update(profileDelete);
+            _context.SaveChanges();
+
+            
+
+            string userId = profileDelete.UserId;
+
+            AppUser appUser = _context.tbAppUsers.Find(userId);
+            
+
+
+            await _emailSender.SendEmailAsync(appUser.Email, "Profile delete",
+                $"Profile delete for {appUser.Email}");
+
+            appUser.Email = null;
+            appUser.UserName = null;
+
+
+            _context.Update(appUser);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(GetProfilesForDelete));
+        }
 
     }
 

@@ -193,6 +193,7 @@ namespace IsaProject.Controllers
             scheduledAppointment.NumberOfPeople = appointmentDTO.NumberOfGuest;
             scheduledAppointment.Price = appointmentDTO.Price;
             scheduledAppointment.IsActive = true;
+            scheduledAppointment.IsCome = false;
 
             _context.scheduledAppointments.Add(scheduledAppointment);
             _context.SaveChanges();

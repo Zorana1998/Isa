@@ -227,6 +227,15 @@
           }
         }
       },
+      "Cronos/0.7.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Cronos.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Cronos.dll": {}
+        }
+      },
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -2662,6 +2671,25 @@
         "contentFiles/any/any/wwwroot/js/bootstrap.js.map",
         "contentFiles/any/any/wwwroot/js/bootstrap.min.js",
         "contentFiles/any/any/wwwroot/js/bootstrap.min.js.map"
+      ]
+    },
+    "Cronos/0.7.1": {
+      "sha512": "aa2DY3qGBnwX7/jW4c17PyRlIeAtc5nYTlAPekc0113jcbBuz9vQkQaQ9NG+TNGlAj4esFxh8OuKUv4vmAODbw==",
+      "type": "package",
+      "path": "cronos/0.7.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "cronos.0.7.1.nupkg.sha512",
+        "cronos.nuspec",
+        "lib/net40/Cronos.dll",
+        "lib/net40/Cronos.xml",
+        "lib/net45/Cronos.dll",
+        "lib/net45/Cronos.xml",
+        "lib/netstandard1.0/Cronos.dll",
+        "lib/netstandard1.0/Cronos.xml",
+        "lib/netstandard2.0/Cronos.dll",
+        "lib/netstandard2.0/Cronos.xml"
       ]
     },
     "Humanizer.Core/2.8.26": {
@@ -8281,6 +8309,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "Cronos >= 0.7.1",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 5.0.11",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 5.0.12",
       "Microsoft.AspNetCore.Identity.UI >= 5.0.12",
@@ -8338,6 +8367,10 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "Cronos": {
+            "target": "Package",
+            "version": "[0.7.1, )"
+          },
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
             "target": "Package",
             "version": "[5.0.11, )"

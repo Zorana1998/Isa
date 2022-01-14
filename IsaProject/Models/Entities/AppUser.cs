@@ -23,7 +23,8 @@ namespace IsaProject.Models.Users
         public string Explanation { get; set; }
 
         public string ReasonForReject { get; set; }
-        /*public float AverageScore { get; set; }
+
+        public float AverageScore { get; set; }
         /*[ForeignKey("Pharmacy")]
         public long PharmacyId { get; set; }
         public List<AbsenceRequest> AbsenceRequests { get; set; }
