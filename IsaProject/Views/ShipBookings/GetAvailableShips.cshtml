@@ -1,5 +1,113 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@using Microsoft.AspNetCore.Identity
+@model IEnumerable<IsaProject.Models.DTO.AppointmentDTO>
+
 @{
+    ViewData["Title"] = "GetAvailableCottages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.css">
+<link rel="stylesheet" type="text/css" href="http://bootstrap-table.wenzhixin.net.cn/assets/bootstrap/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.18.3/extensions/filter-control/utils.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/locale/bootstrap-table-pl-PL.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter/bootstrap-table-filter.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+
+        
+
+<div  style="text-align: center">
+<h1>Ships</h1>
+</div>
+
+<table id="table" class="table-striped" 
+           data-toggle="table"
+           data-search="true"
+           data-filter-control="true">
+    <thead >
+        <tr>
+            <th class="th-sm" data-field="name" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th class="th-sm" data-field="address" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+
+            <th class="th-sm" data-field="country" data-filter-control="input" data-sortable="true"> 
+                @Html.DisplayNameFor(model => model.Country)
+            </th >
+
+            <th class="th-sm" data-field="city" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+
+            <th class="th-sm" data-field="averageScore" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.AverageScore)
+            </th>
+            <th class="th-sm" data-field="rules" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Rules)
+            </th>
+            <th class="th-sm" data-field="price" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th class="th-sm" data-field="duration" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th class="th-sm" data-field="startDate" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.AverageScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rules)
+            </td>
+             <td>
+                @Html.DisplayFor(model => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Tags)
+            </td>
+            <td>
+                    <a asp-controller="Appointments" asp-action="AddTagsUser" asp-route-id="@item.Id">Add Tags</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

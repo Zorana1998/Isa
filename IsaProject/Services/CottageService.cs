@@ -80,7 +80,7 @@ namespace IsaProject.Services
                         }
 
                         //kraj unutar
-                        if (scheduledAppointment.Start <= dateTime && scheduledAppointment.Start.AddDays(scheduledAppointment.Duration) <= dateTime.AddDays(numberOfDays))
+                        if (scheduledAppointment.Start <= dateTime && scheduledAppointment.Start.AddDays(scheduledAppointment.Duration) >= dateTime.AddDays(numberOfDays))
                         {
                             counter++;
                         }

@@ -330,6 +330,9 @@ namespace IsaProject.Controllers
             return RedirectToAction(nameof(GetProfilesForDelete));
         }
 
+
+        
+
     }
 
 }

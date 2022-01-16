@@ -227,6 +227,13 @@
           }
         }
       },
+      "bootstrap-sortable/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Moment.js": "2.3.1",
+          "jQuery": "1.10.2"
+        }
+      },
       "Cronos/0.7.1": {
         "type": "package",
         "compile": {
@@ -244,6 +251,9 @@
         "runtime": {
           "lib/netstandard2.0/Humanizer.dll": {}
         }
+      },
+      "jQuery/1.10.2": {
+        "type": "package"
       },
       "Microsoft.AspNet.WebApi.Client/4.0.20710": {
         "type": "package",
@@ -1285,6 +1295,9 @@
             "rid": "win"
           }
         }
+      },
+      "Moment.js/2.29.1": {
+        "type": "package"
       },
       "Newtonsoft.Json/11.0.2": {
         "type": "package",
@@ -2673,6 +2686,19 @@
         "contentFiles/any/any/wwwroot/js/bootstrap.min.js.map"
       ]
     },
+    "bootstrap-sortable/2.0.0": {
+      "sha512": "0iBfyWppBf7r7bll+a69/rC1BIkGAQV9DeXq292KkS6pLlBrKRAzWdj+rXg19AzXd5SOsDt4E2VuF/acVPdJdw==",
+      "type": "package",
+      "path": "bootstrap-sortable/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bootstrap-sortable.2.0.0.nupkg.sha512",
+        "bootstrap-sortable.nuspec",
+        "content/Content/bootstrap-sortable.css",
+        "content/Scripts/bootstrap-sortable.js"
+      ]
+    },
     "Cronos/0.7.1": {
       "sha512": "aa2DY3qGBnwX7/jW4c17PyRlIeAtc5nYTlAPekc0113jcbBuz9vQkQaQ9NG+TNGlAj4esFxh8OuKUv4vmAODbw==",
       "type": "package",
@@ -2706,6 +2732,26 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "jQuery/1.10.2": {
+      "sha512": "uPspgAZqsXYOwLW+Kf3uRxdFAyX1EiEd6AWJhCsnZNVsUJmEbsZSxA0P+ku6oAhHI682TOSwkbmmJPwFgdY5cA==",
+      "type": "package",
+      "path": "jquery/1.10.2",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/Scripts/jquery-1.10.2-vsdoc.js",
+        "Content/Scripts/jquery-1.10.2.js",
+        "Content/Scripts/jquery-1.10.2.min.js",
+        "Content/Scripts/jquery-1.10.2.min.map",
+        "Tools/common.ps1",
+        "Tools/install.ps1",
+        "Tools/jquery-1.10.2.intellisense.js",
+        "Tools/uninstall.ps1",
+        "jquery.1.10.2.nupkg.sha512",
+        "jquery.nuspec"
       ]
     },
     "Microsoft.AspNet.WebApi.Client/4.0.20710": {
@@ -4510,6 +4556,23 @@
         "runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.xml",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "Moment.js/2.29.1": {
+      "sha512": "CSpZfBYACe5QBFtPRv7k6IS5TZmdcisKFIRdQee1ZINjKl05AlSCTaXn/bo25XUnD82L0vvdEJXH+uv3nKeaiA==",
+      "type": "package",
+      "path": "moment.js/2.29.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/Scripts/moment-with-locales.js",
+        "Content/Scripts/moment-with-locales.min.js",
+        "Content/Scripts/moment-with-locales.min.js.map",
+        "Content/Scripts/moment.js",
+        "Content/Scripts/moment.min.js",
+        "Content/Scripts/moment.min.js.map",
+        "moment.js.2.29.1.nupkg.sha512",
+        "moment.js.nuspec"
       ]
     },
     "Newtonsoft.Json/11.0.2": {
@@ -8316,33 +8379,38 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.12",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.12",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2",
+      "Moment.js >= 2.29.1",
       "SendGrid >= 9.25.1",
       "SendGrid.CSharp.HTTP.Client >= 3.4.9",
       "Swashbuckle >= 5.6.0",
       "Swashbuckle.AspNetCore >= 6.2.3",
-      "bootstrap >= 5.1.3"
+      "bootstrap >= 5.1.3",
+      "bootstrap-sortable >= 2.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Zorana Stamenković\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ZoranaStamenković\\Desktop\\isa\\Isa-main (1)\\Isa-main\\IsaProject\\IsaProject.csproj",
+      "projectUniqueName": "C:\\Users\\Zorana Stamenković\\Desktop\\Solution\\Isa\\IsaProject\\IsaProject.csproj",
       "projectName": "IsaProject",
-      "projectPath": "C:\\Users\\ZoranaStamenković\\Desktop\\isa\\Isa-main (1)\\Isa-main\\IsaProject\\IsaProject.csproj",
-      "packagesPath": "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ZoranaStamenković\\Desktop\\isa\\Isa-main (1)\\Isa-main\\IsaProject\\obj\\",
+      "projectPath": "C:\\Users\\Zorana Stamenković\\Desktop\\Solution\\Isa\\IsaProject\\IsaProject.csproj",
+      "packagesPath": "C:\\Users\\Zorana Stamenković\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Zorana Stamenković\\Desktop\\Solution\\Isa\\IsaProject\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\ZoranaStamenković\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Zorana Stamenković\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -8397,6 +8465,10 @@
             "target": "Package",
             "version": "[5.0.2, )"
           },
+          "Moment.js": {
+            "target": "Package",
+            "version": "[2.29.1, )"
+          },
           "SendGrid": {
             "target": "Package",
             "version": "[9.25.1, )"
@@ -8416,6 +8488,10 @@
           "bootstrap": {
             "target": "Package",
             "version": "[5.1.3, )"
+          },
+          "bootstrap-sortable": {
+            "target": "Package",
+            "version": "[2.0.0, )"
           }
         },
         "imports": [
@@ -8428,6 +8504,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[5.0.13, 5.0.13]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"

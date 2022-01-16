@@ -44,9 +44,30 @@ namespace IsaProject.Services
             return appointments;
         }
 
-        public async Task<List<ScheduledAppointment>> GetMyHistoryReservation(string id)
+        public async Task<List<ScheduledAppointment>> GetMyHistoryReservationCottages(string id)
         {
             List<ScheduledAppointment> appointments = await (from u in _context.scheduledAppointments
+                                                             join entity in _context.Cottages on u.EntityID equals entity.Id
+                                                             where u.UserID == id && u.Start < System.DateTime.Now && u.IsActive == true
+                                                             select u).ToListAsync();
+
+            return appointments;
+        }
+
+        public async Task<List<ScheduledAppointment>> GetMyHistoryReservationShips(string id)
+        {
+            List<ScheduledAppointment> appointments = await (from u in _context.scheduledAppointments
+                                                             join entity in _context.ShipBooking on u.EntityID equals entity.Id
+                                                             where u.UserID == id && u.Start < System.DateTime.Now && u.IsActive == true
+                                                             select u).ToListAsync();
+
+            return appointments;
+        }
+
+        public async Task<List<ScheduledAppointment>> GetMyHistoryReservationAdventures(string id)
+        {
+            List<ScheduledAppointment> appointments = await (from u in _context.scheduledAppointments
+                                                             join entity in _context.Adventure on u.EntityID equals entity.Id
                                                              where u.UserID == id && u.Start < System.DateTime.Now && u.IsActive == true
                                                              select u).ToListAsync();
 

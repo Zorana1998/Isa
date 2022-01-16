@@ -164,14 +164,17 @@ namespace IsaProject.Controllers
 
         public IActionResult GetAvailableAdventure()
         {
-            return View(new List<Adventure>());
+            return View(new List<AppointmentDTO>());
         }
+
+
         [HttpPost]
-        public async Task<IActionResult> GetAvailableAdventure(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore)
+        public async Task<IActionResult> GetAvailableAdventures(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore)
         {
             var user = await _userManager.GetUserAsync(User);
-            return View(await _adventureService.GetAvailableAdventure(dateTime, numberOfGuest, numberOfDays, averageScore, user.Id));
+            return View(await _adventureService.GetAvailableAdventures(user.Id, dateTime, numberOfGuest, numberOfDays, averageScore));
         }
+        
     }
 
         

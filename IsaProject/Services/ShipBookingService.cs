@@ -75,7 +75,7 @@ namespace IsaProject.Services
             return filteredShips;
         }
 
-        public async Task<List<AppointmentDTO>> GetAvailableShips(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore, string id)
+        public async Task<List<AppointmentDTO>> GetAvailableShips(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore, String id)
         {
 
             //AllScheduledCottages
@@ -131,7 +131,7 @@ namespace IsaProject.Services
                         }
 
                         //kraj unutar
-                        if (scheduledAppointment.Start <= dateTime && scheduledAppointment.Start.AddDays(scheduledAppointment.Duration) <= dateTime.AddDays(numberOfDays))
+                        if (scheduledAppointment.Start <= dateTime && scheduledAppointment.Start.AddDays(scheduledAppointment.Duration) >= dateTime.AddDays(numberOfDays))
                         {
                             counter++;
                         }

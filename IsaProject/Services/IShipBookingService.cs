@@ -9,6 +9,6 @@ namespace IsaProject.Services
     public interface IShipBookingService
     {
         public Task<List<ShipBooking>> GetAllFiltered(string searchString, string filter, string sort);
-        public Task<List<AppointmentDTO>> GetAvailableShips(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore, string id);
+        public Task<List<AppointmentDTO>> GetAvailableShips(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore, String id);
     }
 }

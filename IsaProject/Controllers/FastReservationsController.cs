@@ -74,9 +74,12 @@ namespace IsaProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("NewPrice,Id,OwnerID,UserID,EntityID,Start,DurationDays,MaxNumberOfPeople,Price,isScheduled")] FastReservation fastReservation)
         {
-            if (ModelState.IsValid)
-            {
+                var user = await _userManager.GetUserAsync(User);
+
+                fastReservation.OwnerID = user.Id;
+            
                 _context.Add(fastReservation);
+            
                 await _context.SaveChangesAsync();
 
                 Entity entity = _context.Entities.Find(fastReservation.EntityID);
@@ -84,7 +87,7 @@ namespace IsaProject.Controllers
                 List<string> appUserIds = new();
 
                 appUserIds = (from sub in _context.Subscription
-                                       join user in _context.tbAppUsers on sub.OwnerID equals user.Id
+                                       join user2 in _context.tbAppUsers on sub.OwnerID equals user2.Id
                                        where sub.EntityID == fastReservation.EntityID
                                        select user.Id).ToList();
 
@@ -98,8 +101,7 @@ namespace IsaProject.Controllers
 
 
                 return RedirectToAction(nameof(Index));
-            }
-            return View(fastReservation);
+            
         }
 
         // GET: FastReservations/Edit/5
@@ -206,7 +208,7 @@ namespace IsaProject.Controllers
             scheduledAppointment.Price = fastReservation.Price;
             scheduledAppointment.IsActive = true;
 
-            _context.FastReservations.Remove(fastReservation);
+           
             _context.scheduledAppointments.Add(scheduledAppointment);
             _context.SaveChanges();
 
@@ -220,9 +222,91 @@ namespace IsaProject.Controllers
         // GET: FastReservations
         public async Task<IActionResult> GetFree()
         {
+            var user = await _userManager.GetUserAsync(User);
+
             var fastRes = await (from fast in _context.FastReservations
                                          select fast).ToListAsync();
-            return View(fastRes);
+
+            //All reserved
+            List<ScheduledAppointment> scheduledAppointments = await (from schApp in _context.scheduledAppointments
+                                                                      join entity in _context.Entities on schApp.EntityID equals entity.Id
+                                                                      where schApp.IsActive == true
+                                                                      select schApp).ToListAsync();
+
+            //AllMyReservation
+            List<ScheduledAppointment> myUnscheduledAppointments = await (from schApp in _context.scheduledAppointments
+                                                                      join entity in _context.Entities on schApp.EntityID equals entity.Id
+                                                                      join user2 in _context.tbAppUsers on schApp.UserID equals user2.Id
+                                                                      where schApp.IsActive == false
+                                                                      select schApp).ToListAsync();
+
+
+            //FindFast
+            List<Appointment> appointments = new List<Appointment>();
+            foreach (FastReservation fastReservation in fastRes)
+            {
+                Appointment appointment = _context.Appointments.Find(fastReservation.Id);
+                appointments.Add(appointment);
+
+            }
+
+            List<Appointment> availableAppointments = new List<Appointment>();
+
+            var count = 0;
+
+            foreach(Appointment appointmentCheck in appointments)
+            {
+                count = 0;
+                foreach (ScheduledAppointment scheduledAppointmentCheck in scheduledAppointments)
+                {
+                    if (appointmentCheck.EntityID == scheduledAppointmentCheck.EntityID && appointmentCheck.Start == scheduledAppointmentCheck.Start && scheduledAppointmentCheck.IsActive == true)
+                    {
+                        count++;
+                    }
+                }
+                if (count == 0)
+                {
+                    availableAppointments.Add(appointmentCheck);
+                }
+                
+            }
+
+            List<Appointment> solution = new List<Appointment>();
+
+            foreach (Appointment appointment2 in availableAppointments)
+            {
+                count = 0;
+                foreach (ScheduledAppointment scheduledAppointmentCheck in myUnscheduledAppointments)
+                {
+                    if (appointment2.EntityID == scheduledAppointmentCheck.EntityID && appointment2.Start == scheduledAppointmentCheck.Start)
+                    {
+                        count++;
+                    }
+                }
+                if(count == 0)
+                {
+                    solution.Add(appointment2);
+                }
+                
+            }
+
+
+            List<FastReservation> fastReservationsFree = new List<FastReservation>();
+
+            foreach(Appointment appointment1 in solution)
+            {
+                foreach(FastReservation fastReservation in fastRes)
+                {
+                    if(appointment1.Id == fastReservation.Id)
+                    {
+                        fastReservationsFree.Add(fastReservation);
+                    }
+                }
+            }
+            
+
+
+            return View(fastReservationsFree);
         }
 
         

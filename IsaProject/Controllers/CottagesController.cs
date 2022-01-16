@@ -158,11 +158,6 @@ namespace IsaProject.Controllers
             return _context.Cottages.Any(e => e.Id == id);
         }
 
-        public async Task<IActionResult> GetAvailableCottages(string searchString = "", string filter = "", string sort = "")
-        {
-            return View(new List<AppointmentDTO>());
-        }
-
         [HttpPost]
         public async Task<IActionResult> GetAvailableCottages(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore)
         {

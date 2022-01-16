@@ -1,0 +1,68 @@
+﻿@model IEnumerable<IsaProject.Models.ScheduledAppointment>
+
+@{
+    ViewData["Title"] = "GetMyHistoryReservationShips";
+}
+
+
+
+
+@if (Model.Count() == 0)
+{
+    <div  style="text-align: center">
+    <h3>No reservation history for ships</h3>
+    </div>
+}
+else
+{
+    <div  style="text-align: center">
+    <h1>Reservation history</h1>
+    </div>
+
+    <table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Start)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfPeople)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EntityID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Start)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfPeople)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntityID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration)
+                </td>
+           
+
+            </tr>
+    }
+        </tbody>
+    </table>
+  
+}

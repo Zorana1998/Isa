@@ -9,41 +9,64 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+<link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.css">
+<link rel="stylesheet" type="text/css" href="http://bootstrap-table.wenzhixin.net.cn/assets/bootstrap/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.18.3/extensions/filter-control/utils.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/locale/bootstrap-table-pl-PL.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter/bootstrap-table-filter.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
 
         
 
+<div  style="text-align: center">
 <h1>Cottages</h1>
-<table class="table" >
-    <thead>
+</div>
+
+<table id="table" class="table-striped" 
+           data-toggle="table"
+           data-search="true"
+           data-filter-control="true">
+    <thead >
         <tr>
-            <th>
+            <th class="th-sm" data-field="name" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th>
+
+            <th class="th-sm" data-field="address" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.Address)
             </th>
-            <th>
+
+            <th class="th-sm" data-field="country" data-filter-control="input" data-sortable="true"> 
                 @Html.DisplayNameFor(model => model.Country)
-            </th>
-            <th>
+            </th >
+
+            <th class="th-sm" data-field="city" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.City)
             </th>
-            <th>
+
+            <th class="th-sm" data-field="averageScore" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.AverageScore)
             </th>
-            <th>
+            <th class="th-sm" data-field="rules" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.Rules)
             </th>
-            <th>
+            <th class="th-sm" data-field="price" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th>
+            <th class="th-sm" data-field="duration" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.Duration)
             </th>
-            <th>
+            <th class="th-sm" data-field="startDate" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.StartDate)
             </th>
+            <th></th>
             <th></th>
         </tr>
     </thead>

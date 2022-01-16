@@ -75,13 +75,12 @@ namespace IsaProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,OwnerID,UserID,EntityID,Start,DurationDays,MaxNumberOfPeople,Price,isScheduled")] Appointment appointment)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(appointment);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(appointment);
+            var user = await _userManager.GetUserAsync(User);
+            appointment.OwnerID = user.Id;
+            _context.Add(appointment);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+            
         }
 
         // GET: Appointments/Edit/5
@@ -225,7 +224,7 @@ namespace IsaProject.Controllers
             await _emailSender.SendEmailAsync(user.Email, "Scheduled Appointment",
                 $"Scheduled Appointment for {user.FirstName} at {appointment.Start}");
 
-            return View();
+            return RedirectToAction(nameof(GetMyReservation)); ;
         }
 
 
@@ -364,13 +363,31 @@ namespace IsaProject.Controllers
 
         }
 
-        public async Task<IActionResult> GetMyHistoryReservation()
+        public async Task<IActionResult> GetMyHistoryReservationCottages()
         {
 
             var user = await _userManager.GetUserAsync(User);
 
 
-            return View(await _appointmentService.GetMyHistoryReservation(user.Id));
+            return View(await _appointmentService.GetMyHistoryReservationCottages(user.Id));
+        }
+
+        public async Task<IActionResult> GetMyHistoryReservationAdventures()
+        {
+
+            var user = await _userManager.GetUserAsync(User);
+
+
+            return View(await _appointmentService.GetMyHistoryReservationAdventures(user.Id));
+        }
+
+        public async Task<IActionResult> GetMyHistoryReservationShips()
+        {
+
+            var user = await _userManager.GetUserAsync(User);
+
+
+            return View(await _appointmentService.GetMyHistoryReservationShips(user.Id));
         }
 
     }

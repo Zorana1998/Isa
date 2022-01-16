@@ -53,7 +53,7 @@ namespace IsaProject
             services.AddControllersWithViews();
             services.AddAuthorization(options =>
             {
-                List<string> RoleNames = "BookingAdmin;Admin;CottageOwner;Shipowner;FishingInstructor;User".Split(';').ToList();
+                List<string> RoleNames = "BookingAdmin;Admin;CottageOwner;ShipOwner;FishingInstructor;User".Split(';').ToList();
 
                 foreach (var RoleName in RoleNames)
                 {

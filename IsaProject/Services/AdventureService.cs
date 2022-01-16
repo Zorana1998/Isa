@@ -76,7 +76,7 @@ namespace IsaProject.Services
             return filteredAdventures;
         }
 
-        public async Task<List<AppointmentDTO>> GetAvailableAdventure(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore, string id)
+        public async Task<List<AppointmentDTO>> GetAvailableAdventures(string id, DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore)
         {
             //AllScheduledAdventures
             List<ScheduledAppointment> scheduledAppointments = await (from schApp in _context.scheduledAppointments
@@ -130,7 +130,7 @@ namespace IsaProject.Services
                         }
 
                         //kraj unutar
-                        if (scheduledAppointment.Start <= dateTime && scheduledAppointment.Start.AddDays(scheduledAppointment.Duration) <= dateTime.AddDays(numberOfDays))
+                        if (scheduledAppointment.Start <= dateTime && scheduledAppointment.Start.AddDays(scheduledAppointment.Duration) >= dateTime.AddDays(numberOfDays))
                         {
                             counter++;
                         }
@@ -198,8 +198,6 @@ namespace IsaProject.Services
                 var appDTOiD = app.Id;
                 present.Add(_context.cottageAppointmentDTOs.Find(appDTOiD));
             }
-
-
             return present;
         }
 

@@ -8,7 +8,7 @@ namespace IsaProject.Services
 {
     public interface IAdventureService
     {
-        public Task<List<AppointmentDTO>> GetAvailableAdventure(DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore, string id);
+        public Task<List<AppointmentDTO>> GetAvailableAdventures(String id,DateTime dateTime, int numberOfGuest, int numberOfDays, int averageScore);
         public Task<List<Adventure>> GetAllFiltered(string searchString, string filter, string sort);
     }
 }
