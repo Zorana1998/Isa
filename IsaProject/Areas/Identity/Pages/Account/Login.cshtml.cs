@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using IsaProject.Models.Users;
+using IsaProject.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace IsaProject.Areas.Identity.Pages.Account
 {
@@ -21,14 +23,17 @@ namespace IsaProject.Areas.Identity.Pages.Account
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly ApplicationDbContext _context;
 
         public LoginModel(SignInManager<AppUser> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<AppUser> userManager)
+            UserManager<AppUser> userManager,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         [BindProperty]
@@ -85,7 +90,26 @@ namespace IsaProject.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    var users = (from u in _context.tbAppUsers
+                                where u.Email == Input.Email
+                                select u).ToList();
+                    var user = users.First();
+
+                    List<string> userRoles = await (from userrole in _context.UserRoles
+                                                   join role in _context.Roles on userrole.RoleId equals role.Id
+                                                   where userrole.UserId == user.Id
+                                                   select role.Name).ToListAsync();
+                    var userRole = userRoles.First();
                     _logger.LogInformation("User logged in.");
+
+
+                    /*if (userRole.Equals("Admin") && user.isFirstlogin)
+                    {
+                        string resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+                        return RedirectToPage("./ResetPassword", new {Code = resetToken});
+                    }*/
+
+                    
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

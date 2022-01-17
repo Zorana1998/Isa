@@ -31,7 +31,7 @@
 </div>
 
 
-<div class="mt-2 col-md-12 px-5 m-3">
+<div class="mt-2 col-md-12">
 @if (SignInManager.IsSignedIn(User))
 {
     @if ((await AuthorizationService.AuthorizeAsync(User, null, "CottageOwnerPolicy")).Succeeded)
@@ -50,8 +50,8 @@
            data-toggle="table"
            data-search="true"
            data-filter-control="true">
-    <thead >
-        <tr>
+    <thead>
+        <tr >
             <th class="th-sm" data-field="name" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.Name)
             </th>

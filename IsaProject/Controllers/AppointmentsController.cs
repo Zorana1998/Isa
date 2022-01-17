@@ -63,8 +63,14 @@ namespace IsaProject.Controllers
         }
 
         // GET: Appointments/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var user = await _userManager.GetUserAsync(User);
+
+            List<Entity> entities = (from u in _context.Entities
+                                     where u.CottageOwnerID == user.Id && u.IsLogicalDelete == false
+                                     select u).ToList();
+            ViewData["GetMyEntities"] = entities;
             return View();
         }
 
@@ -79,7 +85,7 @@ namespace IsaProject.Controllers
             appointment.OwnerID = user.Id;
             _context.Add(appointment);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(GetMyAppointmentOwner));
             
         }
 
@@ -388,6 +394,14 @@ namespace IsaProject.Controllers
 
 
             return View(await _appointmentService.GetMyHistoryReservationShips(user.Id));
+        }
+
+        public async Task<IActionResult> GetMyAppointmentOwner()
+        {
+
+            var user = await _userManager.GetUserAsync(User);
+
+            return View(await _appointmentService.GetMyAppointmentOwner(user.Id));
         }
 
     }

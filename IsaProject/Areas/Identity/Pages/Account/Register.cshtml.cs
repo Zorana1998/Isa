@@ -160,6 +160,19 @@ namespace IsaProject.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 await _userManager.AddToRoleAsync(user, Input.Role);
+
+                if (Input.Role.Equals("Admin"))
+                {
+                    user.isFirstlogin = true;
+                    user.EmailConfirmed = true;
+                    await _userManager.UpdateAsync(user);
+                }
+
+                if(result.Succeeded && Input.Role == "Admin")
+                {
+                    //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    return RedirectToPage("Login");
+                }
                 
                 if (result.Succeeded && (Input.Role == "User" || Input.Role == "Admin"))
                 {

@@ -74,5 +74,14 @@ namespace IsaProject.Services
             return appointments;
         }
 
+        public async Task<List<Appointment>> GetMyAppointmentOwner(string id)
+        {
+            List<Appointment> appointments = await (from u in _context.Appointments
+                                                             where u.OwnerID == id && u.Start > System.DateTime.Now
+                                                             select u).ToListAsync();
+
+            return appointments;
+        }
+
     }
 }

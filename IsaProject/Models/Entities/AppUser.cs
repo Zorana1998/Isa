@@ -25,14 +25,10 @@ namespace IsaProject.Models.Users
         public string ReasonForReject { get; set; }
 
         public float AverageScore { get; set; }
-        /*[ForeignKey("Pharmacy")]
-        public long PharmacyId { get; set; }
-        public List<AbsenceRequest> AbsenceRequests { get; set; }
-        public List<Drug> AllergicDrugs { get; set; }
-        public TimeSpan WorkHoursStart { get; set; }
-        public TimeSpan WorkHoursEnd { get; set; }
 
-        [Timestamp]
+        public bool isFirstlogin { get; set; }
+
+        /*[Timestamp]
         public byte[] RowVersion { get; set; }*/
     }
 }

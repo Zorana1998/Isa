@@ -47,6 +47,7 @@ namespace IsaProject.Services
                                          where cottage.AverageScore > averageScore
                                          && cottageAppointment.MaxNumberOfPeople > numberOfGuest
                                          && cottageAppointment.Start <= dateTime
+                                         && cottage.IsLogicalDelete == false
                                          //&& cottageAppointment.Start >= DateTime.Now
                                          && cottageAppointment.Start.AddDays(cottageAppointment.DurationDays) >= dateTime.AddDays(numberOfDays)
                                          select cottageAppointment).ToListAsync();

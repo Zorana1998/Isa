@@ -17,36 +17,34 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">IsaProject</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+           <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">IsaProject</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-3 justify-content-between">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                     <ul class="navbar-nav mr-auto">
 
                         @if (SignInManager.IsSignedIn(User))
                         {
                     <li class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Profile
-                            </button>
+                            </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            
                                 <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="Edit">Profile</a>
-                            
-                            
                                 <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="DeleteProfile">Delete Profile</a>
-                            
                             </div>
                     </li>
                         }
-                        <li class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        
+                        
+                        @if ((await AuthorizationService.AuthorizeAsync(User, null, "UserPolicy")).Succeeded)
+                        {
+                            <li class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Entities
-                            </button>
+                            </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Cottages" asp-action="Index">Cottages</a>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Adventures" asp-action="Index">Adventures</a>
@@ -54,13 +52,11 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="FastReservations" asp-action="GetFree">Fast Reservation</a>
                                 
                             </div>
-                        
-                        @if ((await AuthorizationService.AuthorizeAsync(User, null, "UserPolicy")).Succeeded)
-                        {
+                            </li>
                             <li class="dropdown" aria-labelledby="dropdownMenuButton">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Appointments
-                            </button>
+                            </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="GetMyReservation">My Reservation</a>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="GetMyHistoryReservationCottages">My cottage reservation history</a>
@@ -69,18 +65,18 @@
                             </div>
                             </li>
                             <li class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Appeal
-                            </button>
+                            </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Appeals" asp-action="GetPossibleAppealForEntities">Entity appeal</a>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Appeals" asp-action="GetPossibleAppealForUsers">User appeal</a>
                             </div>
                             </li>
                             <li class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Rating
-                            </button>
+                            </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Ratings" asp-action="GetPossibleRatingsForEntities">Entity rating</a>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Ratings" asp-action="GetPossibleRatingsForUsers">User rating</a>
@@ -123,11 +119,22 @@
                         </li>}
                         @if ((await AuthorizationService.AuthorizeAsync(User, null, "CottageOwnerPolicy")).Succeeded || (await AuthorizationService.AuthorizeAsync(User, null, "ShipOwnerPolicy")).Succeeded || (await AuthorizationService.AuthorizeAsync(User, null, "FishingInstructorPolicy")).Succeeded)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="Index">Appointment</a>
+                            <li class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Entities
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Cottages" asp-action="GetMyCottages">My cottages</a>
+                            </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="FastReservations" asp-action="Index">Fast</a>
+                            <li class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Appointment
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="GetMyAppointmentOwner">Appointment</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Ratings" asp-action="GetPossibleRatingsForUsers">User rating</a>
+                            </div>
                             </li>
                         }
                     </ul>
@@ -136,8 +143,8 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="container-fluid">
+        <main role="main" class="p-5">
             @RenderBody()
         </main>
     </div>

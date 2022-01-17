@@ -23,5 +23,9 @@ namespace IsaProject.Models.Entities
         public List<Image> Images { get; set; }
         public string Rules { get; set; }
         public List<Appointment> Appointments { get; set; }
+
+        public string CottageOwnerID { get; set; }
+
+        public bool IsLogicalDelete { get; set; }
     }
 }
