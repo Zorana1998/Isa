@@ -326,6 +326,70 @@ namespace IsaProject.Controllers
             return View(fastReservations);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AddTags(long id, long appointmentId)
+        {
+            var Tag = await _context.Tags.FindAsync(id);
+
+            var Appointment = await _context.Appointments.FindAsync(appointmentId);
+
+            var appointmentTag = new AppointmentTag();
+
+            appointmentTag.TagId = id;
+
+            appointmentTag.AppointmentID = appointmentId;
+
+            _context.AppointmentTag.Add(appointmentTag);
+            await _context.SaveChangesAsync();
+
+            List<Tag> tagChoosen = await (from tag in _context.Tags
+                                          join appTag in _context.AppointmentTag on tag.Id equals appTag.TagId
+                                          join app in _context.Appointments on appTag.AppointmentID equals app.Id
+                                          where app.Id == id
+                                          select tag).ToListAsync();
+
+            List<Tag> tags = new List<Tag>();
+            List<Tag> allTags = await _context.Tags.ToListAsync();
+
+            foreach (var tag in allTags)
+            {
+                if (!tagChoosen.Contains(tag))
+                {
+                    tags.Add(tag);
+                }
+            }
+
+            return RedirectToAction(nameof(AddTags));
+
+        }
+
+        public async Task<IActionResult> AddTags(long id)
+        {
+            var Appointment = await _context.Appointments.FindAsync(id);
+
+            List<Tag> tagChoosen = await (from tag in _context.Tags
+                                          join appTag in _context.AppointmentTag on tag.Id equals appTag.TagId
+                                          join app in _context.Appointments on appTag.AppointmentID equals app.Id
+                                          where app.Id == id
+                                          select tag).ToListAsync();
+
+            List<Tag> tags = new List<Tag>();
+            List<Tag> allTags = await _context.Tags.ToListAsync();
+
+            foreach (var tag in allTags)
+            {
+                if (!tagChoosen.Contains(tag))
+                {
+                    tags.Add(tag);
+                }
+            }
+
+
+            return View(tags);
+        }
+
+
+
 
 
 

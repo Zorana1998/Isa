@@ -2648,3 +2648,4 @@ C:\Users\Zorana Stamenković\Desktop\New folder\Isa\IsaProject\obj\Debug\net5.0\
 C:\Users\Zorana Stamenković\Desktop\New folder\Isa\IsaProject\obj\Debug\net5.0\IsaProject.pdb
 C:\Users\Zorana Stamenković\Desktop\New folder\Isa\IsaProject\obj\Debug\net5.0\IsaProject.genruntimeconfig.cache
 C:\Users\Zorana Stamenković\Desktop\New folder\Isa\IsaProject\obj\Debug\net5.0\Razor\Views\FastReservations\GetMyFastReservationOwner.cshtml.g.cs
+C:\Users\Zorana Stamenković\Desktop\New folder\Isa\IsaProject\obj\Debug\net5.0\Razor\Views\FastReservations\AddTags.cshtml.g.cs

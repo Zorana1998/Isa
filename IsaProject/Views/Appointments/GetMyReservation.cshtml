@@ -3,30 +3,57 @@
 @{
     ViewData["Title"] = "GetMyReservation";
 }
+<link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.css">
+<link rel="stylesheet" type="text/css" href="http://bootstrap-table.wenzhixin.net.cn/assets/bootstrap/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.18.3/extensions/filter-control/utils.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/locale/bootstrap-table-pl-PL.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter/bootstrap-table-filter.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
 
-<h1>Reservation</h1>
+@if (Model.Count() == 0)
+{
+    <div  style="text-align: center">
+    <h3>No reservation</h3>
+    </div>
+}
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Start)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfPeople)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EntityID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Duration)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
+else
+{
+    <div  style="text-align: center">
+    <h1>Reservation history</h1>
+    </div>
+
+<table id="table" class="table-striped" 
+           data-toggle="table"
+           data-search="true"
+           data-filter-control="true">
+        <thead>
+            <tr>
+                <th class="th-sm" data-field="start" data-filter-control="input" data-sortable="true">
+                    @Html.DisplayNameFor(model => model.Start)
+                </th>
+                <th class="th-sm" data-field="numberOfPeople" data-filter-control="input" data-sortable="true">
+                    @Html.DisplayNameFor(model => model.NumberOfPeople)
+                </th>
+                <th class="th-sm" data-field="entityID" data-filter-control="input" data-sortable="true">
+                    @Html.DisplayNameFor(model => model.EntityID)
+                </th>
+                <th class="th-sm" data-field="Price" data-filter-control="input" data-sortable="true">
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th class="th-sm" data-field="duration" data-filter-control="input" data-sortable="true">
+                    @Html.DisplayNameFor(model => model.Duration)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
@@ -56,7 +83,7 @@
 }
     </tbody>
 </table>
-
+}
 
 <script >
     function cancel(id) {

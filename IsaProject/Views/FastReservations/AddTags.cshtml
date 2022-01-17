@@ -1,15 +1,7 @@
-﻿@using Microsoft.AspNetCore.Authorization
-@inject IAuthorizationService AuthorizationService
-
-@using IsaProject.Models.Users
-@using Microsoft.AspNetCore.Identity
-@inject SignInManager<AppUser> SignInManager
-@inject UserManager<AppUser> UserManager
-
-@model IEnumerable<IsaProject.Models.Entities.FastReservation>
+﻿@model IEnumerable<IsaProject.Models.Entities.Tag>
 
 @{
-    ViewData["Title"] = "GetMyFastReservationOwner";
+    ViewData["Title"] = "AddTags";
 }
 
 <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
@@ -27,7 +19,7 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
 
 <div  style="text-align: center">
-<h1>Fast reservations</h1>
+<h1>Add tags</h1>
 </div>
 
 <table id="table" class="table-striped" 
@@ -36,43 +28,56 @@
            data-filter-control="true">
     <thead>
         <tr>
-            <th class="th-sm" data-field="newPrice" data-filter-control="input" data-sortable="true">
-                @Html.DisplayNameFor(model => model.NewPrice)
+            <th class="th-sm" data-field="name" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th class="th-sm" data-field="start" data-filter-control="input" data-sortable="true">
-                @Html.DisplayNameFor(model => model.Start)
+            <th class="th-sm" data-field="price" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th class="th-sm" data-field="durationDays" data-filter-control="input" data-sortable="true">
-                @Html.DisplayNameFor(model => model.DurationDays)
-            </th>
-            <th class="th-sm" data-field="maxNumberOfPeople" data-filter-control="input" data-sortable="true">
-                @Html.DisplayNameFor(model => model.MaxNumberOfPeople)
-            </th>
+            @if (Model.Count()!=0){
             <th></th>
+            }
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.NewPrice)
+                
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Start)
+                @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DurationDays)
+                <button type="submit" onclick="something(@item.Id)">Submit</button>
+                
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaxNumberOfPeople)
-            </td>
-            <td>
-                <a asp-action="AddTags" asp-route-id="@item.Id">Add Tags</a>
-            </td>
-            
         </tr>
 }
     </tbody>
-</table>
 
-<a  class="btn btn-dark mt-2" asp-action="Create">Create new fast reservation</a>
+
+</table>
+<script>
+    function something(id) {
+        var id = id;
+        var url = window.location.pathname;
+        var appointmentId = url.substring(url.lastIndexOf('/') + 1);
+        $.ajax({
+        // do the rest of work here
+        type: "POST",
+        data: {id: id, appointmentId: appointmentId},
+        url: '@Url.Action("AddTags", "Appointments")',
+        async: true,
+        success: function(){
+                    location.reload();
+                }
+    });
+
+    
+}
+    
+
+    
+</script>
