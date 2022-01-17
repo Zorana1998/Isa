@@ -89,34 +89,27 @@
 
                         @if ((await AuthorizationService.AuthorizeAsync(User, null, "AdminPolicy")).Succeeded)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="Index">Users</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="GetUnapprovedUsers">Accounts for approve</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Appeals" asp-action="GetUnansweredAppeals">Users</a>
+                            <li class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                For approving
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                 <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="GetUnapprovedUsers">Accounts for approve</a>
+                                 <a class="nav-link text-dark" asp-area="" asp-controller="Appeals" asp-action="GetUnansweredAppeals">Appeals for answer</a>
+                                 <a class="nav-link text-dark" asp-area="" asp-controller="Ratings" asp-action="GetUnapprovedRatings">Rating for approve</a>
+                                 <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="GetProfilesForDelete">Delete profiles</a>
+                            </div>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Ratings" asp-action="GetUnapprovedRatings">Users</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="AppUsers" asp-action="GetProfilesForDelete">Delete profiles</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="FastReservations" asp-action="Index">Fast</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Tags" asp-action="Index">Tags</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="AppointmentTags" asp-action="Index">AppTags</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Subscriptions" asp-action="Index">Akcije</a>
-                        </li>}
+                            <li class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                For adding
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                 <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                                 <a class="nav-link text-dark" asp-area="" asp-controller="Tags" asp-action="Index">Tags</a>
+                            </div>
+                            </li>}
                         @if ((await AuthorizationService.AuthorizeAsync(User, null, "CottageOwnerPolicy")).Succeeded || (await AuthorizationService.AuthorizeAsync(User, null, "ShipOwnerPolicy")).Succeeded || (await AuthorizationService.AuthorizeAsync(User, null, "FishingInstructorPolicy")).Succeeded)
                         {
                             <li class="dropdown">
@@ -124,7 +117,7 @@
                                 Entities
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Cottages" asp-action="GetMyCottages">My cottages</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Cottages" asp-action="GetMyCottages">My cottages</a>
                             </div>
                             </li>
                             <li class="dropdown">
@@ -132,8 +125,8 @@
                                 Appointment
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="GetMyAppointmentOwner">Appointment</a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Ratings" asp-action="GetPossibleRatingsForUsers">User rating</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="GetMyAppointmentOwner">Appointments</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="FastReservations" asp-action="GetMyFastReservationOwner">Fast reservations</a>
                             </div>
                             </li>
                         }

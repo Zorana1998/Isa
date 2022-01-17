@@ -1,33 +1,52 @@
 ﻿@model IEnumerable<IsaProject.Models.Entities.Appointment>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "GetMyAppointmentOwner";
 }
 
-<h1>Index</h1>
+<link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.css">
+<link rel="stylesheet" type="text/css" href="http://bootstrap-table.wenzhixin.net.cn/assets/bootstrap/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.18.3/extensions/filter-control/utils.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/locale/bootstrap-table-pl-PL.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter/bootstrap-table-filter.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+
+<div  style="text-align: center">
+<h1>My appointments</h1>
+</div>
+
+<table id="table" class="table-striped" 
+           data-toggle="table"
+           data-search="true"
+           data-filter-control="true">
     <thead>
         <tr>
-            <th>
+            <th class="th-sm" data-field="ownerId" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.OwnerID)
             </th>
-            <th>
+            <th class="th-sm" data-field="start" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.Start)
             </th>
-            <th>
+            <th class="th-sm" data-field="durationDays" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.DurationDays)
             </th>
-            <th>
+            <th class="th-sm" data-field="maxNumberOfPeople" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.MaxNumberOfPeople)
             </th>
-            <th>
+            <th class="th-sm" data-field="price" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.Price)
             </th>
+            @if (Model.Count()!=0){
             <th></th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -49,21 +68,12 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 <a asp-action="AddTags" asp-route-id="@item.Id">Add Tags</a>
             </td>
-
-
-
-
-
-
-
 
         </tr>
 }
     </tbody>
 </table>
 
+<a  class="btn btn-dark mt-2" asp-action="Create">Create new appointment</a>

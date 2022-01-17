@@ -1,7 +1,15 @@
-﻿@model IEnumerable<IsaProject.Models.Entities.Tag>
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@using IsaProject.Models.Users
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@model IEnumerable<IsaProject.Models.Entities.FastReservation>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "GetMyFastReservationOwner";
 }
 
 <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
@@ -19,7 +27,7 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
 
 <div  style="text-align: center">
-<h1>Tags</h1>
+<h1>Fast reservations</h1>
 </div>
 
 <table id="table" class="table-striped" 
@@ -28,33 +36,40 @@
            data-filter-control="true">
     <thead>
         <tr>
-            <th class="th-sm" data-field="name" data-filter-control="input" data-sortable="true">
-                @Html.DisplayNameFor(model => model.Name)
+            <th class="th-sm" data-field="newPrice" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.NewPrice)
             </th>
-            <th class="th-sm" data-field="price" data-filter-control="input" data-sortable="true">
-                @Html.DisplayNameFor(model => model.Price)
+            <th class="th-sm" data-field="start" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Start)
             </th>
-            @if (Model.Count()!=0){
+            <th class="th-sm" data-field="durationDays" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.DurationDays)
+            </th>
+            <th class="th-sm" data-field="maxNumberOfPeople" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.MaxNumberOfPeople)
+            </th>
             <th></th>
-            }
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.NewPrice)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Start)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(modelItem => item.DurationDays)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxNumberOfPeople)
+            </td>
+            
         </tr>
 }
     </tbody>
 </table>
-<a  class="btn btn-dark mt-2" asp-action="Create">Create new tags</a>
+
+<a  class="btn btn-dark mt-2" asp-action="Create">Create new fast reservation</a>

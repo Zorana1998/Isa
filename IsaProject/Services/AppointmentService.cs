@@ -80,7 +80,35 @@ namespace IsaProject.Services
                                                              where u.OwnerID == id && u.Start > System.DateTime.Now
                                                              select u).ToListAsync();
 
-            return appointments;
+            List<FastReservation> fastReservations = await (from u in _context.FastReservations
+                                                            where u.OwnerID == id && u.Start > System.DateTime.Now
+                                                            select u).ToListAsync();
+
+            List<Appointment> appointmentsWithoutFast = new List<Appointment>();
+
+            int counter = 0;
+
+            foreach(Appointment app in appointments)
+            {
+                counter = 0;
+                foreach(FastReservation fast in fastReservations)
+                {
+                    if(app.Id == fast.Id)
+                    {
+                        counter++;
+                    }
+                }
+
+                if(counter == 0)
+                {
+                    appointmentsWithoutFast.Add(app);
+                }
+            }
+
+
+
+
+            return appointmentsWithoutFast;
         }
 
     }

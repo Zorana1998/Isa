@@ -117,8 +117,7 @@ namespace IsaProject.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            
                 try
                 {
                     _context.Update(appointment);
@@ -135,9 +134,7 @@ namespace IsaProject.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(appointment);
+                return RedirectToAction(nameof(GetMyAppointmentOwner));
         }
 
         // GET: Appointments/Delete/5

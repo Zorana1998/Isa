@@ -157,24 +157,35 @@ namespace IsaProject.Areas.Identity.Pages.Account
                     Country = Input.Country,
                     PhoneNumber = Input.PhoneNumber
                 };
-                var result = await _userManager.CreateAsync(user, Input.Password);
-
-                await _userManager.AddToRoleAsync(user, Input.Role);
 
                 if (Input.Role.Equals("Admin"))
                 {
                     user.isFirstlogin = true;
                     user.EmailConfirmed = true;
-                    await _userManager.UpdateAsync(user);
                 }
+
+
+                var result = await _userManager.CreateAsync(user, Input.Password);
+
+                await _userManager.AddToRoleAsync(user, Input.Role);
 
                 if(result.Succeeded && Input.Role == "Admin")
                 {
-                    //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    return RedirectToPage("Login");
+                    /*var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    var callbackUrl = Url.Page(
+                        "/Account/ResetPassword",
+                        pageHandler: null,
+                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                        protocol: Request.Scheme);
+
+                    await _emailSender.SendEmailAsync(Input.Email, "Booking: Change password",
+                        $"Please change your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");*/
+                    
+                    return RedirectToPage("");
                 }
                 
-                if (result.Succeeded && (Input.Role == "User" || Input.Role == "Admin"))
+                if (result.Succeeded && (Input.Role == "User"))
                 {
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

@@ -14,6 +14,11 @@ using Microsoft.Extensions.Logging;
 using IsaProject.Models.Users;
 using IsaProject.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Text;
+using Isa.Areas.Identity;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace IsaProject.Areas.Identity.Pages.Account
 {
@@ -24,6 +29,7 @@ namespace IsaProject.Areas.Identity.Pages.Account
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
         private readonly ApplicationDbContext _context;
+        private readonly EmailSender _emailSender;
 
         public LoginModel(SignInManager<AppUser> signInManager, 
             ILogger<LoginModel> logger,
@@ -34,6 +40,11 @@ namespace IsaProject.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _context = context;
+            using (StreamReader r = new StreamReader("./Areas/Identity/emailCredentials.json"))
+            {
+                string json = r.ReadToEnd();
+                _emailSender = JsonConvert.DeserializeObject<EmailSender>(json);
+            }
         }
 
         [BindProperty]
@@ -87,6 +98,31 @@ namespace IsaProject.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+
+                var userByEmail = await _userManager.FindByEmailAsync(Input.Email);
+
+                var userRolesByEmail = await _userManager.GetRolesAsync(userByEmail);
+
+                var userRoleByEmail = userRolesByEmail.First();
+
+                if (userRoleByEmail.Equals("Admin") && userByEmail.isFirstlogin)
+                {
+                    var code = await _userManager.GeneratePasswordResetTokenAsync(userByEmail);
+                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    var callbackUrl = Url.Page(
+                        "/Account/ResetPassword",
+                        pageHandler: null,
+                        values: new { area = "Identity", userId = userByEmail.Id, code = code, returnUrl = returnUrl },
+                        protocol: Request.Scheme);
+
+                    await _emailSender.SendEmailAsync(Input.Email, "Booking: Change password",
+                        $"Please change your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                    
+                }
+
+                
+
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {

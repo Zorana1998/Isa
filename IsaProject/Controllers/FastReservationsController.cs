@@ -62,8 +62,14 @@ namespace IsaProject.Controllers
         }
 
         // GET: FastReservations/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var user = await _userManager.GetUserAsync(User);
+
+            List<Entity> entities = (from u in _context.Entities
+                                     where u.CottageOwnerID == user.Id && u.IsLogicalDelete == false
+                                     select u).ToList();
+            ViewData["GetMyEntities"] = entities;
             return View();
         }
 
@@ -72,7 +78,7 @@ namespace IsaProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NewPrice,Id,OwnerID,UserID,EntityID,Start,DurationDays,MaxNumberOfPeople,Price,isScheduled")] FastReservation fastReservation)
+        public async Task<IActionResult> Create([Bind("NewPrice,Id,OwnerID,UserID,EntityID,Start,DurationDays,MaxNumberOfPeople,isScheduled")] FastReservation fastReservation)
         {
                 var user = await _userManager.GetUserAsync(User);
 
@@ -100,7 +106,7 @@ namespace IsaProject.Controllers
                 }
 
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(GetMyFastReservationOwner));
             
         }
 
@@ -309,7 +315,19 @@ namespace IsaProject.Controllers
             return View(fastReservationsFree);
         }
 
-        
+        public async Task<IActionResult> GetMyFastReservationOwner()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            List<FastReservation> fastReservations = await (from u in _context.FastReservations
+                                                    where u.OwnerID == user.Id && u.Start > System.DateTime.Now
+                                                    select u).ToListAsync();
+
+            return View(fastReservations);
+        }
+
+
+
 
 
 

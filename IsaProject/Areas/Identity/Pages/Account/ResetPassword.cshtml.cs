@@ -78,6 +78,9 @@ namespace IsaProject.Areas.Identity.Pages.Account
             var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
             if (result.Succeeded)
             {
+                var userByEmail =await _userManager.FindByEmailAsync(Input.Email);
+                userByEmail.isFirstlogin = false;
+                await _userManager.UpdateAsync(userByEmail);
                 return RedirectToPage("./ResetPasswordConfirmation");
             }
 

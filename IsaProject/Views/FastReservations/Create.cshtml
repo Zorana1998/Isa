@@ -19,8 +19,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="EntityID" class="control-label"></label>
-                <input asp-for="EntityID" class="form-control" />
-                <span asp-validation-for="EntityID" class="text-danger"></span>
+                <select asp-for="EntityID" class="form-control">
+                    @foreach (IsaProject.Models.Entities.Entity item in (List<IsaProject.Models.Entities.Entity>)@ViewData["GetMyEntities"])
+                    {
+                        <option value=@item.Id class="option">@item.Name  @item.AverageScore</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Start" class="control-label"></label>
@@ -38,11 +42,6 @@
                 <span asp-validation-for="MaxNumberOfPeople" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -50,7 +49,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="GetMyFastReservationOwner">Back to List</a>
 </div>
 
 @section Scripts {
