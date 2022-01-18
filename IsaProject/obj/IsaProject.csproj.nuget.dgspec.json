@@ -82,11 +82,11 @@
             },
             "SendGrid": {
               "target": "Package",
-              "version": "[9.25.1, )"
+              "version": "[9.25.2, )"
             },
             "SendGrid.CSharp.HTTP.Client": {
               "target": "Package",
-              "version": "[3.4.9, )"
+              "version": "[3.4.10, )"
             },
             "Swashbuckle": {
               "target": "Package",

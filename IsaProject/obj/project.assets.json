@@ -1321,7 +1321,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "SendGrid/9.25.1": {
+      "SendGrid/9.25.2": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "9.0.1",
@@ -1334,7 +1334,7 @@
           "lib/netstandard2.0/SendGrid.dll": {}
         }
       },
-      "SendGrid.CSharp.HTTP.Client/3.4.9": {
+      "SendGrid.CSharp.HTTP.Client/3.4.10": {
         "type": "package",
         "compile": {
           "lib/net45/SendGrid.CSharp.HTTP.Client.dll": {}
@@ -4619,10 +4619,10 @@
         "runtime.native.system.nuspec"
       ]
     },
-    "SendGrid/9.25.1": {
-      "sha512": "vMRMHrpCH2m1GjlCOc0i3Llr539N9H6fDzXiJXnRYup0QC+b2C1y0ns+AXmTsMAtHOT4SARICkN3JgdKFuOm4Q==",
+    "SendGrid/9.25.2": {
+      "sha512": "5C+0ThiFfaCWaA1k6zyzbqAlgEsE9uIeygw+TmvzmHJHD6XFfd7cUXq968mYmMmjI3YgLT5CkhDryzarouSIIQ==",
       "type": "package",
-      "path": "sendgrid/9.25.1",
+      "path": "sendgrid/9.25.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4638,19 +4638,19 @@
         "lib/netstandard2.0/SendGrid.dll",
         "lib/netstandard2.0/SendGrid.pdb",
         "lib/netstandard2.0/SendGrid.xml",
-        "sendgrid.9.25.1.nupkg.sha512",
+        "sendgrid.9.25.2.nupkg.sha512",
         "sendgrid.nuspec"
       ]
     },
-    "SendGrid.CSharp.HTTP.Client/3.4.9": {
-      "sha512": "Inxs73ivVcwr4dnR3DcCfOKcL1Hu20S1JGCWSwEobNs7ismFk/IBtpBw8aq7wGYdN48qX/5vc7S4ag1zUUAyyw==",
+    "SendGrid.CSharp.HTTP.Client/3.4.10": {
+      "sha512": "89VeBqGJ7Z5KIMLYg4fiy/OI/6wwY9w4hCHm0un4ihy8taa3XGQ0tOE8Pr3Mf3l2GoROcK0+d0z8VmbpBfGwZA==",
       "type": "package",
-      "path": "sendgrid.csharp.http.client/3.4.9",
+      "path": "sendgrid.csharp.http.client/3.4.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/net45/SendGrid.CSharp.HTTP.Client.dll",
-        "sendgrid.csharp.http.client.3.4.9.nupkg.sha512",
+        "sendgrid.csharp.http.client.3.4.10.nupkg.sha512",
         "sendgrid.csharp.http.client.nuspec"
       ]
     },
@@ -8380,8 +8380,8 @@
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.12",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2",
       "Moment.js >= 2.29.1",
-      "SendGrid >= 9.25.1",
-      "SendGrid.CSharp.HTTP.Client >= 3.4.9",
+      "SendGrid >= 9.25.2",
+      "SendGrid.CSharp.HTTP.Client >= 3.4.10",
       "Swashbuckle >= 5.6.0",
       "Swashbuckle.AspNetCore >= 6.2.3",
       "bootstrap >= 5.1.3",
@@ -8471,11 +8471,11 @@
           },
           "SendGrid": {
             "target": "Package",
-            "version": "[9.25.1, )"
+            "version": "[9.25.2, )"
           },
           "SendGrid.CSharp.HTTP.Client": {
             "target": "Package",
-            "version": "[3.4.9, )"
+            "version": "[3.4.10, )"
           },
           "Swashbuckle": {
             "target": "Package",
@@ -8577,7 +8577,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'SendGrid.CSharp.HTTP.Client 3.4.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "message": "Package 'SendGrid.CSharp.HTTP.Client 3.4.10' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
       "libraryId": "SendGrid.CSharp.HTTP.Client",
       "targetGraphs": [
         "net5.0"
