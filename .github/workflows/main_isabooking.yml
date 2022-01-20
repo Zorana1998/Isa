@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'IsaBooking'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6707E1C9C613438D8F266A10DDE3CC73 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3306D4C3CFF54DB6BAB1E4CA6994995F }}
           package: .
