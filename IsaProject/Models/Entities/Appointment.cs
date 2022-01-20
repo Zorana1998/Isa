@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IsaProject.Models.Users;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -28,7 +29,12 @@ namespace IsaProject.Models.Entities
 
         public List<AppointmentTag> appointmentTags { get; set; }
 
-        
+        public int numberOfReservation{ get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
+
+
 
         public Appointment(string ownerId,long entityId, DateTime dateTime, int duration, int numberOfGuest, int numberOfDays, double price)
         {

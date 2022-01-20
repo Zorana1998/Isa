@@ -83,6 +83,10 @@ namespace IsaProject.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
             appointment.OwnerID = user.Id;
+            appointment.numberOfReservation = 0;
+
+            
+            Console.WriteLine(appointment.numberOfReservation);
             _context.Add(appointment);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(GetMyAppointmentOwner));
@@ -156,8 +160,8 @@ namespace IsaProject.Controllers
         }
 
         // POST: Appointments/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
             var appointment = await _context.Appointments.FindAsync(id);
@@ -171,6 +175,7 @@ namespace IsaProject.Controllers
             return _context.Appointments.Any(e => e.Id == id);
         }
 
+        [HttpPost]
         public async Task<IActionResult> TakeAppointment(long? id)
         {
             if (id == null)
@@ -184,50 +189,71 @@ namespace IsaProject.Controllers
             var appointmentDTO = await _context.cottageAppointmentDTOs
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            var appointment = await _context.Appointments
-                .FirstOrDefaultAsync(m => m.Id == appointmentDTO.AppointmentId);
-
-            ScheduledAppointment scheduledAppointment = new ScheduledAppointment();
-            scheduledAppointment.UserID = user.Id;
-            scheduledAppointment.EntityID = appointment.EntityID;
-            scheduledAppointment.Start = appointmentDTO.StartDate;
-            scheduledAppointment.Duration = appointmentDTO.Duration;
-            scheduledAppointment.NumberOfPeople = appointmentDTO.NumberOfGuest;
-            scheduledAppointment.Price = appointmentDTO.Price;
-            scheduledAppointment.IsActive = true;
-            scheduledAppointment.IsCome = false;
-
-            _context.scheduledAppointments.Add(scheduledAppointment);
-            _context.SaveChanges();
-
-
-
-            //AddTags
-            long appNewId = scheduledAppointment.Id;
-
-            var tagChoosenUser = await (from tag in _context.Tags
-                                      join appTag in _context.AppointmentTag on tag.Id equals appTag.TagId
-                                      join app in _context.cottageAppointmentDTOs on appTag.AppointmentDTOID equals app.Id
-                                      select tag).ToListAsync();
-
-            var tagChoosenOwner = await (from tag in _context.Tags
-                                      join appTag in _context.AppointmentTag on tag.Id equals appTag.TagId
-                                      join app in _context.Appointments on appTag.AppointmentID equals app.Id
-                                      select tag).ToListAsync();
-
-            foreach (Tag tag in tagChoosenUser)
+            /*var appointment = await _context.Appointments
+                .FirstOrDefaultAsync(m => m.Id == appointmentDTO.AppointmentId);*/
+            try
             {
-                AppointmentTag appointmentTag = new AppointmentTag(appNewId, appointmentDTO.Id, tag.Id, scheduledAppointment.Id);
-                _context.AppointmentTag.Add(appointmentTag);
+                var appointment = await _context.Appointments
+                .FirstOrDefaultAsync(m => m.Id == appointmentDTO.AppointmentId);
+                appointment.numberOfReservation++;
+                _context.Appointments.Update(appointment);
                 _context.SaveChanges();
+
+                Console.WriteLine(appointment.RowVersion);
+                ScheduledAppointment scheduledAppointment = new ScheduledAppointment();
+                scheduledAppointment.UserID = user.Id;
+                scheduledAppointment.EntityID = appointment.EntityID;
+                scheduledAppointment.Start = appointmentDTO.StartDate;
+                scheduledAppointment.Duration = appointmentDTO.Duration;
+                scheduledAppointment.NumberOfPeople = appointmentDTO.NumberOfGuest;
+                scheduledAppointment.Price = appointmentDTO.Price;
+                scheduledAppointment.IsActive = true;
+                scheduledAppointment.IsCome = false;
+
+                _context.scheduledAppointments.Add(scheduledAppointment);
+                _context.SaveChanges();
+
+
+
+                //AddTags
+                long appNewId = scheduledAppointment.Id;
+
+                var tagChoosenUser = await (from tag in _context.Tags
+                                            join appTag in _context.AppointmentTag on tag.Id equals appTag.TagId
+                                            join app in _context.cottageAppointmentDTOs on appTag.AppointmentDTOID equals app.Id
+                                            select tag).ToListAsync();
+
+                var tagChoosenOwner = await (from tag in _context.Tags
+                                             join appTag in _context.AppointmentTag on tag.Id equals appTag.TagId
+                                             join app in _context.Appointments on appTag.AppointmentID equals app.Id
+                                             select tag).ToListAsync();
+
+                foreach (Tag tag in tagChoosenUser)
+                {
+                    AppointmentTag appointmentTag = new AppointmentTag(appNewId, appointmentDTO.Id, tag.Id, scheduledAppointment.Id);
+                    _context.AppointmentTag.Add(appointmentTag);
+                    _context.SaveChanges();
+                }
+
+                _context.SaveChanges();
+
+                /*await _emailSender.SendEmailAsync(user.Email, "Scheduled Appointment",
+                    $"Scheduled Appointment for {user.FirstName} at {appointment.Start}");*/
+
+                return RedirectToAction(nameof(GetMyReservation));
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
             }
 
-            _context.SaveChanges();
 
-            await _emailSender.SendEmailAsync(user.Email, "Scheduled Appointment",
-                $"Scheduled Appointment for {user.FirstName} at {appointment.Start}");
 
-            return RedirectToAction(nameof(GetMyReservation)); ;
+
+            
+
+
+
         }
 
 

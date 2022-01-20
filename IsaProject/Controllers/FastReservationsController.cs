@@ -82,7 +82,12 @@ namespace IsaProject.Controllers
         {
                 var user = await _userManager.GetUserAsync(User);
 
+                FastReservation fastSave = new FastReservation();
+
+
                 fastReservation.OwnerID = user.Id;
+
+                fastReservation.numberOfReservation = 0;
             
                 _context.Add(fastReservation);
             
@@ -195,7 +200,7 @@ namespace IsaProject.Controllers
             return _context.FastReservations.Any(e => e.Id == id);
         }
 
-        public async Task<IActionResult> TakeAppointment(long? id)
+        public async Task<IActionResult> TakeAppointment(long? id, byte[] version)
         {
             if (id == null)
             {
@@ -204,6 +209,19 @@ namespace IsaProject.Controllers
 
             var user = await _userManager.GetUserAsync(User);
             var fastReservation = await _context.FastReservations.FindAsync(id);
+
+            try
+            {
+                
+                var fastReservation1 = await _context.FastReservations.FindAsync(id);
+                fastReservation1.numberOfReservation++;
+                _context.FastReservations.Update(fastReservation1);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                    throw;
+            }
 
             ScheduledAppointment scheduledAppointment = new ScheduledAppointment();
             scheduledAppointment.UserID = user.Id;

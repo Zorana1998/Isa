@@ -25,6 +25,9 @@ namespace IsaProject.Models.Entities
 
         public string ContentAnswer { get; set; }
 
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
+
 
 
 
