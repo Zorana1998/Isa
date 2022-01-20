@@ -13,5 +13,6 @@ namespace IsaProject.Services
         bool Exists(string id);
         public void Create(AppUser user);
         public Task<List<AppUser>> GetUnapprovedUsers();
+        public AppUser GetByUsername(string username);
     }
 }

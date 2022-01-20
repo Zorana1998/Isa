@@ -6,6 +6,22 @@ namespace IsaProject.Models.Entities
     public class Cottage: Entity
     { 
         public List<Room> Rooms { get; set; }
+
+        public Cottage()
+        {
+        }
+
+        public Cottage(string name, string address, string country, string city, string promotinalDescription, double averageScore, string rules)
+        {
+            Name = name;
+            Address = address;
+            Country = country;
+            City = city;
+            PromotionalDescription = promotinalDescription;
+            AverageScore = averageScore;
+            Rules = rules;
+        }
+
     }
 
     /*Vlasnik vikendice može da uređuje profil vikendice koji sadrži:
@@ -18,4 +34,8 @@ namespace IsaProject.Models.Entities
 ● pravila ponašanja (šta je dozvoljeno, a šta ne),
 //● cenovnik i informacije o dodatnim uslugama.
 */
+    
+
+
+
 }

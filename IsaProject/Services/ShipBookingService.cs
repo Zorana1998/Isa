@@ -52,7 +52,7 @@ namespace IsaProject.Services
                 shipBookings = await _context.ShipBooking.ToListAsync();
             }
 
-            List<ShipBooking> filteredShips = new List<ShipBooking>();
+            var filteredShips = new List<ShipBooking>();
 
             if (string.IsNullOrEmpty(searchString))
             {
@@ -79,13 +79,13 @@ namespace IsaProject.Services
         {
 
             //AllScheduledCottages
-            List<ScheduledAppointment> scheduledAppointments = await (from schApp in _context.scheduledAppointments
+            var scheduledAppointments = await (from schApp in _context.scheduledAppointments
                                                                       join ships in _context.ShipBooking on schApp.EntityID equals ships.Id
                                                                       where schApp.IsActive == true
                                                                       select schApp).ToListAsync();
 
             //FastReservation
-            List<long> fastReservationsIds = new List<long>();
+            var fastReservationsIds = new List<long>();
             fastReservationsIds = await (from res in _context.FastReservations
                                          select res.Id).ToListAsync();
 
@@ -102,7 +102,7 @@ namespace IsaProject.Services
                                       select shipAppointment).ToListAsync();
 
             //SkipFast
-            List<Appointment> shipAppointments= new List<Appointment>();
+            var shipAppointments= new List<Appointment>();
 
             foreach (Appointment app in shipAppointmentsTemporary)
             {
@@ -114,11 +114,10 @@ namespace IsaProject.Services
 
             List<Appointment> availableAppointments = new();
 
-            var counter = 0;
-
+            
             foreach (Appointment appointment in shipAppointments)
             {
-                counter = 0;
+                var counter = 0;
 
                 foreach (ScheduledAppointment scheduledAppointment in scheduledAppointments)
                 {
@@ -159,7 +158,7 @@ namespace IsaProject.Services
             }
 
             //AllCottagesAppDTO
-            List<AppointmentDTO> shipAppointmentDTO = new List<AppointmentDTO>();
+            var shipAppointmentDto = new List<AppointmentDTO>();
 
             foreach (Appointment app in availableAppointments)
             {
@@ -183,17 +182,17 @@ namespace IsaProject.Services
                 ShipBooking shipBooking = ships.First();
 
                 AppointmentDTO appDTO = new AppointmentDTO(app.Id, shipBooking.Name, shipBooking.Address, shipBooking.Country, shipBooking.City, shipBooking.AverageScore, shipBooking.Rules, app.Price, dateTime, numberOfDays, id, numberOfGuest);
-                shipAppointmentDTO.Add(appDTO);
+                shipAppointmentDto.Add(appDTO);
             }
 
 
 
-            List<AppointmentDTO> present = new List<AppointmentDTO>();
+            var present = new List<AppointmentDTO>();
 
 
-            foreach (AppointmentDTO appointmentDTO in shipAppointmentDTO)
+            foreach (AppointmentDTO appointmentDto in shipAppointmentDto)
             {
-                var app = new AppointmentDTO(appointmentDTO.AppointmentId, appointmentDTO.Name, appointmentDTO.Address, appointmentDTO.Country, appointmentDTO.City, appointmentDTO.AverageScore, appointmentDTO.Rules, appointmentDTO.Price, appointmentDTO.StartDate, appointmentDTO.Duration, id, numberOfGuest);
+                var app = new AppointmentDTO(appointmentDto.AppointmentId, appointmentDto.Name, appointmentDto.Address, appointmentDto.Country, appointmentDto.City, appointmentDto.AverageScore, appointmentDto.Rules, appointmentDto.Price, appointmentDto.StartDate, appointmentDto.Duration, id, numberOfGuest);
                 _context.cottageAppointmentDTOs.Add(app);
                 _context.SaveChanges();
                 var appDTOiD = app.Id;

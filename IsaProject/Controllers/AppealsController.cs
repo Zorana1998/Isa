@@ -13,7 +13,7 @@ using IsaProject.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Newtonsoft.Json;
 using System.IO;
-using Isa.Areas.Identity;
+using IsaProject.Areas.Identity;
 
 namespace IsaProject.Controllers
 {
@@ -23,15 +23,13 @@ namespace IsaProject.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public AppealsController(ApplicationDbContext context, UserManager<AppUser> userManager, IEmailSender emailSender)
+        public AppealsController(ApplicationDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
             _userManager = userManager;
-            using (StreamReader r = new StreamReader("./Areas/Identity/emailCredentials.json"))
-            {
-                string json = r.ReadToEnd();
-                _emailSender = JsonConvert.DeserializeObject<EmailSender>(json);
-            }
+            using StreamReader r = new StreamReader("./Areas/Identity/emailCredentials.json");
+            var json = r.ReadToEnd();
+            _emailSender = JsonConvert.DeserializeObject<EmailSender>(json);
         }
 
         // GET: Appeals

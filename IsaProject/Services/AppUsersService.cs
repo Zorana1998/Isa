@@ -75,5 +75,19 @@ namespace IsaProject.Services
 
             return users;
         }
+
+        public AppUser GetByUsername(string username)
+        {
+            var user = from u in _context.tbAppUsers
+                       where u.UserName.Equals(username)
+                       select u;
+
+            if (user.Count() == 0)
+            {
+                return null;
+            }
+            return user.First();
+        }
+
     }
 }

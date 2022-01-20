@@ -14,7 +14,7 @@ namespace IsaProject.Areas.Identity.Pages.Account.Manage
     {
         UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        ILogger<ResetAuthenticatorModel> _logger;
+        private readonly ILogger<ResetAuthenticatorModel> _logger;
 
         public ResetAuthenticatorModel(
             UserManager<AppUser> userManager,

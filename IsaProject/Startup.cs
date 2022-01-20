@@ -1,4 +1,3 @@
-using Isa.Areas.Identity;
 using IsaProject.Data;
 using IsaProject.Models.Users;
 using IsaProject.Services;

@@ -13,7 +13,7 @@ using IsaProject.Models.Entities;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Newtonsoft.Json;
 using System.IO;
-using Isa.Areas.Identity;
+using IsaProject.Areas.Identity;
 
 namespace IsaProject.Controllers
 {
@@ -23,7 +23,7 @@ namespace IsaProject.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public RatingsController(ApplicationDbContext context, UserManager<AppUser> userManager, IEmailSender emailSender)
+        public RatingsController(ApplicationDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -90,7 +90,7 @@ namespace IsaProject.Controllers
         // GET: Ratings/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
-            if (id == null)
+            if (id == null || id < 1)
             {
                 return NotFound();
             }
