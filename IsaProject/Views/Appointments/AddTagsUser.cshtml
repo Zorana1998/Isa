@@ -29,10 +29,10 @@
         </tr>
 }
     </tbody>
+   
+<button type="Schedule" onclick="schedule()">Submit</button>
+
 </table>
-
-<button type="submit" onclick="schedule()">Submit</button>
-
 <script>
     function something(id) {
         var id = id;
@@ -52,6 +52,7 @@
     }
 
     function schedule() {
+        var id = id;
         var url = window.location.pathname;
         var id = url.substring(url.lastIndexOf('/') + 1);
         $.ajax({

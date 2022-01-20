@@ -111,5 +111,12 @@ namespace IsaProject.Services
             return appointmentsWithoutFast;
         }
 
+        public Appointment GetById(long id)
+        {
+            var app = _context.Appointments.Find(id);
+
+            return app;
+        }
+
     }
 }

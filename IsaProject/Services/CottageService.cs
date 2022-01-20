@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using IsaProject.Models.Entities;
 using IsaProject.Models.DTO;
 using Newtonsoft.Json;
-using Isa.Areas.Identity;
 using IsaProject.Models;
 
 namespace IsaProject.Services

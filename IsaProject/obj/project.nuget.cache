@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZM32mABdNeIou98c02z4U81iSdtuHvjVXp7fFjHfhM1YNwbh0giQDuvHCGrHVh4er5olelFZA0Qpp4vQcvoq5g==",
+  "dgSpecHash": "PQbV/P6qAhVrWZI3gFazEEKSaGbyPKx+rV/6P8X7okDgSj0hfHseHVuixMZqWVxLeU/HQ1kCJdgVbF8GX5OSOg==",
   "success": true,
   "projectFilePath": "C:\\Users\\ZoranaStamenković\\Source\\Repos\\Zorana1998\\Isa\\IsaProject\\IsaProject.csproj",
   "expectedPackageFiles": [
@@ -173,10 +173,10 @@
     "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.12\\microsoft.entityframeworkcore.5.0.12.nupkg.sha512",
     "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.12\\microsoft.entityframeworkcore.abstractions.5.0.12.nupkg.sha512",
     "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\5.0.12\\microsoft.entityframeworkcore.analyzers.5.0.12.nupkg.sha512",
-    "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\microsoft.entityframeworkcore.design\\5.0.1\\microsoft.entityframeworkcore.design.5.0.1.nupkg.sha512",
+    "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\microsoft.entityframeworkcore.design\\5.0.12\\microsoft.entityframeworkcore.design.5.0.12.nupkg.sha512",
     "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\5.0.12\\microsoft.entityframeworkcore.relational.5.0.12.nupkg.sha512",
     "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\5.0.12\\microsoft.entityframeworkcore.sqlserver.5.0.12.nupkg.sha512",
-    "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\5.0.1\\microsoft.entityframeworkcore.tools.5.0.1.nupkg.sha512",
+    "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\5.0.12\\microsoft.entityframeworkcore.tools.5.0.12.nupkg.sha512",
     "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\5.0.0\\microsoft.extensions.caching.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\microsoft.extensions.caching.memory\\5.0.0\\microsoft.extensions.caching.memory.5.0.0.nupkg.sha512",

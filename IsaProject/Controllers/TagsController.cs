@@ -56,6 +56,11 @@ namespace IsaProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Price")] Tag tag)
         {
+            if (tag.Id < 0)
+            {
+                return BadRequest(ModelState);
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(tag);

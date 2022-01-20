@@ -8,7 +8,6 @@ using System.Net.Mail;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using Isa.Areas.Identity;
 using IsaProject.Data;
 using IsaProject.Models.Users;
 using Microsoft.AspNetCore.Authentication;

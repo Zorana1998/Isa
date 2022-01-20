@@ -13,8 +13,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Isa.Areas.Identity;
 using System.IO;
+using IsaProject.Areas.Identity;
 using IsaProject.Models.Entities;
 
 namespace IsaProject.Controllers
@@ -32,11 +32,9 @@ namespace IsaProject.Controllers
             _context = context;
             _userManager = userManager;
             _appUsersService = appUsersService;
-            using (StreamReader r = new StreamReader("./Areas/Identity/emailCredentials.json"))
-            {
-                string json = r.ReadToEnd();
-                _emailSender = JsonConvert.DeserializeObject<EmailSender>(json);
-            }
+            using StreamReader r = new StreamReader("./Areas/Identity/emailCredentials.json");
+            var json = r.ReadToEnd();
+            _emailSender = JsonConvert.DeserializeObject<EmailSender>(json);
         }
 
         public async Task<IActionResult> Index()
@@ -60,7 +58,7 @@ namespace IsaProject.Controllers
                 return NotFound();
             }
 
-            List<string> userRole = await (from userrole in _context.UserRoles
+            var userRole = await (from userrole in _context.UserRoles
                                            join role in _context.Roles on userrole.RoleId equals role.Id
                                            where userrole.UserId == id
                                            select role.Name).ToListAsync();

@@ -26,10 +26,7 @@ namespace IsaProject.Models.Entities
 
         public bool IsApproved { get; set; }
 
-        
-        public string AdminResponseId { get; set; }
-
-        [Timestamp]
-        public byte[] RowVersion { get; set; }
+        /*[Timestamp]
+        public byte[] RowVersion { get; set; }*/
     }
 }
