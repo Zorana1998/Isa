@@ -28,7 +28,14 @@ namespace IsaProject.Models.Entities
 
         public List<AppointmentTag> appointmentTags { get; set; }
 
-        
+        public int NumberOfReservations { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
+
+
+
+
 
         public Appointment(string ownerId,long entityId, DateTime dateTime, int duration, int numberOfGuest, int numberOfDays, double price)
         {

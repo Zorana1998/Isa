@@ -265,6 +265,8 @@ namespace IsaProject.Controllers
         {
             Rating rating = _context.Rating.Find(id);
 
+
+
             if (rating.EntityID == 0)
             {
                 AppUser appUser = rating.User;

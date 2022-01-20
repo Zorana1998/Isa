@@ -39,7 +39,7 @@ namespace Isa.Models
 
         public bool IsApproved { get; set; }
 
-        /*[Timestamp]
-        public byte[] RowVersion { get; set; }*/
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }

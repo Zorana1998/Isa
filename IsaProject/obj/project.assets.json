@@ -3626,7 +3626,7 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
-      "Newtonsoft.Json/11.0.2": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
@@ -3688,6 +3688,30 @@
         },
         "runtime": {
           "lib/netstandard1.0/_._": {}
+        }
+      },
+      "Selenium.WebDriver/4.0.0-beta2": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3"
+        },
+        "compile": {
+          "lib/net5.0/WebDriver.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/WebDriver.dll": {}
+        }
+      },
+      "SeleniumExtras.WaitHelpers/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Selenium.WebDriver": "4.0.0-beta2"
+        },
+        "compile": {
+          "lib/netstandard2.1/SeleniumExtras.WaitHelpers.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/SeleniumExtras.WaitHelpers.dll": {}
         }
       },
       "SendGrid/9.25.2": {
@@ -11589,10 +11613,10 @@
         "netstandard.library.nuspec"
       ]
     },
-    "Newtonsoft.Json/11.0.2": {
-      "sha512": "IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ==",
+    "Newtonsoft.Json/12.0.3": {
+      "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
       "type": "package",
-      "path": "newtonsoft.json/11.0.2",
+      "path": "newtonsoft.json/12.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -11615,8 +11639,9 @@
         "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.11.0.2.nupkg.sha512",
-        "newtonsoft.json.nuspec"
+        "newtonsoft.json.12.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
       ]
     },
     "NHunspell/1.2.5554.16953": {
@@ -11697,6 +11722,38 @@
         "lib/netstandard1.0/_._",
         "runtime.native.system.4.3.0.nupkg.sha512",
         "runtime.native.system.nuspec"
+      ]
+    },
+    "Selenium.WebDriver/4.0.0-beta2": {
+      "sha512": "D6R8WrTggalRviNue130FL3XA7GhBw0xckC8Y9jxLlhc5mqccX3JtUnPVqGpGrl3yq7vynXSLqEMjNEWEX9wxw==",
+      "type": "package",
+      "path": "selenium.webdriver/4.0.0-beta2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "images/icon.png",
+        "lib/net45/WebDriver.dll",
+        "lib/net46/WebDriver.dll",
+        "lib/net47/WebDriver.dll",
+        "lib/net48/WebDriver.dll",
+        "lib/net5.0/WebDriver.dll",
+        "lib/netstandard2.0/WebDriver.dll",
+        "lib/netstandard2.1/WebDriver.dll",
+        "selenium.webdriver.4.0.0-beta2.nupkg.sha512",
+        "selenium.webdriver.nuspec"
+      ]
+    },
+    "SeleniumExtras.WaitHelpers/1.0.2": {
+      "sha512": "de7m30nkZZLkfCncYBdluUpM27AR/Vkk4kiA4HRQbV+fZI3ps4qGIeJCuj8TAMXdMfQik5Rno8xPnFBIod+ebg==",
+      "type": "package",
+      "path": "seleniumextras.waithelpers/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "lib/netstandard2.1/SeleniumExtras.WaitHelpers.dll",
+        "seleniumextras.waithelpers.1.0.2.nupkg.sha512",
+        "seleniumextras.waithelpers.nuspec"
       ]
     },
     "SendGrid/9.25.2": {
@@ -15989,7 +16046,8 @@
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2",
       "Moment.js >= 2.29.1",
       "NUnit >= 3.13.2",
-      "Newtonsoft.Json >= 11.0.2",
+      "Newtonsoft.Json >= 12.0.3",
+      "SeleniumExtras.WaitHelpers >= 1.0.2",
       "SendGrid >= 9.25.2",
       "SendGrid.CSharp.HTTP.Client >= 3.4.10",
       "Swashbuckle >= 5.6.0",
@@ -16001,29 +16059,36 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Zorana Stamenković\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ZoranaStamenković\\Source\\Repos\\Zorana1998\\Isa\\IsaProject\\IsaProject.csproj",
+      "projectUniqueName": "C:\\Users\\Zorana Stamenković\\Desktop\\isaa\\Isa\\IsaProject\\IsaProject.csproj",
       "projectName": "IsaProject",
-      "projectPath": "C:\\Users\\ZoranaStamenković\\Source\\Repos\\Zorana1998\\Isa\\IsaProject\\IsaProject.csproj",
-      "packagesPath": "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ZoranaStamenković\\Source\\Repos\\Zorana1998\\Isa\\IsaProject\\obj\\",
+      "projectPath": "C:\\Users\\Zorana Stamenković\\Desktop\\isaa\\Isa\\IsaProject\\IsaProject.csproj",
+      "packagesPath": "C:\\Users\\Zorana Stamenković\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Zorana Stamenković\\Desktop\\isaa\\Isa\\IsaProject\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\ZoranaStamenković\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Zorana Stamenković\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
@@ -16090,7 +16155,11 @@
           },
           "Newtonsoft.Json": {
             "target": "Package",
-            "version": "[11.0.2, )"
+            "version": "[12.0.3, )"
+          },
+          "SeleniumExtras.WaitHelpers": {
+            "target": "Package",
+            "version": "[1.0.2, )"
           },
           "SendGrid": {
             "target": "Package",
@@ -16135,6 +16204,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[5.0.13, 5.0.13]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -16152,7 +16227,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.src 213.0.20211222.100105 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 11.0.2 was resolved.",
+      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.src 213.0.20211222.100105 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 12.0.3 was resolved.",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net5.0"
@@ -16162,7 +16237,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.UnitTesting 213.0.20211222.100105 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 11.0.2 was resolved.",
+      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.UnitTesting 213.0.20211222.100105 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 12.0.3 was resolved.",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net5.0"
@@ -16172,7 +16247,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.Diagramming 213.0.20211222.100105 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 11.0.2 was resolved.",
+      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.Diagramming 213.0.20211222.100105 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 12.0.3 was resolved.",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net5.0"
@@ -16182,7 +16257,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.SolutionBuilder 213.0.20211222.100105 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 11.0.2 was resolved.",
+      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.SolutionBuilder 213.0.20211222.100105 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 12.0.3 was resolved.",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net5.0"
@@ -16192,7 +16267,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.VisualStudio.SinceVs10 213.0.20211222.100105 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 11.0.2 was resolved.",
+      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.VisualStudio.SinceVs10 213.0.20211222.100105 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 12.0.3 was resolved.",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net5.0"
@@ -16202,7 +16277,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.Cpp.Src.Core 213.0.20211222.101341 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 11.0.2 was resolved.",
+      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.Cpp.Src.Core 213.0.20211222.101341 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 12.0.3 was resolved.",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net5.0"
@@ -16222,7 +16297,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.Core 213.0.20211222.100105 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 11.0.2 was resolved.",
+      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.Core 213.0.20211222.100105 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 12.0.3 was resolved.",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net5.0"
@@ -16232,7 +16307,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: JetBrains.Platform.Core.Ide 213.0.20211221.144426 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 11.0.2 was resolved.",
+      "message": "Detected package version outside of dependency constraint: JetBrains.Platform.Core.Ide 213.0.20211221.144426 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 12.0.3 was resolved.",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net5.0"
@@ -16242,7 +16317,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.Tasks 213.0.20211222.100105 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 11.0.2 was resolved.",
+      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.Tasks 213.0.20211222.100105 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 12.0.3 was resolved.",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net5.0"
@@ -16252,7 +16327,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: JetBrains.Platform.Interop.CommandLine 213.0.20211221.144426 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 11.0.2 was resolved.",
+      "message": "Detected package version outside of dependency constraint: JetBrains.Platform.Interop.CommandLine 213.0.20211221.144426 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 12.0.3 was resolved.",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net5.0"
@@ -16262,7 +16337,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: JetBrains.Platform.UIInteractive.Shell 213.0.20211221.144426 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 11.0.2 was resolved.",
+      "message": "Detected package version outside of dependency constraint: JetBrains.Platform.UIInteractive.Shell 213.0.20211221.144426 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 12.0.3 was resolved.",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net5.0"
@@ -16282,7 +16357,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: JetBrains.Platform.VisualStudio.SinceVs10 213.0.20211221.144426 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 11.0.2 was resolved.",
+      "message": "Detected package version outside of dependency constraint: JetBrains.Platform.VisualStudio.SinceVs10 213.0.20211221.144426 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 12.0.3 was resolved.",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net5.0"
@@ -16292,7 +16367,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.VisualStudio.Debugger 213.0.20211222.100105 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 11.0.2 was resolved.",
+      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.VisualStudio.Debugger 213.0.20211222.100105 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 12.0.3 was resolved.",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net5.0"
@@ -16312,7 +16387,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: JetBrains.Platform.Core.Shell 213.0.20211221.135006 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 11.0.2 was resolved.",
+      "message": "Detected package version outside of dependency constraint: JetBrains.Platform.Core.Shell 213.0.20211221.135006 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 12.0.3 was resolved.",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net5.0"
@@ -16332,7 +16407,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.Web.Core 213.0.20211222.100105 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 11.0.2 was resolved.",
+      "message": "Detected package version outside of dependency constraint: JetBrains.Psi.Features.Web.Core 213.0.20211222.100105 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 12.0.3 was resolved.",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net5.0"
@@ -16352,7 +16427,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: JetBrains.Platform.Core.IisExpress 213.0.20211221.144426 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 11.0.2 was resolved.",
+      "message": "Detected package version outside of dependency constraint: JetBrains.Platform.Core.IisExpress 213.0.20211221.144426 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 12.0.3 was resolved.",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net5.0"
@@ -16362,7 +16437,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: JetBrains.Platform.VisualStudio.Core 213.0.20211221.144426 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 11.0.2 was resolved.",
+      "message": "Detected package version outside of dependency constraint: JetBrains.Platform.VisualStudio.Core 213.0.20211221.144426 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 12.0.3 was resolved.",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net5.0"
@@ -16372,7 +16447,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: JetBrains.Platform.VisualStudio.SinceVs15 213.0.20211221.144426 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 11.0.2 was resolved.",
+      "message": "Detected package version outside of dependency constraint: JetBrains.Platform.VisualStudio.SinceVs15 213.0.20211221.144426 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 12.0.3 was resolved.",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net5.0"
@@ -16382,7 +16457,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: JetBrains.Platform.Installer 213.0.20211221.144426 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 11.0.2 was resolved.",
+      "message": "Detected package version outside of dependency constraint: JetBrains.Platform.Installer 213.0.20211221.144426 requires Newtonsoft.Json (= 9.0.1) but version Newtonsoft.Json 12.0.3 was resolved.",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net5.0"

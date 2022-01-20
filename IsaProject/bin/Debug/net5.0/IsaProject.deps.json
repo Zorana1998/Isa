@@ -44,7 +44,8 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "5.0.2",
           "Moment.js": "2.29.1",
           "NUnit": "3.13.2",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
+          "SeleniumExtras.WaitHelpers": "1.0.2",
           "SendGrid": "9.25.2",
           "SendGrid.CSharp.HTTP.Client": "3.4.10",
           "Swashbuckle": "5.6.0",
@@ -794,7 +795,7 @@
         "dependencies": {
           "JetBrains.NuGet.Configurations": "6.0.20211125.80",
           "JetBrains.NuGet.Versioning": "6.0.20211125.80",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "System.Security.Cryptography.Cng": "5.0.0",
           "System.Security.Cryptography.Pkcs": "5.0.0"
         },
@@ -871,7 +872,7 @@
           "JetBrains.RdFramework": "2021.3.4",
           "JetBrains.RdFramework.Reflection": "2021.3.4",
           "JetBrains.SharpZipLib.Stripped": "1.3.2.10",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "Sprache.JetBrains": "2.1.0",
           "System.Collections.Immutable": "5.0.0",
           "Wave": "213.0.0"
@@ -885,7 +886,7 @@
           "JetBrains.Platform.RdProtocol": "213.0.20211221.144426",
           "JetBrains.RdFramework": "2021.3.4",
           "JetBrains.RdFramework.Reflection": "2021.3.4",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "Wave": "213.0.0"
         }
       },
@@ -933,7 +934,7 @@
           "Microsoft.CSharp": "4.7.0",
           "Microsoft.Extensions.DependencyModel": "3.0.0",
           "Microsoft.Web.Xdt": "3.0.0",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "Sprache.JetBrains": "2.1.0",
           "System.Buffers": "4.5.1",
           "System.Collections.Immutable": "5.0.0",
@@ -990,7 +991,7 @@
           "JetBrains.Platform.UIInteractive.Shell": "213.0.20211221.144426",
           "JetBrains.SharpZipLib.Stripped": "1.3.2.10",
           "Microsoft.Web.Xdt": "3.0.0",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "System.Collections.Immutable": "5.0.0",
           "System.ValueTuple": "4.5.0",
           "Wave": "213.0.0"
@@ -1001,7 +1002,7 @@
           "JetBrains.Annotations": "2021.3.0",
           "JetBrains.Lifetimes": "2021.3.4",
           "JetBrains.Platform.Core.Shell": "213.0.20211221.135006",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "Wave": "213.0.0"
         }
       },
@@ -1149,7 +1150,7 @@
           "JetBrains.System.Windows.Interactivity": "3.0.40218.1",
           "JetBrains.Windows7APICodePack.Stripped": "1.1.20210120.1",
           "Microsoft.Web.Xdt": "3.0.0",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "System.Collections.Immutable": "5.0.0",
           "Wave": "213.0.0",
           "xmlrpcnet": "2.5.0"
@@ -1188,7 +1189,7 @@
           "JetBrains.Platform.VisualStudio.Util": "213.0.20211221.144426",
           "JetBrains.RdFramework": "2021.3.4",
           "JetBrains.RdFramework.Reflection": "2021.3.4",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "System.Collections.Immutable": "5.0.0",
           "System.Memory": "4.5.4",
           "Wave": "213.0.0"
@@ -1300,7 +1301,7 @@
           "JetBrains.RdFramework.Reflection": "2021.3.4",
           "Microsoft.CSharp": "4.7.0",
           "Microsoft.Web.Xdt": "3.0.0",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "System.Collections.Immutable": "5.0.0",
           "Wave": "213.0.0"
         }
@@ -1362,7 +1363,7 @@
           "JetBrains.Platform.VisualStudio.SinceVs14": "213.0.20211221.144426",
           "JetBrains.RdFramework": "2021.3.4",
           "JetBrains.RdFramework.Reflection": "2021.3.4",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "System.Collections.Immutable": "5.0.0",
           "Wave": "213.0.0"
         }
@@ -1508,7 +1509,7 @@
           "JetBrains.RdFramework.Reflection": "2021.3.4",
           "JetBrains.SharpZipLib.Stripped": "1.3.2.10",
           "NVelocity": "1.0.3",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "System.Collections.Immutable": "5.0.0",
           "Wave": "213.0.0",
           "YamlDotNet.Signed": "5.2.1"
@@ -1528,7 +1529,7 @@
           "JetBrains.RdFramework.Reflection": "2021.3.4",
           "JetBrains.ReSharper.TestRunner.Abstractions": "2.6.2",
           "JetBrains.SharpZipLib.Stripped": "1.3.2.10",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "System.Collections.Immutable": "5.0.0",
           "Wave": "213.0.0",
           "YamlDotNet.Signed": "5.2.1"
@@ -1545,7 +1546,7 @@
           "JetBrains.Psi.Features.UIInteractive.Core": "213.0.20211222.100105",
           "JetBrains.Psi.Features.src": "213.0.20211222.100105",
           "JetBrains.SharpZipLib.Stripped": "1.3.2.10",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "Wave": "213.0.0"
         }
       },
@@ -1556,7 +1557,7 @@
           "JetBrains.Psi.Features.src": "213.0.20211222.100105",
           "JetBrains.RdFramework": "2021.3.4",
           "JetBrains.RdFramework.Reflection": "2021.3.4",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "Wave": "213.0.0"
         }
       },
@@ -1582,7 +1583,7 @@
           "JetBrains.Psi.Features.Core": "213.0.20211222.100105",
           "JetBrains.RdFramework": "2021.3.4",
           "JetBrains.RdFramework.Reflection": "2021.3.4",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "System.Collections.Immutable": "5.0.0",
           "Wave": "213.0.0"
         }
@@ -1598,7 +1599,7 @@
           "JetBrains.Platform.Core.Shell": "213.0.20211221.135006",
           "JetBrains.SharpZipLib.Stripped": "1.3.2.10",
           "NVelocity": "1.0.3",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "System.Collections.Immutable": "5.0.0",
           "Wave": "213.0.0"
         }
@@ -1746,7 +1747,7 @@
           "JetBrains.ReSharper.TestRunner.Adapters.VsTest.Tasks": "2.6.2.1",
           "JetBrains.ReSharper.TestRunner.Adapters.XUnit": "2.6.2.29",
           "JetBrains.ReSharper.TestRunner.Adapters.XUnit.Tasks": "2.6.2.8",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "System.Collections.Immutable": "5.0.0",
           "System.Runtime.InteropServices.RuntimeInformation": "4.3.0",
           "Wave": "213.0.0",
@@ -1777,7 +1778,7 @@
           "JetBrains.Psi.Features.VisualStudio.SinceVs10": "213.0.20211222.100105",
           "JetBrains.RdFramework": "2021.3.4",
           "JetBrains.RdFramework.Reflection": "2021.3.4",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "Wave": "213.0.0"
         }
       },
@@ -1855,7 +1856,7 @@
           "JetBrains.Psi.Features.VisualStudio._Core": "213.0.20211222.100105",
           "JetBrains.RdFramework": "2021.3.4",
           "JetBrains.RdFramework.Reflection": "2021.3.4",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "Wave": "213.0.0"
         }
       },
@@ -2034,7 +2035,7 @@
           "Microsoft.Owin.Hosting": "3.0.1",
           "Microsoft.Owin.StaticFiles": "3.0.1",
           "NVelocity": "1.0.3",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "Owin": "1.0.0",
           "System.Collections.Immutable": "5.0.0",
           "Wave": "213.0.0",
@@ -2326,7 +2327,7 @@
       "Microsoft.AspNet.WebApi.Client/4.0.20710": {
         "dependencies": {
           "Microsoft.Net.Http": "2.0.20710",
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "12.0.3"
         },
         "runtime": {
           "lib/net40/System.Net.Http.Formatting.dll": {
@@ -3001,7 +3002,7 @@
       "Microsoft.IdentityModel.JsonWebTokens/5.6.0": {
         "dependencies": {
           "Microsoft.IdentityModel.Tokens": "5.6.0",
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "12.0.3"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.IdentityModel.JsonWebTokens.dll": {
@@ -3042,7 +3043,7 @@
       "Microsoft.IdentityModel.Protocols.OpenIdConnect/5.6.0": {
         "dependencies": {
           "Microsoft.IdentityModel.Protocols": "5.6.0",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "System.IdentityModel.Tokens.Jwt": "5.6.0"
         },
         "runtime": {
@@ -3058,7 +3059,7 @@
       "Microsoft.IdentityModel.Tokens/5.6.0": {
         "dependencies": {
           "Microsoft.IdentityModel.Logging": "5.6.0",
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "System.Security.Cryptography.Cng": "5.0.0"
         },
         "runtime": {
@@ -3154,7 +3155,7 @@
       },
       "Microsoft.VisualStudio.Web.CodeGeneration.Contracts/5.0.2": {
         "dependencies": {
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "System.Collections.Immutable": "5.0.0"
         },
         "runtime": {
@@ -3171,7 +3172,7 @@
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "5.0.2",
           "Microsoft.VisualStudio.Web.CodeGeneration.Templating": "5.0.2",
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "12.0.3"
         },
         "runtime": {
           "lib/net5.0/Microsoft.VisualStudio.Web.CodeGeneration.Core.dll": {
@@ -3245,7 +3246,7 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "3.8.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Contracts": "5.0.2",
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "12.0.3"
         },
         "runtime": {
           "lib/net5.0/Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll": {
@@ -3307,11 +3308,11 @@
           "Microsoft.NETCore.Platforms": "5.0.0"
         }
       },
-      "Newtonsoft.Json/11.0.2": {
+      "Newtonsoft.Json/12.0.3": {
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
-            "assemblyVersion": "11.0.0.0",
-            "fileVersion": "11.0.2.21924"
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.3.23909"
           }
         },
         "compile": {
@@ -3362,9 +3363,37 @@
           "Microsoft.NETCore.Targets": "1.1.3"
         }
       },
+      "Selenium.WebDriver/4.0.0-beta2": {
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3"
+        },
+        "runtime": {
+          "lib/net5.0/WebDriver.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/net5.0/WebDriver.dll": {}
+        }
+      },
+      "SeleniumExtras.WaitHelpers/1.0.2": {
+        "dependencies": {
+          "Selenium.WebDriver": "4.0.0-beta2"
+        },
+        "runtime": {
+          "lib/netstandard2.1/SeleniumExtras.WaitHelpers.dll": {
+            "assemblyVersion": "1.0.2.0",
+            "fileVersion": "1.0.2.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.1/SeleniumExtras.WaitHelpers.dll": {}
+        }
+      },
       "SendGrid/9.25.2": {
         "dependencies": {
-          "Newtonsoft.Json": "11.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "starkbank-ecdsa": "1.3.3"
         },
         "runtime": {
@@ -3464,7 +3493,7 @@
       "Swashbuckle.Core/5.6.0": {
         "dependencies": {
           "Microsoft.AspNet.WebApi.Core": "4.0.20710",
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "12.0.3"
         },
         "runtime": {
           "lib/net40/Swashbuckle.Core.dll": {
@@ -3777,7 +3806,7 @@
         "dependencies": {
           "Microsoft.IdentityModel.JsonWebTokens": "5.6.0",
           "Microsoft.IdentityModel.Tokens": "5.6.0",
-          "Newtonsoft.Json": "11.0.2"
+          "Newtonsoft.Json": "12.0.3"
         },
         "runtime": {
           "lib/netstandard2.0/System.IdentityModel.Tokens.Jwt.dll": {
@@ -8684,12 +8713,12 @@
       "path": "netstandard.library/2.0.0",
       "hashPath": "netstandard.library.2.0.0.nupkg.sha512"
     },
-    "Newtonsoft.Json/11.0.2": {
+    "Newtonsoft.Json/12.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ==",
-      "path": "newtonsoft.json/11.0.2",
-      "hashPath": "newtonsoft.json.11.0.2.nupkg.sha512"
+      "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
+      "path": "newtonsoft.json/12.0.3",
+      "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
     },
     "NHunspell/1.2.5554.16953": {
       "type": "package",
@@ -8725,6 +8754,20 @@
       "sha512": "sha512-c/qWt2LieNZIj1jGnVNsE2Kl23Ya2aSTBuXMD6V7k9KWr6l16Tqdwq+hJScEpWER9753NWC8h96PaVNY5Ld7Jw==",
       "path": "runtime.native.system/4.3.0",
       "hashPath": "runtime.native.system.4.3.0.nupkg.sha512"
+    },
+    "Selenium.WebDriver/4.0.0-beta2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-D6R8WrTggalRviNue130FL3XA7GhBw0xckC8Y9jxLlhc5mqccX3JtUnPVqGpGrl3yq7vynXSLqEMjNEWEX9wxw==",
+      "path": "selenium.webdriver/4.0.0-beta2",
+      "hashPath": "selenium.webdriver.4.0.0-beta2.nupkg.sha512"
+    },
+    "SeleniumExtras.WaitHelpers/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-de7m30nkZZLkfCncYBdluUpM27AR/Vkk4kiA4HRQbV+fZI3ps4qGIeJCuj8TAMXdMfQik5Rno8xPnFBIod+ebg==",
+      "path": "seleniumextras.waithelpers/1.0.2",
+      "hashPath": "seleniumextras.waithelpers.1.0.2.nupkg.sha512"
     },
     "SendGrid/9.25.2": {
       "type": "package",

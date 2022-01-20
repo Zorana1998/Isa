@@ -1,29 +1,35 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ZoranaStamenković\\Source\\Repos\\Zorana1998\\Isa\\NUnitTest\\NUnitTest.csproj": {}
+    "C:\\Users\\Zorana Stamenković\\Desktop\\isaa\\Isa\\NUnitTest\\NUnitTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ZoranaStamenković\\Source\\Repos\\Zorana1998\\Isa\\IsaProject\\IsaProject.csproj": {
+    "C:\\Users\\Zorana Stamenković\\Desktop\\isaa\\Isa\\IsaProject\\IsaProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ZoranaStamenković\\Source\\Repos\\Zorana1998\\Isa\\IsaProject\\IsaProject.csproj",
+        "projectUniqueName": "C:\\Users\\Zorana Stamenković\\Desktop\\isaa\\Isa\\IsaProject\\IsaProject.csproj",
         "projectName": "IsaProject",
-        "projectPath": "C:\\Users\\ZoranaStamenković\\Source\\Repos\\Zorana1998\\Isa\\IsaProject\\IsaProject.csproj",
-        "packagesPath": "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ZoranaStamenković\\Source\\Repos\\Zorana1998\\Isa\\IsaProject\\obj\\",
+        "projectPath": "C:\\Users\\Zorana Stamenković\\Desktop\\isaa\\Isa\\IsaProject\\IsaProject.csproj",
+        "packagesPath": "C:\\Users\\Zorana Stamenković\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Zorana Stamenković\\Desktop\\isaa\\Isa\\IsaProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\ZoranaStamenković\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Zorana Stamenković\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
@@ -90,7 +96,11 @@
             },
             "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[11.0.2, )"
+              "version": "[12.0.3, )"
+            },
+            "SeleniumExtras.WaitHelpers": {
+              "target": "Package",
+              "version": "[1.0.2, )"
             },
             "SendGrid": {
               "target": "Package",
@@ -135,6 +145,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[5.0.13, 5.0.13]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -147,32 +163,38 @@
         }
       }
     },
-    "C:\\Users\\ZoranaStamenković\\Source\\Repos\\Zorana1998\\Isa\\NUnitTest\\NUnitTest.csproj": {
+    "C:\\Users\\Zorana Stamenković\\Desktop\\isaa\\Isa\\NUnitTest\\NUnitTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ZoranaStamenković\\Source\\Repos\\Zorana1998\\Isa\\NUnitTest\\NUnitTest.csproj",
+        "projectUniqueName": "C:\\Users\\Zorana Stamenković\\Desktop\\isaa\\Isa\\NUnitTest\\NUnitTest.csproj",
         "projectName": "NUnitTest",
-        "projectPath": "C:\\Users\\ZoranaStamenković\\Source\\Repos\\Zorana1998\\Isa\\NUnitTest\\NUnitTest.csproj",
-        "packagesPath": "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ZoranaStamenković\\Source\\Repos\\Zorana1998\\Isa\\NUnitTest\\obj\\",
+        "projectPath": "C:\\Users\\Zorana Stamenković\\Desktop\\isaa\\Isa\\NUnitTest\\NUnitTest.csproj",
+        "packagesPath": "C:\\Users\\Zorana Stamenković\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Zorana Stamenković\\Desktop\\isaa\\Isa\\NUnitTest\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\ZoranaStamenković\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Zorana Stamenković\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\ZoranaStamenković\\Source\\Repos\\Zorana1998\\Isa\\IsaProject\\IsaProject.csproj": {
-                "projectPath": "C:\\Users\\ZoranaStamenković\\Source\\Repos\\Zorana1998\\Isa\\IsaProject\\IsaProject.csproj"
+              "C:\\Users\\Zorana Stamenković\\Desktop\\isaa\\Isa\\IsaProject\\IsaProject.csproj": {
+                "projectPath": "C:\\Users\\Zorana Stamenković\\Desktop\\isaa\\Isa\\IsaProject\\IsaProject.csproj"
               }
             }
           }
@@ -198,6 +220,14 @@
             "NUnit3TestAdapter": {
               "target": "Package",
               "version": "[3.17.0, )"
+            },
+            "Selenium.Support": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "Selenium.WebDriver": {
+              "target": "Package",
+              "version": "[4.1.0, )"
             },
             "coverlet.collector": {
               "target": "Package",

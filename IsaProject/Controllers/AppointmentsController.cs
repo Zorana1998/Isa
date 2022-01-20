@@ -83,6 +83,7 @@ namespace IsaProject.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
             appointment.OwnerID = user.Id;
+            appointment.NumberOfReservations = 0;
             _context.Add(appointment);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(GetMyAppointmentOwner));
@@ -178,7 +179,6 @@ namespace IsaProject.Controllers
                 return NotFound();
             }
 
-
             var user = await _userManager.GetUserAsync(User);
 
             var appointmentDTO = await _context.cottageAppointmentDTOs
@@ -186,6 +186,22 @@ namespace IsaProject.Controllers
 
             var appointment = await _context.Appointments
                 .FirstOrDefaultAsync(m => m.Id == appointmentDTO.AppointmentId);
+
+            try
+            {
+                appointment.NumberOfReservations++;
+                _context.Appointments.Update(appointment);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                
+                    throw;
+                
+            }
+
+
+            
 
             ScheduledAppointment scheduledAppointment = new ScheduledAppointment();
             scheduledAppointment.UserID = user.Id;
