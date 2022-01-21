@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IsaProject.Migrations
 {
-    public partial class changeEverythinf : Migration
+    public partial class changeMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,7 +18,8 @@ namespace IsaProject.Migrations
                     UserApprovalReceivedID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsAnswered = table.Column<bool>(type: "bit", nullable: false),
-                    ContentAnswer = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ContentAnswer = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -52,6 +53,8 @@ namespace IsaProject.Migrations
                     Penalty = table.Column<int>(type: "int", nullable: false),
                     Explanation = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ReasonForReject = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AverageScore = table.Column<float>(type: "real", nullable: false),
+                    isFirstlogin = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -109,6 +112,8 @@ namespace IsaProject.Migrations
                     PromotionalDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AverageScore = table.Column<double>(type: "float", nullable: false),
                     Rules = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OwnerID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsLogicalDelete = table.Column<bool>(type: "bit", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InstructorDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FishingEquipment = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -133,6 +138,21 @@ namespace IsaProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProfileDelete",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsApproved = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProfileDelete", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "scheduledAppointments",
                 columns: table => new
                 {
@@ -144,7 +164,8 @@ namespace IsaProject.Migrations
                     Duration = table.Column<int>(type: "int", nullable: false),
                     NumberOfPeople = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsCome = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -272,6 +293,30 @@ namespace IsaProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Rating",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    EntityID = table.Column<long>(type: "bigint", nullable: false),
+                    EmployeeID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Score = table.Column<int>(type: "int", nullable: false),
+                    IsApproved = table.Column<bool>(type: "bit", nullable: false),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rating", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Rating_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Appointments",
                 columns: table => new
                 {
@@ -283,6 +328,8 @@ namespace IsaProject.Migrations
                     DurationDays = table.Column<int>(type: "int", nullable: false),
                     MaxNumberOfPeople = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
+                    NumberOfReservations = table.Column<int>(type: "int", nullable: false),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NewPrice = table.Column<double>(type: "float", nullable: true)
                 },
@@ -496,6 +543,11 @@ namespace IsaProject.Migrations
                 column: "ShipId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Rating_UserId",
+                table: "Rating",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Rooms_CottageID",
                 table: "Rooms",
                 column: "CottageID");
@@ -534,6 +586,12 @@ namespace IsaProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "NavigationEquipment");
+
+            migrationBuilder.DropTable(
+                name: "ProfileDelete");
+
+            migrationBuilder.DropTable(
+                name: "Rating");
 
             migrationBuilder.DropTable(
                 name: "Rooms");

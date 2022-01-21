@@ -10,15 +10,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IsaProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220114151115_deleteProfileChange")]
-    partial class deleteProfileChange
+    [Migration("20220121122447_changeMigration")]
+    partial class changeMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.12")
+                .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Isa.Models.Rating", b =>
@@ -36,6 +36,11 @@ namespace IsaProject.Migrations
 
                     b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
 
                     b.Property<int>("Score")
                         .HasColumnType("int");
@@ -118,6 +123,11 @@ namespace IsaProject.Migrations
                     b.Property<bool>("IsAnswered")
                         .HasColumnType("bit");
 
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
                     b.Property<string>("UserApprovalReceivedID")
                         .HasColumnType("nvarchar(max)");
 
@@ -149,11 +159,19 @@ namespace IsaProject.Migrations
                     b.Property<int>("MaxNumberOfPeople")
                         .HasColumnType("int");
 
+                    b.Property<int>("NumberOfReservations")
+                        .HasColumnType("int");
+
                     b.Property<string>("OwnerID")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
 
                     b.Property<DateTime>("Start")
                         .HasColumnType("datetime2");
@@ -226,8 +244,14 @@ namespace IsaProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsLogicalDelete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OwnerID")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PromotionalDescription")
@@ -491,6 +515,9 @@ namespace IsaProject.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("isFirstlogin")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

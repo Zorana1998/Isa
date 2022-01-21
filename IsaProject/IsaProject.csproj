@@ -18,7 +18,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.12" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.12" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.12">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.13">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -37,6 +37,11 @@
 
   <ItemGroup>
     <Folder Include="Models\Entities\Users\" />
+    <Folder Include="Views\Image\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\ship-cabin-cottage-vranov-nad-dyji-p151121-b6.jpg" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>

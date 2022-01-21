@@ -1,33 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Zorana Stamenković\\Desktop\\isaa\\Isa\\IsaProject\\IsaProject.csproj": {}
+    "C:\\Users\\ZoranaStamenković\\Desktop\\New folder (2)\\IsaProject\\IsaProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Zorana Stamenković\\Desktop\\isaa\\Isa\\IsaProject\\IsaProject.csproj": {
+    "C:\\Users\\ZoranaStamenković\\Desktop\\New folder (2)\\IsaProject\\IsaProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Zorana Stamenković\\Desktop\\isaa\\Isa\\IsaProject\\IsaProject.csproj",
+        "projectUniqueName": "C:\\Users\\ZoranaStamenković\\Desktop\\New folder (2)\\IsaProject\\IsaProject.csproj",
         "projectName": "IsaProject",
-        "projectPath": "C:\\Users\\Zorana Stamenković\\Desktop\\isaa\\Isa\\IsaProject\\IsaProject.csproj",
-        "packagesPath": "C:\\Users\\Zorana Stamenković\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Zorana Stamenković\\Desktop\\isaa\\Isa\\IsaProject\\obj\\",
+        "projectPath": "C:\\Users\\ZoranaStamenković\\Desktop\\New folder (2)\\IsaProject\\IsaProject.csproj",
+        "packagesPath": "C:\\Users\\ZoranaStamenković\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ZoranaStamenković\\Desktop\\New folder (2)\\IsaProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Zorana Stamenković\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ZoranaStamenković\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -80,7 +77,7 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.12, )"
+              "version": "[5.0.13, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
@@ -145,12 +142,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[5.0.13, 5.0.13]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"

@@ -154,14 +154,14 @@ namespace IsaProject.Controllers
             return _context.Entities.Any(e => e.Id == id);
         }
 
-        public IActionResult GetMyEntities()
+        public async Task<IActionResult> GetMyEntities()
         {
 
-            var user = _userManager.GetUserAsync(User);
+            var user = await _userManager.GetUserAsync(User);
 
-            List<Entity> entities= (from u in _context.Entities
-                                where u.CottageOwnerID == (user.Id).ToString()
-                                select u).ToList();
+            List<Entity> entities= await (from u in _context.Entities
+                                where u.OwnerID == (user.Id).ToString()
+                                select u).ToListAsync();
 
             return View(entities);
         }

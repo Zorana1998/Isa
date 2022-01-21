@@ -66,9 +66,12 @@ namespace IsaProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                AppUser user = await _userManager.GetUserAsync(User);
+                shipBooking.OwnerID = user.Id;
+                shipBooking.IsLogicalDelete = false;
                 _context.Add(shipBooking);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(GetMyShips));
             }
             return View(shipBooking);
         }
@@ -101,27 +104,14 @@ namespace IsaProject.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(shipBooking);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ShipBookingExists(shipBooking.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(shipBooking);
+            var user = await _userManager.GetUserAsync(User);
+            shipBooking.OwnerID = user.Id;
+
+            _context.Update(shipBooking);
+            await _context.SaveChangesAsync();
+
+
+            return RedirectToAction(nameof(GetMyShips));
         }
 
         // GET: ShipBookings/Delete/5
@@ -147,10 +137,11 @@ namespace IsaProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            var shipBooking = await _context.ShipBooking.FindAsync(id);
-            _context.ShipBooking.Remove(shipBooking);
+            var ship = await _context.ShipBooking.FindAsync(id);
+            ship.IsLogicalDelete = true;
+            _context.ShipBooking.Update(ship);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(GetMyShips));
         }
 
         private bool ShipBookingExists(long id)
@@ -168,6 +159,16 @@ namespace IsaProject.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
             return View(await _shipService.GetAvailableShips(dateTime, numberOfGuest, numberOfDays, averageScore,user.Id));
+        }
+
+        public async Task<IActionResult> GetMyShips()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            
+            List<ShipBooking> shipBookings = (from cot in _context.ShipBooking
+                                                    where cot.IsLogicalDelete == false && cot.OwnerID == user.Id
+                                                    select cot).ToList();
+            return View(shipBookings);
         }
     }
 }

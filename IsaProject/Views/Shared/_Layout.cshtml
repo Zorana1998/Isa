@@ -25,6 +25,21 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                      <ul class="navbar-nav mr-auto">
 
+                        @if (!SignInManager.IsSignedIn(User))
+                        {
+                    <li class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Entities
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Cottages" asp-action="Index">Cottages</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Adventures" asp-action="Index">Adventures</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="ShipBookings" asp-action="Index">Ships</a>
+                            </div>
+                    </li>
+                        }
+
+
                         @if (SignInManager.IsSignedIn(User))
                         {
                     <li class="dropdown">
@@ -37,6 +52,7 @@
                             </div>
                     </li>
                         }
+
                         
                         
                         @if ((await AuthorizationService.AuthorizeAsync(User, null, "UserPolicy")).Succeeded)
@@ -116,9 +132,24 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Entities
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            @if ((await AuthorizationService.AuthorizeAsync(User, null, "CottageOwnerPolicy")).Succeeded)
+                            {
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Cottages" asp-action="GetMyCottages">My cottages</a>
-                            </div>
+                                </div>
+                            }
+                            @if ((await AuthorizationService.AuthorizeAsync(User, null, "ShipOwnerPolicy")).Succeeded)
+                            {
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="ShipBookings" asp-action="GetMyShips">My ships</a>
+                                </div>
+                            }
+                            @if ((await AuthorizationService.AuthorizeAsync(User, null, "FishingInstructorPolicy")).Succeeded)
+                            {
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Adventures" asp-action="GetMyAdventures">My adventures</a>
+                                </div>
+                            }
                             </li>
                             <li class="dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -126,11 +157,13 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="GetMyAppointmentOwner">Appointments</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="GetMyHistoryReservationOwner">Histroy appointments</a>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="FastReservations" asp-action="GetMyFastReservationOwner">Fast reservations</a>
                             </div>
                             </li>
                         }
-                    </ul>
+                    
+                </ul>
                     <partial name="_LoginPartial" />
                 </div>
             </div>

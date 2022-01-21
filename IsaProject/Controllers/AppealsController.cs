@@ -114,10 +114,10 @@ namespace IsaProject.Controllers
         public async Task<IActionResult> Edit(long id, [Bind("ContentAnswer")] Appeal appeal)
         {
 
-            if (id != appeal.Id)
+            /*if (id != appeal.Id)
             {
                 return NotFound();
-            }
+            }*/
 
             Appeal appealUpdate = _context.Appeal.Find(id);
             appealUpdate.IsAnswered = true;
@@ -268,9 +268,11 @@ namespace IsaProject.Controllers
             return View(appeals);
         }
 
-
-
         
+
+
+
+
 
 
 

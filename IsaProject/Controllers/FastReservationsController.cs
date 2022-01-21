@@ -67,7 +67,7 @@ namespace IsaProject.Controllers
             var user = await _userManager.GetUserAsync(User);
 
             var entities = (from u in _context.Entities
-                                     where u.CottageOwnerID == user.Id && u.IsLogicalDelete == false
+                                     where u.OwnerID == user.Id && u.IsLogicalDelete == false
                                      select u).ToList();
             ViewData["GetMyEntities"] = entities;
             return View();

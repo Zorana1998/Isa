@@ -4,22 +4,54 @@ using IsaProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IsaProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220113151629_changeEverythinf")]
-    partial class changeEverythinf
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.12")
+                .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Isa.Models.Rating", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("EmployeeID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("EntityID")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Rating");
+                });
 
             modelBuilder.Entity("IsaProject.Models.DTO.AppointmentDTO", b =>
                 {
@@ -89,6 +121,11 @@ namespace IsaProject.Migrations
                     b.Property<bool>("IsAnswered")
                         .HasColumnType("bit");
 
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
                     b.Property<string>("UserApprovalReceivedID")
                         .HasColumnType("nvarchar(max)");
 
@@ -120,11 +157,19 @@ namespace IsaProject.Migrations
                     b.Property<int>("MaxNumberOfPeople")
                         .HasColumnType("int");
 
+                    b.Property<int>("NumberOfReservations")
+                        .HasColumnType("int");
+
                     b.Property<string>("OwnerID")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
 
                     b.Property<DateTime>("Start")
                         .HasColumnType("datetime2");
@@ -197,8 +242,14 @@ namespace IsaProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsLogicalDelete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OwnerID")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PromotionalDescription")
@@ -213,6 +264,28 @@ namespace IsaProject.Migrations
                     b.ToTable("Entities");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Entity");
+                });
+
+            modelBuilder.Entity("IsaProject.Models.Entities.ProfileDelete", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProfileDelete");
                 });
 
             modelBuilder.Entity("IsaProject.Models.Entities.Room", b =>
@@ -342,6 +415,9 @@ namespace IsaProject.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsCome")
+                        .HasColumnType("bit");
+
                     b.Property<int>("NumberOfPeople")
                         .HasColumnType("int");
 
@@ -369,6 +445,9 @@ namespace IsaProject.Migrations
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("AverageScore")
+                        .HasColumnType("real");
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
@@ -434,6 +513,9 @@ namespace IsaProject.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("isFirstlogin")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -677,6 +759,15 @@ namespace IsaProject.Migrations
                         .HasColumnName("Ship_Type");
 
                     b.HasDiscriminator().HasValue("Ship");
+                });
+
+            modelBuilder.Entity("Isa.Models.Rating", b =>
+                {
+                    b.HasOne("IsaProject.Models.Users.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("IsaProject.Models.Entities.Appointment", b =>

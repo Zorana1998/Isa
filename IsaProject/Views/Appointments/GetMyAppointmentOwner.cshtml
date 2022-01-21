@@ -44,9 +44,6 @@
             <th class="th-sm" data-field="price" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-            @if (Model.Count()!=0){
-            <th></th>
-            }
         </tr>
     </thead>
     <tbody>
@@ -66,9 +63,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                <a asp-action="AddTags" asp-route-id="@item.Id">Add Tags</a>
             </td>
 
         </tr>

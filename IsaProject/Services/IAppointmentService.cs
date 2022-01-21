@@ -14,7 +14,7 @@ namespace IsaProject.Services
         public Task<List<ScheduledAppointment>> GetMyHistoryReservationCottages(string id);
         public Task<List<ScheduledAppointment>> GetMyHistoryReservationAdventures(string id);
         public Task<List<ScheduledAppointment>> GetMyHistoryReservationShips(string id);
-
+        public Task<List<ScheduledAppointment>> GetMyHistoryReservationOwner(string id);
         public Task<List<Appointment>> GetMyAppointmentOwner(string id);
         public Appointment GetById(long id);
     }

@@ -70,9 +70,12 @@ namespace IsaProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                AppUser user = await _userManager.GetUserAsync(User);
+                adventure.OwnerID = user.Id;
+                adventure.IsLogicalDelete = false;
                 _context.Add(adventure);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(GetMyAdventures));
             }
             return View(adventure);
         }
@@ -105,27 +108,14 @@ namespace IsaProject.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(adventure);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AdventureExists(adventure.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(adventure);
+            var user = await _userManager.GetUserAsync(User);
+            adventure.OwnerID = user.Id;
+
+            _context.Update(adventure);
+            await _context.SaveChangesAsync();
+
+
+            return RedirectToAction(nameof(GetMyAdventures));
         }
 
         // GET: Adventures/Delete/5
@@ -151,10 +141,11 @@ namespace IsaProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            var adventure = await _context.Adventure.FindAsync(id);
-            _context.Adventure.Remove(adventure);
+            var ship = await _context.ShipBooking.FindAsync(id);
+            ship.IsLogicalDelete = true;
+            _context.ShipBooking.Update(ship);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(GetMyAdventures));
         }
 
         private bool AdventureExists(long id)
@@ -174,7 +165,17 @@ namespace IsaProject.Controllers
             var user = await _userManager.GetUserAsync(User);
             return View(await _adventureService.GetAvailableAdventures(user.Id, dateTime, numberOfGuest, numberOfDays, averageScore));
         }
-        
+
+        public async Task<IActionResult> GetMyAdventures()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            List<Adventure> adventures = await (from cot in _context.Adventure
+                                                    where cot.IsLogicalDelete == false && cot.OwnerID == user.Id
+                                                    select cot).ToListAsync();
+            return View(adventures);
+        }
+
     }
 
         

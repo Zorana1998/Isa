@@ -68,7 +68,7 @@ namespace IsaProject.Controllers
             var user = await _userManager.GetUserAsync(User);
 
             List<Entity> entities = (from u in _context.Entities
-                                     where u.CottageOwnerID == user.Id && u.IsLogicalDelete == false
+                                     where u.OwnerID == user.Id && u.IsLogicalDelete == false
                                      select u).ToList();
             ViewData["GetMyEntities"] = entities;
             return View();
@@ -84,9 +84,52 @@ namespace IsaProject.Controllers
             var user = await _userManager.GetUserAsync(User);
             appointment.OwnerID = user.Id;
             appointment.NumberOfReservations = 0;
-            _context.Add(appointment);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(GetMyAppointmentOwner));
+            List<Appointment> appointments = await(from app in _context.Appointments
+                                             where app.EntityID == appointment.EntityID
+                                             select app).ToListAsync();
+
+
+            int counter = 0;
+
+            foreach (Appointment appointmentDates in appointments)
+            {
+                        //stari u sredini
+                        if (appointmentDates.Start >= appointment.Start && appointmentDates.Start.AddDays(appointmentDates.DurationDays) <= appointment.Start.AddDays(appointment.DurationDays))
+                        {
+                            counter++;
+                        }
+
+                        //novi u sredini
+                        if (appointmentDates.Start <= appointment.Start && appointmentDates.Start.AddDays(appointmentDates.DurationDays) >= appointment.Start.AddDays(appointment.DurationDays))
+                        {
+                            counter++;
+                        }
+
+                        if (appointmentDates.Start <= appointment.Start && appointmentDates.Start.AddDays(appointmentDates.DurationDays) >= appointment.Start)
+                        {
+                            counter++;
+                        }
+
+                        if (appointmentDates.Start >= appointment.Start && appointmentDates.Start <= appointment.Start.AddDays(appointment.DurationDays))
+                        {
+                            counter++;
+                        }
+            }
+
+            if(counter == 0)
+            {
+                _context.Add(appointment);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(GetMyAppointmentOwner));
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            
+            
+            
             
         }
 
@@ -415,6 +458,15 @@ namespace IsaProject.Controllers
             var user = await _userManager.GetUserAsync(User);
 
             return View(await _appointmentService.GetMyAppointmentOwner(user.Id));
+        }
+
+        public async Task<IActionResult> GetMyHistoryReservationOwner()
+        {
+
+            var user = await _userManager.GetUserAsync(User);
+
+
+            return View(await _appointmentService.GetMyHistoryReservationOwner(user.Id));
         }
 
     }

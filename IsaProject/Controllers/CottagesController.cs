@@ -68,7 +68,7 @@ namespace IsaProject.Controllers
         public async Task<IActionResult> Create([Bind("Id,Name,Address,Country,City,PromotionalDescription,AverageScore,Rules")] Cottage cottage)
         {
             AppUser user =await _userManager.GetUserAsync(User);
-            cottage.CottageOwnerID = user.Id;
+            cottage.OwnerID = user.Id;
             cottage.IsLogicalDelete = false;
             _context.Add(cottage);
             await _context.SaveChangesAsync();
@@ -103,18 +103,30 @@ namespace IsaProject.Controllers
                 return NotFound();
             }
 
-            var user = await _userManager.GetUserAsync(User);
-            cottage.CottageOwnerID = user.Id;
+            int numberOfApp = (from app in _context.scheduledAppointments
+                                                    where app.EntityID == cottage.Id && app.IsActive == true && app.Start >= DateTime.Now
+                                                    select app).Count();
 
-            _context.Update(cottage);
-            await _context.SaveChangesAsync();
+            if(numberOfApp == 0) { 
+
+                var user = await _userManager.GetUserAsync(User);
+                cottage.OwnerID = user.Id;
+
+                _context.Update(cottage);
+                await _context.SaveChangesAsync();
                 
                 
-            return RedirectToAction(nameof(GetMyCottages));
-        }
+                return RedirectToAction(nameof(GetMyCottages));
+            }
+            else
+            {
+                return View("Error");
+            }
 
-        // GET: Cottages1/Delete/5
-        public async Task<IActionResult> Delete(long? id)
+    }
+
+    // GET: Cottages1/Delete/5
+    public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
             {
@@ -137,10 +149,22 @@ namespace IsaProject.Controllers
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
             var cottage = await _context.Cottages.FindAsync(id);
-            cottage.IsLogicalDelete = true;
-            _context.Cottages.Update(cottage);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(GetMyCottages));
+
+            int numberOfApp = (from app in _context.scheduledAppointments
+                               where app.EntityID == cottage.Id && app.IsActive == true && app.Start >= DateTime.Now
+                               select app).Count();
+
+            if (numberOfApp == 0)
+            {
+                cottage.IsLogicalDelete = true;
+                _context.Cottages.Update(cottage);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(GetMyCottages));
+            }
+            else
+            {
+                return View("Error");
+            }
         }
 
         private bool CottageExists(long id)
@@ -160,7 +184,7 @@ namespace IsaProject.Controllers
             var user = await _userManager.GetUserAsync(User);
 
             List<Cottage> cottages = await (from cot in _context.Cottages
-                                            where cot.IsLogicalDelete == false && cot.CottageOwnerID == user.Id
+                                            where cot.IsLogicalDelete == false && cot.OwnerID == user.Id
                                             select cot).ToListAsync();
             return View(cottages);
         }

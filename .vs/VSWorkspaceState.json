@@ -1,8 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\IsaProject"
+    "\\IsaProject",
+    "\\IsaProject\\wwwroot",
+    "\\IsaProject\\wwwroot\\lib",
+    "\\IsaProject\\wwwroot\\lib\\bootstrap",
+    "\\IsaProject\\wwwroot\\lib\\bootstrap\\dist",
+    "\\IsaProject\\wwwroot\\lib\\bootstrap\\dist\\js"
   ],
-  "SelectedNode": "\\IsaProject.sln",
+  "SelectedNode": "\\IsaProject\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
   "PreviewInSolutionExplorer": false
 }
