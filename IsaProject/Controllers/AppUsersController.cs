@@ -318,8 +318,7 @@ namespace IsaProject.Controllers
             await _emailSender.SendEmailAsync(appUser.Email, "Profile delete",
                 $"Profile delete for {appUser.Email}");
 
-            appUser.Email = null;
-            appUser.UserName = null;
+            
 
 
             _context.Update(appUser);

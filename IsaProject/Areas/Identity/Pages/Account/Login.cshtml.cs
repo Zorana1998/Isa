@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using System.IO;
 using Newtonsoft.Json;
+using IsaProject.Models.Entities;
 
 namespace IsaProject.Areas.Identity.Pages.Account
 {
@@ -92,11 +93,22 @@ namespace IsaProject.Areas.Identity.Pages.Account
             returnUrl ??= Url.Content("~/");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            AppUser appUser = (from us in _context.tbAppUsers where us.Email == Input.Email select us).First();
+
+            ProfileDelete profileDelete = (from pd in _context.ProfileDelete where pd.UserId == appUser.Id select pd).First();
+
+
         
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+
+                if(profileDelete.IsApproved == true)
+                {
+                    return RedirectToPage("Error");
+                }
 
                 var userByEmail = await _userManager.FindByEmailAsync(Input.Email);
 

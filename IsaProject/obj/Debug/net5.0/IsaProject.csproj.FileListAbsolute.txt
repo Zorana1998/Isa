@@ -4819,3 +4819,4 @@ C:\Users\Zorana Stamenković\Desktop\isaaa\Isa\IsaProject\obj\Debug\net5.0\ref\I
 C:\Users\Zorana Stamenković\Desktop\isaaa\Isa\IsaProject\obj\Debug\net5.0\IsaProject.pdb
 C:\Users\Zorana Stamenković\Desktop\isaaa\Isa\IsaProject\obj\Debug\net5.0\IsaProject.genruntimeconfig.cache
 C:\Users\Zorana Stamenković\Desktop\isaaa\Isa\IsaProject\obj\Debug\net5.0\Razor\Views\Adventures\GetMyAdventures.cshtml.g.cs
+C:\Users\Zorana Stamenković\Desktop\isaaa\Isa\IsaProject\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Error.cshtml.g.cs

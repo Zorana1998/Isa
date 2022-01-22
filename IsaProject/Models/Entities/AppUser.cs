@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IsaProject.Models.Users
@@ -28,7 +29,7 @@ namespace IsaProject.Models.Users
 
         public bool isFirstlogin { get; set; }
 
-        /*[Timestamp]
-        public byte[] RowVersion { get; set; }*/
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }
