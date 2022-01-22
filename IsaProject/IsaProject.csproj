@@ -45,6 +45,10 @@
     <None Include="wwwroot\ship-cabin-cottage-vranov-nad-dyji-p151121-b6.jpg" />
   </ItemGroup>
 
+	<PropertyGroup>
+		<PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+	</PropertyGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>
