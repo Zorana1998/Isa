@@ -1,0 +1,11 @@
+INSERT INTO [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'b0ddace5-a726-4c4b-9e56-c0054a94805c', N'Admin', N'ADMIN', N'425eb290-516d-4a1e-a957-756b08b247d5')
+INSERT INTO [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'c833f3d5-8d99-4445-9464-57ad0b001b79', N'CottageOwner', N'COTTAGEOWNER', N'c05d1e45-60dc-4cc9-bc0c-5c8f5d577c54')
+INSERT INTO [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'd4d91ae3-e80d-4cc1-ad11-56b731361290', N'FishingInstructor', N'FISHINGINSTRUCTOR', N'c2a738e9-af91-4dc5-bdca-f337dff982b0')
+INSERT INTO [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'f04b598e-e1dd-4be8-adbb-2fa1575972ea', N'ShipOwner', N'SHIPOWNER', N'75b9ae9a-d144-4e8a-b974-3a6724af426a')
+INSERT INTO [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'ff48aa9b-da07-4423-a8bb-05e05340c228', N'User', N'USER', N'160752eb-64fa-471e-a2a2-2e8c193822a4')
+
+
+INSERT INTO [dbo].[AspNetUsers] ([Id], [FirstName], [LastName], [Address], [Country], [City], [Penalty], [Explanation], [ReasonForReject], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount], [AverageScore]) 
+VALUES (N'beafbdea-55b4-4807-a156-69646f9e765a', N'Zorana', N'Stamenkovic', N'Vojvodjanska 2', N'Srbija', N'Karavukovo', 0, NULL, NULL, N'zoranastamenkovic1998@gmail.com', N'ZORANASTAMENKOVIC1998@GMAIL.COM', N'zoranastamenkovic1998@gmail.com', N'ZORANASTAMENKOVIC1998@GMAIL.COM', 1, N'AQAAAAEAACcQAAAAEP/FF9T4LC2MR/GfqbOchKNwl31OdA6IF5yPq6GLhxwOeAF7XkYjiHR1NJAE+d8MjQ==', N'Q6MUSH77DE2HEMV5EFT4J4UEIJPVOED3', N'1e180f16-5362-474f-a9fd-edc92f066d06', N'0637624071', 0, 0, NULL, 1, 0, 0)
+
+INSERT INTO [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'beafbdea-55b4-4807-a156-69646f9e765a', N'b0ddace5-a726-4c4b-9e56-c0054a94805c')
