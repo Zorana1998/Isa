@@ -10071,6 +10071,7 @@
       "NUnit3TestAdapter >= 3.17.0",
       "Selenium.Support >= 4.1.0",
       "Selenium.WebDriver >= 4.1.0",
+      "System.IO.FileSystem.AccessControl >= 5.0.0",
       "coverlet.collector >= 3.0.2"
     ]
   },
@@ -10149,6 +10150,10 @@
           "Selenium.WebDriver": {
             "target": "Package",
             "version": "[4.1.0, )"
+          },
+          "System.IO.FileSystem.AccessControl": {
+            "target": "Package",
+            "version": "[5.0.0, )"
           },
           "coverlet.collector": {
             "target": "Package",

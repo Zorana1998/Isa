@@ -96,7 +96,11 @@ namespace IsaProject.Areas.Identity.Pages.Account
 
             AppUser appUser = (from us in _context.tbAppUsers where us.Email == Input.Email select us).First();
 
-            ProfileDelete profileDelete = (from pd in _context.ProfileDelete where pd.UserId == appUser.Id select pd).First();
+
+
+            List<ProfileDelete> profileDelete = (from pd in _context.ProfileDelete where pd.UserId == appUser.Id select pd).ToList();
+
+            
 
 
         
@@ -105,10 +109,14 @@ namespace IsaProject.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
 
-                if(profileDelete.IsApproved == true)
+                if (profileDelete.Count != 0)
                 {
-                    return RedirectToPage("Error");
+                    if (profileDelete.First().IsApproved == true)
+                    {
+                        return RedirectToPage("Error");
+                    }
                 }
+                
 
                 var userByEmail = await _userManager.FindByEmailAsync(Input.Email);
 

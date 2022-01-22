@@ -286,7 +286,7 @@ namespace IsaProject.Controllers
             await _emailSender.SendEmailAsync(user.Email, "Scheduled Appointment",
                 $"Scheduled Appointment for {user.FirstName} at {appointment.Start}");
 
-            return RedirectToAction(nameof(GetMyReservation)); ;
+            return RedirectToAction(nameof(GetMyReservation)); 
         }
 
 
