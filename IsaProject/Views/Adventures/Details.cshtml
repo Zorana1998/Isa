@@ -1,4 +1,7 @@
-﻿@model IsaProject.Models.Entities.Adventure.Adventure
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@model IsaProject.Models.Entities.Adventure.Adventure
 
 @{
     ViewData["Title"] = "Details";
@@ -66,6 +69,16 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@if ((await AuthorizationService.AuthorizeAsync(User, null, "UserPolicy")).Succeeded)
+{
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+}
+
+@if ((await AuthorizationService.AuthorizeAsync(User, null, "FishingInstructorPolicy")).Succeeded)
+{
+    <div>
+        <a asp-action="GetMyAdventures">Back to List</a>
+    </div>
+}

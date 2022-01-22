@@ -124,7 +124,7 @@ namespace IsaProject.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
 
-            if (!await _roleManager.RoleExistsAsync("Admin"))
+            /*if (!await _roleManager.RoleExistsAsync("Admin"))
             {
                 //create roles
                 await _roleManager.CreateAsync(new IdentityRole("Admin"));
@@ -132,7 +132,7 @@ namespace IsaProject.Areas.Identity.Pages.Account
                 await _roleManager.CreateAsync(new IdentityRole("CottageOwner"));
                 await _roleManager.CreateAsync(new IdentityRole("ShipOwner"));
                 await _roleManager.CreateAsync(new IdentityRole("FishingInstructor"));
-            }
+            }*/
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -159,17 +159,17 @@ namespace IsaProject.Areas.Identity.Pages.Account
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
-                /*if (Input.Role.Equals("Admin"))
+                if (Input.Role.Equals("Admin"))
                 {
                     user.isFirstlogin = true;
                     user.EmailConfirmed = true;
                 }
-                */
+                
 
 
                 await _userManager.AddToRoleAsync(user, Input.Role);
 
-                /*if(result.Succeeded && Input.Role == "Admin")
+                if(result.Succeeded && Input.Role == "Admin")
                 {
                     /*var code = await _userManager.GeneratePasswordResetTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -180,12 +180,12 @@ namespace IsaProject.Areas.Identity.Pages.Account
                         protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.Email, "Booking: Change password",
-                        $"Please change your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                        $"Please change your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");*/
                     
                     return RedirectToPage("");
-                }*/
+                }
 
-                if (result.Succeeded && (Input.Role == "User" || Input.Role =="Admin"))
+                if (result.Succeeded && (Input.Role == "User"))
                 {
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

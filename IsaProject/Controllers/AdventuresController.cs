@@ -34,7 +34,7 @@ namespace IsaProject.Controllers
         // GET: Adventures
         public async Task<IActionResult> Index(string searchString = "", string filter = "", string sort = "")
         {
-            return View(await _adventureService.GetAllFiltered(searchString, filter, sort));
+            return View(await (from adv in _context.Adventure select adv).ToListAsync());
         }
 
         // GET: Adventures/Details/5
@@ -68,16 +68,15 @@ namespace IsaProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("InstructorDescription,FishingEquipment,Id,Name,Address,Country,City,PromotionalDescription,AverageScore,Rules")] Adventure adventure)
         {
-            if (ModelState.IsValid)
-            {
+            
                 AppUser user = await _userManager.GetUserAsync(User);
                 adventure.OwnerID = user.Id;
                 adventure.IsLogicalDelete = false;
-                _context.Add(adventure);
+                _context.Adventure.Add(adventure);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(GetMyAdventures));
-            }
-            return View(adventure);
+            
+           
         }
 
         // GET: Adventures/Edit/5

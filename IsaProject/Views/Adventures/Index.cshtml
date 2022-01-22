@@ -9,12 +9,13 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.css">
 <link rel="stylesheet" type="text/css" href="http://bootstrap-table.wenzhixin.net.cn/assets/bootstrap/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.18.3/extensions/filter-control/utils.min.js"></script>
@@ -26,31 +27,20 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
 
 <div  style="text-align: center">
-<h1>Adventure</h1>
+<h1>Adventures</h1>
 </div>
 
 
-<div class="mt-2 col-md-12 px-5 m-3">
-@if (SignInManager.IsSignedIn(User))
-{
-    @if ((await AuthorizationService.AuthorizeAsync(User, null, "FishingInstructorPolicy")).Succeeded)
-    {
-
-        <p>
-            <a asp-action="Create">Create New</a>
-        </p>
-    }
-
-}
-</div>
 
 
-<table id="table"
+
+
+<table id="table" class="table-striped" 
            data-toggle="table"
            data-search="true"
-           data-filter-control="true" class="table-striped">
+           data-filter-control="true">
     <thead>
-        <tr>
+        <tr >
             <th class="th-sm" data-field="name" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -59,9 +49,9 @@
                 @Html.DisplayNameFor(model => model.Address)
             </th>
 
-            <th class="th-sm" data-field="country" data-filter-control="input" data-sortable="true">
+            <th class="th-sm" data-field="country" data-filter-control="input" data-sortable="true"> 
                 @Html.DisplayNameFor(model => model.Country)
-            </th>
+            </th >
 
             <th class="th-sm" data-field="city" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.City)
@@ -71,21 +61,24 @@
                 @Html.DisplayNameFor(model => model.PromotionalDescription)
             </th>
 
-            <th class="th-sm" data-field="averageScore" data-filter-control="input" data-sortable="true"> 
+            <th class="th-sm" data-field="averageScore" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.AverageScore)
             </th>
-              @if (SignInManager.IsSignedIn(User))
+
+             @if (SignInManager.IsSignedIn(User))
 {
     @if ((await AuthorizationService.AuthorizeAsync(User, null, "UserPolicy")).Succeeded)
     {
             <th class="th-sm" ></th>
     }
 }
+            
 
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    
+    <tbody class="table table-striped">
 @foreach (var item in Model) {
         <tr>
             <td>
@@ -111,7 +104,7 @@
             </td>
             @if (SignInManager.IsSignedIn(User))
 {
-    @if ((await AuthorizationService.AuthorizeAsync(User, null, "FishingInstructorPolicy")).Succeeded)
+    @if ((await AuthorizationService.AuthorizeAsync(User, null, "CottageOwnerPolicy")).Succeeded)
     {
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
@@ -120,7 +113,7 @@
             </td>
     }
 }
-        @if (SignInManager.IsSignedIn(User))
+ @if (SignInManager.IsSignedIn(User))
 {
     @if ((await AuthorizationService.AuthorizeAsync(User, null, "UserPolicy")).Succeeded)
     {
@@ -131,7 +124,6 @@
 }
         </tr>
 }
-
     </tbody>
 </table>
 
@@ -141,36 +133,33 @@
     @if ((await AuthorizationService.AuthorizeAsync(User, null, "UserPolicy")).Succeeded)
     {
         <div  style="text-align: center">
-        <h3 >Search available adventures</h3>
+        <h3 >Search available cottages</h3>
         </div>
-        <form asp-controller="Adventures" asp-action="GetAvailableAdventures" class="form">
+        <form asp-controller="Cottages" asp-action="GetAvailableCottages" class="form">
             <div class="form-group mb-2" style="text-align: left" >
                 <label for="dateTime">DateTime:</label>
                 <input type="datetime-local" id="dateTime" name="dateTime" class="form-control"/><br/>
             </div>
-
-            <div class="form-group mb-2" style="text-align: left" >
+            <div class="form-group" style="text-align: left">
                 <label for="numberOfGuest">Number of guest:</label>
                 <input type="number" id="numberOfGuest" name="numberOfGuest" class="form-control"/><br/>
             </div>
-
-            <div class="form-group mb-2" style="text-align: left" >
+            <div class="form-group" style="text-align: left">
                 <label for="numberOfDays">Number of days:</label>
                 <input type="number" id="numberOfDays" name="numberOfDays" class="form-control"/><br/>
             </div>
-
-            <div class="form-group mb-2" style="text-align: left" >
+            <div class="form-group" style="text-align: left">
                 <label for="averageScore">Average Score:</label>
                 <input type="number" id="averageScore" name="averageScore" class="form-control"/><br/>
             </div>
-
             <div class="form-group" style="text-align: left">
-                <button type="submit" class="btn btn-primary">Get Available Adventures</button>
+                <button type="submit" class="btn btn-primary">Get Available Cottages</button>
             </div>
 
         </form>
+        
     }
 
-
 }
+
 </div>

@@ -1,11 +1,14 @@
 ﻿@using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 
+@using IsaProject.Models.Users
 @using Microsoft.AspNetCore.Identity
-@model IEnumerable<IsaProject.Models.DTO.AppointmentDTO>
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@model IEnumerable<IsaProject.Models.Entities.Adventure.Adventure>
 
 @{
-    ViewData["Title"] = "GetAvailableCottages";
+    ViewData["Title"] = "GetMyAdventures";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -23,18 +26,18 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter/bootstrap-table-filter.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
 
-        
-
 <div  style="text-align: center">
-<h1>Cottages</h1>
+<h1>Adventures</h1>
 </div>
+
+
 
 <table id="table" class="table-striped" 
            data-toggle="table"
            data-search="true"
            data-filter-control="true">
-    <thead >
-        <tr>
+    <thead>
+        <tr >
             <th class="th-sm" data-field="name" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -51,26 +54,20 @@
                 @Html.DisplayNameFor(model => model.City)
             </th>
 
+            <th class="th-sm" data-field="promotionalDescription" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.PromotionalDescription)
+            </th>
+
             <th class="th-sm" data-field="averageScore" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.AverageScore)
             </th>
-            <th class="th-sm" data-field="rules" data-filter-control="input" data-sortable="true">
-                @Html.DisplayNameFor(model => model.Rules)
-            </th>
-            <th class="th-sm" data-field="price" data-filter-control="input" data-sortable="true">
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th class="th-sm" data-field="duration" data-filter-control="input" data-sortable="true">
-                @Html.DisplayNameFor(model => model.Duration)
-            </th>
-            <th class="th-sm" data-field="startDate" data-filter-control="input" data-sortable="true">
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
+            @if (Model.Count()!=0){
             <th></th>
-            <th></th>
+            }
         </tr>
     </thead>
-    <tbody>
+    
+    <tbody class="table table-striped">
 @foreach (var item in Model) {
         <tr>
             <td>
@@ -85,31 +82,26 @@
             <td>
                 @Html.DisplayFor(modelItem => item.City)
             </td>
-           
+            <td>
+                @Html.DisplayFor(modelItem => item.PromotionalDescription)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AverageScore)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rules)
+                @if (Model.Count() != 0)
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+       
             </td>
-             <td>
-                @Html.DisplayFor(model => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.Duration)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.Tags)
-            </td>
-            <td>
-                    <a asp-controller="Appointments" asp-action="AddTagsUser" asp-route-id="@item.Id">Add Tags</a>
-            </td>
+            }
         </tr>
 }
     </tbody>
 </table>
 
 
+
+    <a  class="btn btn-dark mt-2" asp-action="Create">Create new adventure</a>

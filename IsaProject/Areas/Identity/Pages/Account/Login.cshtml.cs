@@ -98,7 +98,7 @@ namespace IsaProject.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
 
-               /* var userByEmail = await _userManager.FindByEmailAsync(Input.Email);
+                var userByEmail = await _userManager.FindByEmailAsync(Input.Email);
 
                 var userRolesByEmail = await _userManager.GetRolesAsync(userByEmail);
 
@@ -118,7 +118,7 @@ namespace IsaProject.Areas.Identity.Pages.Account
                         $"Please change your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
                     
-                }*/
+                }
 
                 
 

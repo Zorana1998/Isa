@@ -5,17 +5,7 @@
       "ProjectGuid": "2461894c-2760-4a07-8083-b340d05250ec",
       "DisplayName": "IsaProject",
       "ColorIndex": 0
-    },
-    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
-      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
-      "DisplayName": "Miscellaneous Files",
-      "ColorIndex": -1
-    },
-    "ce53b806-37c6-477b-b7e8-493922a9c44d": {
-      "ProjectGuid": "ce53b806-37c6-477b-b7e8-493922a9c44d",
-      "DisplayName": "NUnitTest",
-      "ColorIndex": 1
     }
   },
-  "NextColorIndex": 2
+  "NextColorIndex": 1
 }
