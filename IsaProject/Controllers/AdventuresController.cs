@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using IsaProject.Models.DTO;
 using IsaProject.Models;
 using IsaProject.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IsaProject.Controllers
 {
@@ -56,6 +57,7 @@ namespace IsaProject.Controllers
         }
 
         // GET: Adventures/Create
+        [Authorize(Roles = "FishingInstructor")]
         public IActionResult Create()
         {
             return View();
@@ -64,6 +66,7 @@ namespace IsaProject.Controllers
         // POST: Adventures/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "FishingInstructor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("InstructorDescription,FishingEquipment,Id,Name,Address,Country,City,PromotionalDescription,AverageScore,Rules")] Adventure adventure)
@@ -80,6 +83,7 @@ namespace IsaProject.Controllers
         }
 
         // GET: Adventures/Edit/5
+        [Authorize(Roles = "FishingInstructor")]
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -98,6 +102,7 @@ namespace IsaProject.Controllers
         // POST: Adventures/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "FishingInstructor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, [Bind("InstructorDescription,FishingEquipment,Id,Name,Address,Country,City,PromotionalDescription,AverageScore,Rules")] Adventure adventure)
@@ -118,6 +123,7 @@ namespace IsaProject.Controllers
         }
 
         // GET: Adventures/Delete/5
+        [Authorize(Roles = "FishingInstructor")]
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -136,6 +142,7 @@ namespace IsaProject.Controllers
         }
 
         // POST: Adventures/Delete/5
+        [Authorize(Roles = "FishingInstructor")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
@@ -165,6 +172,7 @@ namespace IsaProject.Controllers
             return View(await _adventureService.GetAvailableAdventures(user.Id, dateTime, numberOfGuest, numberOfDays, averageScore));
         }
 
+        [Authorize(Roles = "FishingInstructor")]
         public async Task<IActionResult> GetMyAdventures()
         {
             var user = await _userManager.GetUserAsync(User);

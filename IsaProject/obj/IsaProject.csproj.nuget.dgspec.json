@@ -125,6 +125,10 @@
               "target": "Package",
               "version": "[4.7.1, )"
             },
+            "System.Runtime.InteropServices.RuntimeInformation": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
             "System.Text.Encoding.CodePages": {
               "target": "Package",
               "version": "[4.7.0, )"

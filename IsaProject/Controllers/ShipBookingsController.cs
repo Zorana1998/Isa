@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using IsaProject.Models.Users;
 using IsaProject.Services;
 using IsaProject.Models.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IsaProject.Controllers
 {
@@ -52,6 +53,7 @@ namespace IsaProject.Controllers
         }
 
         // GET: ShipBookings/Create
+        [Authorize(Roles = "ShipOwner")]
         public IActionResult Create()
         {
             return View();
