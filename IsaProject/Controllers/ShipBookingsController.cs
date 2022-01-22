@@ -62,6 +62,7 @@ namespace IsaProject.Controllers
         // POST: ShipBookings/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "ShipOwner")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Type,Length,EngineNumber,EnginePower,MaxSpeed,Capacity,FishingEquipment,Id,Name,Address,Country,City,PromotionalDescription,AverageScore,Rules")] ShipBooking shipBooking)
@@ -79,6 +80,7 @@ namespace IsaProject.Controllers
         }
 
         // GET: ShipBookings/Edit/5
+        [Authorize(Roles = "ShipOwner")]
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -97,6 +99,7 @@ namespace IsaProject.Controllers
         // POST: ShipBookings/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "ShipOwner")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, [Bind("Type,Length,EngineNumber,EnginePower,MaxSpeed,Capacity,FishingEquipment,Id,Name,Address,Country,City,PromotionalDescription,AverageScore,Rules")] ShipBooking shipBooking)
@@ -117,6 +120,7 @@ namespace IsaProject.Controllers
         }
 
         // GET: ShipBookings/Delete/5
+        [Authorize(Roles = "ShipOwner")]
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -136,6 +140,7 @@ namespace IsaProject.Controllers
 
         // POST: ShipBookings/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "ShipOwner")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
@@ -163,6 +168,7 @@ namespace IsaProject.Controllers
             return View(await _shipService.GetAvailableShips(dateTime, numberOfGuest, numberOfDays, averageScore,user.Id));
         }
 
+        [Authorize(Roles = "ShipOwner")]
         public async Task<IActionResult> GetMyShips()
         {
             var user = await _userManager.GetUserAsync(User);

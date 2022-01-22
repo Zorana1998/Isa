@@ -11,6 +11,7 @@ using IsaProject.Services;
 using Microsoft.AspNetCore.Identity;
 using IsaProject.Models.Users;
 using IsaProject.Models.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IsaProject.Controllers
 {
@@ -55,6 +56,7 @@ namespace IsaProject.Controllers
         }
 
         // GET: Cottages1/Create
+        [Authorize(Roles = "CottageOwner")]
         public IActionResult Create()
         {
             return View();
@@ -64,6 +66,7 @@ namespace IsaProject.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "CottageOwner")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Address,Country,City,PromotionalDescription,AverageScore,Rules")] Cottage cottage)
         {
@@ -76,6 +79,7 @@ namespace IsaProject.Controllers
         }
 
         // GET: Cottages1/Edit/5
+        [Authorize(Roles = "CottageOwner")]
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -95,6 +99,7 @@ namespace IsaProject.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "CottageOwner")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, [Bind("Id,Name,Address,Country,City,PromotionalDescription,AverageScore,Rules")] Cottage cottage)
         {
@@ -125,8 +130,9 @@ namespace IsaProject.Controllers
 
     }
 
-    // GET: Cottages1/Delete/5
-    public async Task<IActionResult> Delete(long? id)
+        // GET: Cottages1/Delete/5
+        [Authorize(Roles = "CottageOwner")]
+        public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
             {
@@ -145,6 +151,7 @@ namespace IsaProject.Controllers
 
         // POST: Cottages1/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "CottageOwner")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {

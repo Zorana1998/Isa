@@ -16,6 +16,7 @@ using System.IO;
 using Newtonsoft.Json;
 using IsaProject.Models.DTO;
 using IsaProject.Areas.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IsaProject.Controllers
 {
