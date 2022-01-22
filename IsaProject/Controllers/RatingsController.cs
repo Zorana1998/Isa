@@ -266,82 +266,88 @@ namespace IsaProject.Controllers
             Rating rating = _context.Rating.Find(id);
 
 
-
-            if (rating.EntityID == 0)
+            try
             {
-                AppUser appUser = rating.User;
-
-                rating.IsApproved = true;
-
-                _context.Rating.Update(rating);
-                _context.SaveChanges();
-
-                List<Rating> ratings = await (from u in _context.Rating
-                                              where u.User == appUser && u.IsApproved == true
-                                              select u).ToListAsync();
-                float newRating = 0;
-
-                int ratingSum = 0;
-
-                foreach (Rating r in ratings)
+                if (rating.EntityID == 0)
                 {
-                    ratingSum += r.Score;
+                    AppUser appUser = rating.User;
+
+                    rating.IsApproved = true;
+
+                    _context.Rating.Update(rating);
+                    _context.SaveChanges();
+
+                    List<Rating> ratings = await (from u in _context.Rating
+                                                  where u.User == appUser && u.IsApproved == true
+                                                  select u).ToListAsync();
+                    float newRating = 0;
+
+                    int ratingSum = 0;
+
+                    foreach (Rating r in ratings)
+                    {
+                        ratingSum += r.Score;
+                    }
+
+                    newRating = ratingSum / ratings.Count;
+
+                    appUser.AverageScore = newRating;
+
+                    _context.tbAppUsers.Update(appUser);
+
+                    _context.SaveChanges();
+
+                    await _emailSender.SendEmailAsync(appUser.Email, "New rating",
+                    $"Rating entity {rating.EntityID} at {rating.Score}");
+                }
+                else
+                {
+                    Entity entity = _context.Entities.Find(rating.EntityID);
+
+                    rating.IsApproved = true;
+
+                    _context.Rating.Update(rating);
+                    _context.SaveChanges();
+
+                    List<Rating> ratings = await (from u in _context.Rating
+                                                  where u.EntityID == rating.EntityID && u.IsApproved == true
+                                                  select u).ToListAsync();
+
+                    float newRating = 0;
+
+                    int ratingSum = 0;
+
+                    foreach (Rating r in ratings)
+                    {
+                        ratingSum += r.Score;
+                    }
+
+                    newRating = ratingSum / ratings.Count;
+
+                    entity.AverageScore = newRating;
+
+                    _context.Entities.Update(entity);
+
+                    _context.SaveChanges();
+
+                    AppUser appUser = (from u in _context.Rating
+                                       join user in _context.tbAppUsers on u.EmployeeID equals user.Id
+                                       select user).ToList().First();
+
+                    await _emailSender.SendEmailAsync(appUser.Email, "New rating",
+                    $"Rating entity {rating.EntityID} at {rating.Score}");
                 }
 
-                newRating = ratingSum / ratings.Count;
 
-                appUser.AverageScore = newRating;
 
-                _context.tbAppUsers.Update(appUser);
 
-                _context.SaveChanges();
 
-                await _emailSender.SendEmailAsync(appUser.Email, "New rating",
-                $"Rating entity {rating.EntityID} at {rating.Score}");
+                return RedirectToAction(nameof(GetUnapprovedRatings));
             }
-            else
+            catch (DbUpdateConcurrencyException)
             {
-                Entity entity = _context.Entities.Find(rating.EntityID);
-
-                rating.IsApproved = true;
-
-                _context.Rating.Update(rating);
-                _context.SaveChanges();
-
-                List<Rating> ratings = await (from u in _context.Rating
-                                              where u.EntityID == rating.EntityID && u.IsApproved == true
-                                              select u).ToListAsync();
-
-                float newRating = 0;
-
-                int ratingSum = 0;
-
-                foreach (Rating r in ratings)
-                {
-                    ratingSum += r.Score;
-                }
-
-                newRating = ratingSum / ratings.Count;
-
-                entity.AverageScore = newRating;
-
-                _context.Entities.Update(entity);
-
-                _context.SaveChanges();
-
-                AppUser appUser = (from u in _context.Rating
-                                         join user in _context.tbAppUsers on u.EmployeeID equals user.Id
-                                         select user).ToList().First();
-
-                await _emailSender.SendEmailAsync(appUser.Email, "New rating",
-                $"Rating entity {rating.EntityID} at {rating.Score}");
+                throw;
             }
-
-
-
-            
-
-            return RedirectToAction(nameof(GetUnapprovedRatings));
         }
 
     }
