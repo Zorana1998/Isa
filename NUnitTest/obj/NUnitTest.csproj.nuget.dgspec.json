@@ -129,6 +129,10 @@
               "target": "Package",
               "version": "[4.3.0, )"
             },
+            "System.Security.Cryptography.Pkcs": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "System.Text.Encoding.CodePages": {
               "target": "Package",
               "version": "[4.7.0, )"
@@ -248,6 +252,10 @@
             "System.Runtime.InteropServices.RuntimeInformation": {
               "target": "Package",
               "version": "[4.3.0, )"
+            },
+            "System.Security.Cryptography.Pkcs": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             },
             "coverlet.collector": {
               "target": "Package",
